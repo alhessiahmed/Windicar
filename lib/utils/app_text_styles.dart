@@ -50,7 +50,7 @@ class AppTextStyles {
     fontFamily: 'SFCompactDisplay',
   );
 
-   static TextStyle textTitle14 = TextStyle(
+  static TextStyle textTitle14 = TextStyle(
     fontSize: 14.sp,
     // fontWeight: FontWeight.w500,
     fontFamily: 'SFCompactDisplay',
@@ -58,6 +58,11 @@ class AppTextStyles {
 
   static TextStyle textTitle17 = TextStyle(
     fontSize: 17.sp,
+    // fontWeight: FontWeight.w600,
+    fontFamily: 'SFCompactDisplay',
+  );
+  static TextStyle textTitle16 = TextStyle(
+    fontSize: 16.sp,
     // fontWeight: FontWeight.w600,
     fontFamily: 'SFCompactDisplay',
   );

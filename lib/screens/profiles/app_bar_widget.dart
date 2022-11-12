@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:logo/utils/app_text_styles.dart';
 
 enum PopupMenuItemEnum {
   edit,
@@ -28,9 +29,8 @@ AppBar getAppBarCustom({
     ),
     title: Text(
       title,
-      style: TextStyle(
+      style: AppTextStyles.textTitle17.copyWith(
         color: colorAppBar,
-        fontSize: 17.sp,
       ),
     ),
     centerTitle: true,
@@ -43,13 +43,19 @@ AppBar getAppBarCustom({
             color: colorAppBar,
           ),
           itemBuilder: (context) => [
-            const PopupMenuItem(
+            PopupMenuItem(
               value: PopupMenuItemEnum.edit,
-              child: Text("Modifier"),
+              child: Text(
+                "Modifier",
+                style: AppTextStyles.textTitle17,
+              ),
             ),
-            const PopupMenuItem(
+            PopupMenuItem(
               value: PopupMenuItemEnum.logout,
-              child: Text("se déconnecter"),
+              child: Text(
+                "se déconnecter",
+                style: AppTextStyles.textTitle17,
+              ),
             ),
           ],
         ),

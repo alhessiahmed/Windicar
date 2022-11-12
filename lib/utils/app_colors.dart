@@ -7,5 +7,8 @@ class AppColors {
   static const Color favoriteOutline = Color(0xFF32CBA8);
   static const Color lightGrey = Color(0xFFF5F5F5);
   static const Color grey = Color(0xFF707070);
+  static const Color yollowStar = Color(0xFFFFC107);
+  static const Color cyan = Color(0xFF14AEA1);
+  static const Color greenWhatapp = Color(0xFF44CE35);
   static const Color red = Colors.red;
 }
