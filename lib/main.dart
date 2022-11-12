@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:logo/screens/profiles/change_password_screen.dart';
 import 'package:logo/screens/profiles/profile_screen.dart';
 import 'package:logo/screens/car_details_screen.dart';
 import 'package:logo/screens/home_screen.dart';
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
             '/on_boarding_screen': (context) => const OnBoardingScreen(),
             '/home_screen': (context) => const HomeScreen(),
             '/profile_screen': (context) => const ProfileScreen(),
+            '/change_password_screen': (context) => const ChangePasswordScreen(),
           },
           initialRoute: '/profile_screen',
         );

@@ -84,7 +84,9 @@ class ProfileScreen extends StatelessWidget {
                 height: 50.h,
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/change_password_screen');
+                },
                 child: Text('Changer mot de passe'),
               ),
               SizedBox(
