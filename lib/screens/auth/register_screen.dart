@@ -72,7 +72,9 @@ class RegisterScreen extends StatelessWidget {
                 height: 40.h,
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/verification_screen');
+                },
                 child: const Text('Valider'),
               ),
               SizedBox(
