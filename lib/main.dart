@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:logo/screens/profiles/profile_screen.dart';
 import 'package:logo/screens/car_details_screen.dart';
 import 'package:logo/screens/home_screen.dart';
 import 'package:logo/screens/intro/on_boarding_screen.dart';
@@ -22,6 +23,9 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
+            colorScheme: ColorScheme.light().copyWith(
+              primary: AppColors.darkGreen,
+            ),
             floatingActionButtonTheme: FloatingActionButtonThemeData(
               backgroundColor: AppColors.darkGreen,
               iconSize: 48.r,
@@ -47,8 +51,9 @@ class MyApp extends StatelessWidget {
             '/splash_screen': (context) => const SplashScreen(),
             '/on_boarding_screen': (context) => const OnBoardingScreen(),
             '/home_screen': (context) => const HomeScreen(),
+            '/profile_screen': (context) => const ProfileScreen(),
           },
-          initialRoute: '/splash_screen',
+          initialRoute: '/profile_screen',
         );
       },
     );
