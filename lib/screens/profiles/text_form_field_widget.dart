@@ -49,7 +49,7 @@ class TextFormFieldCustom extends StatelessWidget {
           elevation: 3,
           child: TextFormField(
             textInputAction: textInputAction,
-            maxLines: maxLines,
+            maxLines: maxLines ?? 1,
             keyboardType: textInputType,
             controller: textEditingController,
             obscureText: isPassword,

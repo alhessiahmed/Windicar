@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:logo/screens/auth/login_screen.dart';
 import 'package:logo/screens/profiles/change_password_screen.dart';
 import 'package:logo/screens/profiles/profile_screen.dart';
 import 'package:logo/screens/car_details_screen.dart';
@@ -54,8 +55,9 @@ class MyApp extends StatelessWidget {
             '/home_screen': (context) => const HomeScreen(),
             '/profile_screen': (context) => const ProfileScreen(),
             '/change_password_screen': (context) => const ChangePasswordScreen(),
+            '/login_screen': (context) => const LoginScreen(),
           },
-          initialRoute: '/profile_screen',
+          initialRoute: '/login_screen',
         );
       },
     );

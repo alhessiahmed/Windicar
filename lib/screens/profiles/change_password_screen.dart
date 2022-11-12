@@ -40,7 +40,9 @@ class ChangePasswordScreen extends StatelessWidget {
                 height: 40.h,
               ),
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  //TODO : change password
+                },
                 child: const Text('Valider'),
               ),
             ],
