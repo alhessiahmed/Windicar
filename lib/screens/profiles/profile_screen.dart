@@ -33,6 +33,7 @@ class ProfileScreen extends StatelessWidget {
                       backgroundColor: AppColors.darkGreen,
                       child: CircleAvatar(
                         radius: 50.w,
+                        backgroundColor: AppColors.white,
                         backgroundImage: const NetworkImage(
                           'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
                         ),
@@ -90,10 +91,8 @@ class ProfileScreen extends StatelessWidget {
                 height: 55.h,
               ),
               ElevatedButton(
-                onPressed: () {
-                  Navigator.pushReplacementNamed(context, '/home_screen');
-                },
-                child: const Text('Entrée'),
+                onPressed: () {},
+                child: const Text('Valider'),
               ),
             ],
           ),
