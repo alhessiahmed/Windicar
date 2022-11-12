@@ -69,6 +69,7 @@ class LoginScreen extends StatelessWidget {
               TextButton(
                 onPressed: () {
                   // TODO:  Go to register page
+                  Navigator.pushNamed(context, '/register_screen');
                 },
                 child: const Text("S'inscrire gratuitement"),
               ),
