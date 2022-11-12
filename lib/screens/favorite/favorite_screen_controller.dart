@@ -28,6 +28,7 @@ class FavoriteScreenController extends GetxController {
     required index,
   }) async {
     items[index].isFav = !items[index].isFav;
+    items.removeAt(index);
     update();
   }
 
