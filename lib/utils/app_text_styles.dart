@@ -50,6 +50,12 @@ class AppTextStyles {
     fontFamily: 'SFCompactDisplay',
   );
 
+   static TextStyle textTitle14 = TextStyle(
+    fontSize: 14.sp,
+    // fontWeight: FontWeight.w500,
+    fontFamily: 'SFCompactDisplay',
+  );
+
   static TextStyle homeAppBarTextStyle = TextStyle(
     color: AppColors.black,
     fontSize: 17.sp,
