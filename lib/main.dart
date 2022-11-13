@@ -13,6 +13,7 @@ import 'package:logo/utils/app_colors.dart';
 import 'package:logo/utils/app_text_styles.dart';
 
 import 'screens/auth/reset_new_password.dart';
+import 'screens/favorite/favorite_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -64,8 +65,9 @@ class MyApp extends StatelessWidget {
             '/register_screen': (context) => const RegisterScreen(),
             '/verification_screen': (context) => const VerificationScreen(),
             '/reset_new_password_screen': (context) => const ResetNewPasswordScreen(),
+            '/favorite_screen': (context) => const FavoriteScreen(),
           },
-          initialRoute: '/login_screen',
+          initialRoute: '/favorite_screen',
         );
       },
     );

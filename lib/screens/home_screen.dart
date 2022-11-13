@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -168,7 +169,7 @@ class CarCard extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 8.w),
               child: Row(
                 children: [
-                  Text(
+                  AutoSizeText(
                     title,
                     style: AppTextStyles.cardBlackTextStyle,
                   ),
@@ -177,7 +178,7 @@ class CarCard extends StatelessWidget {
                   SizedBox(
                     width: 4.w,
                   ),
-                  Text(
+                  AutoSizeText(
                     rating,
                     style: AppTextStyles.ratingTextStyle,
                   ),
@@ -189,7 +190,7 @@ class CarCard extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 8.w),
-              child: Text(
+              child: AutoSizeText(
                 subtitle,
                 style: AppTextStyles.cardGreenTextStyle,
               ),
