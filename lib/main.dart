@@ -6,6 +6,9 @@ import 'package:logo/screens/auth/verification_screen.dart';
 import 'package:logo/screens/profiles/change_password_screen.dart';
 import 'package:logo/screens/profiles/profile_screen.dart';
 import 'package:logo/screens/car_details_screen.dart';
+// import 'package:get/get_navigation/src/root/get_material_app.dart';
+// import 'package:logo/core/routes/app_routes.dart';
+// import 'package:logo/core/routes/routes_names.dart';
 import 'package:logo/screens/home_screen.dart';
 import 'package:logo/screens/intro/on_boarding_screen.dart';
 import 'package:logo/screens/intro/splash_screen.dart';
@@ -28,6 +31,7 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       builder: (context, child) {
+        // return GetMaterialApp(
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
@@ -70,6 +74,9 @@ class MyApp extends StatelessWidget {
             '/supplier_screen': (context) => const SupplierScreen(),
           },
           initialRoute: '/supplier_screen',
+          // initialRoute: '/splash_screen',
+          // getPages: AppRoutes.getPage(),
+          // initialRoute: RoutesNames.splashScreen,
         );
       },
     );

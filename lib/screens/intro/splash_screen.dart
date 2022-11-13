@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+// import 'package:get/get.dart';
+// import 'package:logo/core/routes/routes_names.dart';
 import 'package:logo/utils/app_text_styles.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -15,6 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(const Duration(seconds: 3), () {
       // Navigator.pushReplacementNamed(context, '/home_screen');
       Navigator.pushReplacementNamed(context, '/on_boarding_screen');
+      // Get.toNamed(RoutesNames.onBoardingScreen);
     });
   }
 

@@ -21,11 +21,11 @@ class HomeScreen extends StatelessWidget {
             padding: EdgeInsets.all(16.r),
             child: Row(
               children: [
-                Expanded(
+                const Expanded(
                   flex: 3,
                   child: Text('data'),
                 ),
-                Expanded(
+                const Expanded(
                   flex: 2,
                   child: Text('00'),
                 ),
@@ -33,7 +33,7 @@ class HomeScreen extends StatelessWidget {
                   flex: 1,
                   child: IconButton(
                     onPressed: () {},
-                    icon: Icon(Icons.search),
+                    icon: const Icon(Icons.search),
                   ),
                 ),
               ],
@@ -50,7 +50,6 @@ class HomeScreen extends StatelessWidget {
                 return Expanded(
                   child: GridView.builder(
                     shrinkWrap: true,
-                    // physics: const NeverScrollableScrollPhysics(),
                     physics: const BouncingScrollPhysics(),
                     padding: EdgeInsets.all(16.r),
                     itemCount: controller.items.length,
@@ -63,7 +62,7 @@ class HomeScreen extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return CarCard(
                         id: controller.items[index].id,
-                        imgUrl: controller.items[index].imgUrl,
+                        imgUrl: controller.items[index].imgUrls.first,
                         title: controller.items[index].title,
                         subtitle: controller.items[index].subtitle,
                         rating: controller.items[index].rating,

@@ -1,9 +1,11 @@
 import 'package:get/get.dart';
-import 'package:logo/model/Car.dart';
+import 'package:logo/model/car.dart';
 
 class HomeGetxController extends GetxController {
+  // final loading = false.obs;
+  // final items = <Car>[].obs;
   bool loading = false;
-  List<Car> items = [];
+  List<Car> items = <Car>[];
 
   @override
   void onInit() async {
@@ -12,8 +14,11 @@ class HomeGetxController extends GetxController {
   }
 
   Future<void> read() async {
+    // loading(true);
     loading = true;
+    // items.value = fillList();
     items = fillList();
+    // loading(false);
     loading = false;
     update();
   }
@@ -29,7 +34,7 @@ class HomeGetxController extends GetxController {
     return [
       Car(
         id: 1,
-        imgUrl: 'assets/images/car.png',
+        imgUrls: ['assets/images/car.png'],
         title: 'Mercedes gt 63',
         subtitle: '300 DH/Jour',
         rating: '4.5',
@@ -37,7 +42,7 @@ class HomeGetxController extends GetxController {
       ),
       Car(
         id: 2,
-        imgUrl: 'assets/images/car.png',
+        imgUrls: ['assets/images/car.png'],
         title: 'BMW Loz 63',
         subtitle: '310 DH/Jour',
         rating: '4.6',
@@ -45,7 +50,7 @@ class HomeGetxController extends GetxController {
       ),
       Car(
         id: 3,
-        imgUrl: 'assets/images/car.png',
+        imgUrls: ['assets/images/car.png'],
         title: 'Lambornini 63',
         subtitle: '320 DH/Jour',
         rating: '4.7',
@@ -53,7 +58,7 @@ class HomeGetxController extends GetxController {
       ),
       Car(
         id: 4,
-        imgUrl: 'assets/images/car.png',
+        imgUrls: ['assets/images/car.png'],
         title: 'Toyota yoyo 63',
         subtitle: '330 DH/Jour',
         rating: '4.8',
@@ -61,7 +66,7 @@ class HomeGetxController extends GetxController {
       ),
       Car(
         id: 5,
-        imgUrl: 'assets/images/car.png',
+        imgUrls: ['assets/images/car.png'],
         title: 'Hyonda huhu 63',
         subtitle: '340 DH/Jour',
         rating: '4.9',
