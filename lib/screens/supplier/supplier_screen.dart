@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -8,11 +7,12 @@ import 'package:logo/getx/home_getx_controller.dart';
 import 'package:logo/screens/profiles/app_bar_widget.dart';
 import 'package:logo/utils/app_colors.dart';
 import 'package:logo/utils/app_text_styles.dart';
-
-import '../home_screen.dart';
+import 'package:logo/widgets/car_card.dart';
 
 class SupplierScreen extends StatelessWidget {
   const SupplierScreen({super.key});
+
+  ///TODO: THIS WILL BE CHANGED TO MYPROFILESCREEN
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class SupplierScreen extends StatelessWidget {
                         title: 'Mark stephane',
                         context: context,
                         colorAppBar: AppColors.white,
-                        isVisiableMenu: true,
+                        // isVisiableMenu: true,
                       ),
                       CircleAvatar(
                         radius: 33.w,

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:logo/utils/app_text_styles.dart';
@@ -69,6 +71,7 @@ class TextFormFieldCustom extends StatelessWidget {
               filled: true,
               fillColor: AppColors.lightGrey,
             ),
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: validateFunctionEmpty,
           ),
         ),
@@ -89,6 +92,7 @@ class TextFormFieldCustom extends StatelessWidget {
   String? validateFunctionEmpty(value) {
     if (value != null && value.isEmpty) {
       textHelper = '*Requerid';
+      print(textHelper);
     } else {
       textHelper = '';
     }

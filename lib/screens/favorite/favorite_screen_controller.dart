@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
-
-import '../../model/Car.dart';
+import 'package:logo/model/car.dart';
 
 class FavoriteScreenController extends GetxController {
   bool loading = false;
@@ -36,7 +35,7 @@ class FavoriteScreenController extends GetxController {
     return [
       Car(
         id: 1,
-        imgUrl: 'assets/images/car.png',
+        imgUrls: ['assets/images/car.png'],
         title: 'Mercedes gt 63',
         subtitle: '300 DH/Jour',
         rating: '4.5',
@@ -44,7 +43,7 @@ class FavoriteScreenController extends GetxController {
       ),
       Car(
         id: 2,
-        imgUrl: 'assets/images/car.png',
+        imgUrls: ['assets/images/car.png'],
         title: 'BMW Loz 63',
         subtitle: '310 DH/Jour',
         rating: '4.6',
@@ -52,7 +51,7 @@ class FavoriteScreenController extends GetxController {
       ),
       Car(
         id: 3,
-        imgUrl: 'assets/images/car.png',
+        imgUrls: ['assets/images/car.png'],
         title: 'Lambornini 63',
         subtitle: '320 DH/Jour',
         rating: '4.7',
@@ -60,7 +59,7 @@ class FavoriteScreenController extends GetxController {
       ),
       Car(
         id: 4,
-        imgUrl: 'assets/images/car.png',
+        imgUrls: ['assets/images/car.png'],
         title: 'Toyota yoyo 63',
         subtitle: '330 DH/Jour',
         rating: '4.8',
@@ -68,7 +67,7 @@ class FavoriteScreenController extends GetxController {
       ),
       Car(
         id: 5,
-        imgUrl: 'assets/images/car.png',
+        imgUrls: ['assets/images/car.png'],
         title: 'Hyonda huhu 63',
         subtitle: '340 DH/Jour',
         rating: '4.9',
