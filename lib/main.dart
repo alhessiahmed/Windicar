@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:logo/screens/auth/login_screen.dart';
+import 'package:logo/screens/auth/register_screen.dart';
+import 'package:logo/screens/auth/verification_screen.dart';
 import 'package:logo/screens/profiles/change_password_screen.dart';
 import 'package:logo/screens/profiles/profile_screen.dart';
 import 'package:logo/screens/car_details_screen.dart';
@@ -8,6 +11,8 @@ import 'package:logo/screens/intro/on_boarding_screen.dart';
 import 'package:logo/screens/intro/splash_screen.dart';
 import 'package:logo/utils/app_colors.dart';
 import 'package:logo/utils/app_text_styles.dart';
+
+import 'screens/auth/reset_new_password.dart';
 
 void main() {
   runApp(const MyApp());
@@ -53,9 +58,14 @@ class MyApp extends StatelessWidget {
             '/on_boarding_screen': (context) => const OnBoardingScreen(),
             '/home_screen': (context) => const HomeScreen(),
             '/profile_screen': (context) => const ProfileScreen(),
-            '/change_password_screen': (context) => const ChangePasswordScreen(),
+            '/change_password_screen': (context) =>
+                const ChangePasswordScreen(),
+            '/login_screen': (context) => const LoginScreen(),
+            '/register_screen': (context) => const RegisterScreen(),
+            '/verification_screen': (context) => const VerificationScreen(),
+            '/reset_new_password_screen': (context) => const ResetNewPasswordScreen(),
           },
-          initialRoute: '/profile_screen',
+          initialRoute: '/login_screen',
         );
       },
     );
