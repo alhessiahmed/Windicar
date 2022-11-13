@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:logo/screens/car_details_screen.dart';
+// import 'package:get/get_navigation/src/root/get_material_app.dart';
+// import 'package:logo/core/routes/app_routes.dart';
+// import 'package:logo/core/routes/routes_names.dart';
 import 'package:logo/screens/home_screen.dart';
 import 'package:logo/screens/intro/on_boarding_screen.dart';
 import 'package:logo/screens/intro/splash_screen.dart';
@@ -19,6 +21,7 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       builder: (context, child) {
+        // return GetMaterialApp(
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
@@ -49,6 +52,8 @@ class MyApp extends StatelessWidget {
             '/home_screen': (context) => const HomeScreen(),
           },
           initialRoute: '/splash_screen',
+          // getPages: AppRoutes.getPage(),
+          // initialRoute: RoutesNames.splashScreen,
         );
       },
     );

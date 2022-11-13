@@ -1,6 +1,6 @@
 class Car {
   final int id;
-  final String imgUrl;
+  final List<String> imgUrls;
   final String title;
   final String subtitle;
   final String rating;
@@ -8,7 +8,7 @@ class Car {
 
   Car({
     required this.id,
-    required this.imgUrl,
+    required this.imgUrls,
     required this.title,
     required this.subtitle,
     required this.rating,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+// import 'package:get/get.dart';
+// import 'package:logo/core/routes/routes_names.dart';
 import 'package:logo/utils/app_text_styles.dart';
 
 class OnBoardingScreen extends StatelessWidget {
@@ -34,6 +36,7 @@ class OnBoardingScreen extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 Navigator.pushReplacementNamed(context, '/home_screen');
+                // Get.toNamed(RoutesNames.homeScreen);
               },
               child: const Text('Entrée'),
             ),
