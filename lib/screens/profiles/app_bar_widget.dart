@@ -1,6 +1,6 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 import 'package:logo/utils/app_text_styles.dart';
 
 enum PopupMenuItemEnum {
@@ -58,6 +58,15 @@ AppBar getAppBarCustom({
               ),
             ),
           ],
+          onSelected: (value) {
+            // if value 1 show dialog
+            if (value == PopupMenuItemEnum.edit) {
+              Navigator.pushNamed(context, '/profile_screen');
+              // if value 2 show dialog
+            } else if (value == PopupMenuItemEnum.logout) {
+              ///TODO: LOGOUT AND GO BACK TO HOME SCREEN
+            }
+          },
         ),
       ),
     ],
