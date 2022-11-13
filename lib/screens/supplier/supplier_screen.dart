@@ -128,7 +128,7 @@ class SupplierScreen extends StatelessWidget {
                         itemBuilder: (context, index) {
                           return CarCard(
                             id: controller.items[index].id,
-                            imgUrl: controller.items[index].imgUrl,
+                            imgUrl: controller.items[index].imgUrls.first,
                             title: controller.items[index].title,
                             subtitle: controller.items[index].subtitle,
                             rating: controller.items[index].rating,
