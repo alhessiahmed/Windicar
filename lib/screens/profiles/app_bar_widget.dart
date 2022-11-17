@@ -29,7 +29,7 @@ AppBar getAppBarCustom({
     ),
     title: Text(
       title,
-      style: AppTextStyles.textTitle17.copyWith(
+      style: AppTextStyles.textStyle17.copyWith(
         color: colorAppBar,
       ),
     ),
@@ -47,14 +47,14 @@ AppBar getAppBarCustom({
               value: PopupMenuItemEnum.edit,
               child: Text(
                 "Modifier",
-                style: AppTextStyles.textTitle17,
+                style: AppTextStyles.textStyle17,
               ),
             ),
             PopupMenuItem(
               value: PopupMenuItemEnum.logout,
               child: Text(
                 "se déconnecter",
-                style: AppTextStyles.textTitle17,
+                style: AppTextStyles.textStyle17,
               ),
             ),
           ],

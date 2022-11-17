@@ -23,7 +23,7 @@ class LoginScreen extends StatelessWidget {
               ),
               Text(
                 'Se connecter',
-                style: AppTextStyles.textTitle17,
+                style: AppTextStyles.textStyle17,
               ),
               SizedBox(
                 height: 80.h,

@@ -5,8 +5,13 @@ import 'package:logo/utils/app_colors.dart';
 import 'app_bar_widget.dart';
 import 'text_form_field_widget.dart';
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+class UpdateProfileScreen extends StatelessWidget {
+  const UpdateProfileScreen({
+    super.key,
+    this.userId,
+  });
+
+  final int? userId;
 
   @override
   Widget build(BuildContext context) {

@@ -9,68 +9,46 @@ class AppTextStyles {
     fontFamily: 'CenturyGothic',
   );
 
-  static TextStyle onBoardingTextStyle = TextStyle(
-    color: AppColors.darkGreen,
-    fontSize: 14.sp,
-    // fontWeight: FontWeight.w700,
-    fontFamily: 'SFCompactDisplay',
-  );
-
-  static TextStyle buttonTextStyle = TextStyle(
-    fontSize: 14.sp,
-    // fontWeight: FontWeight.w500,
-    fontFamily: 'SFCompactDisplay',
-  );
-
-  static TextStyle onBoardingAppBarTextStyle = TextStyle(
-    color: AppColors.darkGreen,
-    fontSize: 17.sp,
-    // fontWeight: FontWeight.w600,
-    fontFamily: 'SFCompactDisplay',
-  );
-
-  static TextStyle ratingTextStyle = TextStyle(
+  static TextStyle textStyle12 = TextStyle(
     color: AppColors.black,
     fontSize: 12.sp,
     // fontWeight: FontWeight.w500,
     fontFamily: 'SFCompactDisplay',
   );
 
-  static TextStyle cardBlackTextStyle = TextStyle(
+  static TextStyle textStyle14 = TextStyle(
     color: AppColors.black,
     fontSize: 14.sp,
-    // fontWeight: FontWeight.w900,
+    // fontWeight: FontWeight.w500,
     fontFamily: 'SFCompactDisplay',
   );
 
-  static TextStyle cardGreenTextStyle = TextStyle(
+  static TextStyle whiteTextStyle14 = textStyle14.copyWith(
+    color: AppColors.white,
+  );
+
+  static TextStyle darkGreenTextStyle14 = textStyle14.copyWith(
     color: AppColors.darkGreen,
-    fontSize: 14.sp,
-    // fontWeight: FontWeight.w500,
-    fontFamily: 'SFCompactDisplay',
   );
 
-  static TextStyle textTitle14 = TextStyle(
-    fontSize: 14.sp,
-    // fontWeight: FontWeight.w500,
-    fontFamily: 'SFCompactDisplay',
-  );
-
-  static TextStyle textTitle17 = TextStyle(
-    fontSize: 17.sp,
-    // fontWeight: FontWeight.w600,
-    fontFamily: 'SFCompactDisplay',
-  );
-  static TextStyle textTitle16 = TextStyle(
+  static TextStyle textStyle16 = TextStyle(
     fontSize: 16.sp,
     // fontWeight: FontWeight.w600,
     fontFamily: 'SFCompactDisplay',
   );
 
-  static TextStyle homeAppBarTextStyle = TextStyle(
+  static TextStyle textStyle17 = TextStyle(
     color: AppColors.black,
     fontSize: 17.sp,
-    // fontWeight: FontWeight.w500,
+    // fontWeight: FontWeight.w600,
     fontFamily: 'SFCompactDisplay',
+  );
+
+  static TextStyle darkGreenTextStyle17 = textStyle14.copyWith(
+    color: AppColors.darkGreen,
+  );
+
+  static TextStyle whiteTextStyle17 = textStyle14.copyWith(
+    color: AppColors.white,
   );
 }

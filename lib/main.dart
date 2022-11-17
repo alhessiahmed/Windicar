@@ -4,7 +4,8 @@ import 'package:logo/screens/auth/login_screen.dart';
 import 'package:logo/screens/auth/register_screen.dart';
 import 'package:logo/screens/auth/verification_screen.dart';
 import 'package:logo/screens/profiles/change_password_screen.dart';
-import 'package:logo/screens/profiles/profile_screen.dart';
+// import 'package:logo/screens/profiles/profile_screen.dart';
+import 'package:logo/screens/profile_screen.dart';
 import 'package:logo/screens/home_screen.dart';
 import 'package:logo/screens/intro/on_boarding_screen.dart';
 import 'package:logo/screens/intro/splash_screen.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-            colorScheme: ColorScheme.light().copyWith(
+            colorScheme: const ColorScheme.light().copyWith(
               primary: AppColors.darkGreen,
             ),
             floatingActionButtonTheme: FloatingActionButtonThemeData(
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.darkGreen,
                 foregroundColor: AppColors.white,
-                textStyle: AppTextStyles.buttonTextStyle,
+                textStyle: AppTextStyles.textStyle14,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(24.r),
                 ),
@@ -71,8 +72,10 @@ class MyApp extends StatelessWidget {
             '/favorite_screen': (context) => const FavoriteScreen(),
             '/supplier_screen': (context) => const SupplierScreen(),
           },
-          // initialRoute: '/login_screen',
+          // initialRoute: '/profile_screen',
+          // initialRoute: '/favorite_screen',
           initialRoute: '/splash_screen',
+          // initialRoute: '/supplier_screen',
           // getPages: AppRoutes.getPage(),
           // initialRoute: RoutesNames.splashScreen,
         );
