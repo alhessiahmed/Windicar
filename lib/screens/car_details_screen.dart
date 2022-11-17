@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:logo/getx/car_details_getx_controller.dart';
 import 'package:logo/model/car.dart';
@@ -64,10 +64,6 @@ class CarDetailsScreen extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text(
-          'Car ID: $id',
-          style: AppTextStyles.cardBlackTextStyle,
-        ),
         leadingWidth: 64.r,
         leading: Row(
           children: [
@@ -179,15 +175,31 @@ class CarDetailsScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Mercedes gt 63'),
-                        Text('300 DH /Jour'),
+                        Text(
+                          'Mercedes gt 63',
+                          style: AppTextStyles.textStyle17,
+                        ),
+                        const Spacer(),
+                        Text(
+                          '300 DH',
+                          style: AppTextStyles.darkGreenTextStyle17,
+                        ),
+                        Text(
+                          ' /Jour',
+                          style: AppTextStyles.textStyle17,
+                        ),
                       ],
                     ),
                     SizedBox(
                       height: 16.h,
                     ),
+                    // Divider(
+                    //   thickness: 1,
+                    //   color: AppColors.grey,
+                    //   height: 24.h,
+                    // ),
                     Row(
                       children: [
                         InkResponse(
@@ -212,31 +224,57 @@ class CarDetailsScreen extends StatelessWidget {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('Mark stephane'),
-                            Text('Casablanca'),
+                            Text(
+                              'Mark stephane',
+                              style: AppTextStyles.textStyle16,
+                            ),
+                            Text(
+                              'Casablanca',
+                              style: AppTextStyles.darkGreenTextStyle14,
+                            ),
                           ],
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Image.asset('assets/images/star.png'),
-                        Text('4.8'),
+                        SizedBox(
+                          width: 8.w,
+                        ),
+                        Text(
+                          '4.8',
+                          style: AppTextStyles.textStyle16,
+                        ),
                       ],
                     ),
                     SizedBox(
                       height: 16.h,
                     ),
-                    Text('Fonctionnalités'),
+                    // Divider(
+                    //   thickness: 1,
+                    //   color: AppColors.grey,
+                    //   height: 24.h,
+                    // ),
+                    Text(
+                      'Fonctionnalités',
+                      style: AppTextStyles.textStyle16,
+                    ),
                     SizedBox(
                       height: 16.h,
                     ),
                     Row(
                       children: [
-                        SvgPicture.asset('assets/images/ic_fuel.svg'),
-                        Text('Essence'),
+                        Image.asset('assets/images/ic_fuel.png'),
+                        Text(
+                          'Essence',
+                          style: AppTextStyles.textStyle16,
+                        ),
                         SizedBox(
                           width: 24.w,
                         ),
                         SvgPicture.asset('assets/images/ic_engine.svg'),
-                        Text('Manuel'),
+                        Text(
+                          'Manuel',
+                          style: AppTextStyles.textStyle16,
+                        ),
                       ],
                     ),
                     Divider(
@@ -244,18 +282,26 @@ class CarDetailsScreen extends StatelessWidget {
                       color: AppColors.grey,
                       thickness: 1,
                     ),
-                    Text('Description'),
+                    Text(
+                      'Description',
+                      style: AppTextStyles.textStyle16,
+                    ),
                     Padding(
                       padding: EdgeInsetsDirectional.only(start: 8.w, top: 8.h),
                       child: Text(
-                          'Le client est très important, le client sera suivi par le client.Pour le besoin très présent, pour plus de commodité,nemportez que ce vulputate. Comme le basket ou pas, la gorge a maintenant quelques.'),
+                        'Le client est très important, le client sera suivi par le client.Pour le besoin très présent, pour plus de commodité,nemportez que ce vulputate. Comme le basket ou pas, la gorge a maintenant quelques.',
+                        style: AppTextStyles.textStyle14,
+                      ),
                     ),
                     Divider(
                       endIndent: (Get.width / 2).w,
                       color: AppColors.grey,
                       thickness: 1,
                     ),
-                    Text('Autres voitures'),
+                    Text(
+                      'Autres voitures',
+                      style: AppTextStyles.textStyle16,
+                    ),
                   ],
                 ),
               ),
@@ -303,24 +349,36 @@ class CarDetailsScreen extends StatelessWidget {
           children: [
             SizedBox(
               width: Get.width * 0.4,
-              child: ElevatedButton.icon(
-                icon: const FaIcon(FontAwesomeIcons.phone),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.cyan,
+              child: Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(32.r),
+                  gradient: const LinearGradient(
+                    begin: AlignmentDirectional.topCenter,
+                    end: AlignmentDirectional.bottomCenter,
+                    colors: [
+                      Color(0xFF35CEA9),
+                      Color(0xFF14AEA1),
+                    ],
+                  ),
                 ),
-                onPressed: () {
-                  //TODO : Dial
-                },
-                label: Text(
-                  'Appeler',
-                  style: AppTextStyles.textTitle16,
+                child: ElevatedButton.icon(
+                  icon: Image.asset('assets/images/ic_phone.png'),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.transparent, elevation: 0),
+                  onPressed: () {
+                    //TODO : Dial
+                  },
+                  label: Text(
+                    'Appeler',
+                    style: AppTextStyles.textStyle16,
+                  ),
                 ),
               ),
             ),
             SizedBox(
               width: Get.width * 0.4,
               child: ElevatedButton.icon(
-                icon: const FaIcon(FontAwesomeIcons.whatsapp),
+                icon: Image.asset('assets/images/ic_whatsapp.png'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.greenWhatapp,
                 ),
@@ -329,7 +387,7 @@ class CarDetailsScreen extends StatelessWidget {
                 },
                 label: Text(
                   'Whatsapp',
-                  style: AppTextStyles.textTitle16,
+                  style: AppTextStyles.textStyle16,
                 ),
               ),
             ),

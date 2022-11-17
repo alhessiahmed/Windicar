@@ -38,7 +38,7 @@ class RegisterScreen extends StatelessWidget {
                 alignment: AlignmentDirectional.centerStart,
                 child: Text(
                   "S'inscrire en moins d'une minute",
-                  style: AppTextStyles.textTitle17,
+                  style: AppTextStyles.textStyle17,
                 ),
               ),
               SizedBox(

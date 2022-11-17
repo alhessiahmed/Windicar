@@ -34,7 +34,7 @@ class VerificationScreen extends StatelessWidget {
               ),
               Text(
                 "Récupérer le de mot de passe",
-                style: AppTextStyles.textTitle17,
+                style: AppTextStyles.textStyle17,
               ),
               SizedBox(
                 height: 24.h,
@@ -42,7 +42,7 @@ class VerificationScreen extends StatelessWidget {
               Text(
                 "Indiquez votre de E-mail pour récuperer\n votre mot passe",
                 textAlign: TextAlign.center,
-                style: AppTextStyles.textTitle17,
+                style: AppTextStyles.textStyle17,
               ),
               SizedBox(
                 height: 40.h,

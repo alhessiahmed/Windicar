@@ -60,7 +60,7 @@ class CarCard extends StatelessWidget {
                     imgUrl,
                     width: 166.w,
                     height: 141.h,
-                    fit: BoxFit.fill,
+                    fit: BoxFit.cover,
                   ),
                 ),
                 PositionedDirectional(
@@ -89,7 +89,7 @@ class CarCard extends StatelessWidget {
                 children: [
                   AutoSizeText(
                     title,
-                    style: AppTextStyles.cardBlackTextStyle,
+                    style: AppTextStyles.textStyle14,
                   ),
                   const Spacer(),
                   Image.asset('assets/images/star.png'),
@@ -98,7 +98,7 @@ class CarCard extends StatelessWidget {
                   ),
                   AutoSizeText(
                     rating,
-                    style: AppTextStyles.ratingTextStyle,
+                    style: AppTextStyles.textStyle12,
                   ),
                 ],
               ),
@@ -110,7 +110,7 @@ class CarCard extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 8.w),
               child: AutoSizeText(
                 subtitle,
-                style: AppTextStyles.cardGreenTextStyle,
+                style: AppTextStyles.darkGreenTextStyle14,
               ),
             ),
           ],

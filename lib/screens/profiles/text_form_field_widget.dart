@@ -64,7 +64,7 @@ class TextFormFieldCustom extends StatelessWidget {
               enabledBorder: outlineInputBorder,
               errorBorder: outlineInputBorderError,
               focusedBorder: outlineInputBorder,
-              hintStyle: AppTextStyles.textTitle14.copyWith(
+              hintStyle: AppTextStyles.textStyle14.copyWith(
                 color: AppColors.grey,
               ),
               hintText: hintText,

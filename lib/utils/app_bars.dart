@@ -4,6 +4,34 @@ import 'package:logo/utils/app_colors.dart';
 import 'package:logo/utils/app_text_styles.dart';
 
 class AppBars {
+  static AppBar customeAppBar({
+    required BuildContext context,
+    required Color backgroundColor,
+    // required String leadingRoute,
+    // Widget? leadingIcon,
+    double? elevation,
+    String? title,
+  }) {
+    return AppBar(
+      backgroundColor: backgroundColor,
+      elevation: elevation,
+      title: Text(
+        title ?? '',
+        style: AppTextStyles.whiteTextStyle17,
+      ),
+      centerTitle: true,
+      leading: IconButton(
+        onPressed: () {
+          Navigator.pop(context);
+        },
+        icon: const Icon(
+          Icons.arrow_back_ios_rounded,
+          color: AppColors.white,
+        ),
+      ),
+    );
+  }
+
   static AppBar homeAppBar({
     required BuildContext context,
     required String leadingRoute,
@@ -12,7 +40,7 @@ class AppBars {
     return AppBar(
       title: Text(
         'LOGO',
-        style: AppTextStyles.homeAppBarTextStyle,
+        style: AppTextStyles.textStyle17,
       ),
       centerTitle: true,
       backgroundColor: AppColors.white,

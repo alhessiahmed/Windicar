@@ -72,6 +72,30 @@ class HomeGetxController extends GetxController {
         rating: '4.9',
         isFav: false,
       ),
+      Car(
+        id: 6,
+        imgUrls: ['assets/images/car.png'],
+        title: 'Tesla Space X',
+        subtitle: '340 DH/Jour',
+        rating: '4.9',
+        isFav: false,
+      ),
+      Car(
+        id: 7,
+        imgUrls: ['assets/images/car.png'],
+        title: 'Batata Zakya',
+        subtitle: '340 DH/Jour',
+        rating: '4.9',
+        isFav: false,
+      ),
+      Car(
+        id: 8,
+        imgUrls: ['assets/images/car.png'],
+        title: 'Shawarma Zakya',
+        subtitle: '340 DH/Jour',
+        rating: '4.9',
+        isFav: false,
+      ),
     ];
   }
 }

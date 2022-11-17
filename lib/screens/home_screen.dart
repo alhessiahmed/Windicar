@@ -19,7 +19,7 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBars.homeAppBar(
         context: context,
         leadingRoute: '/favorite_screen',
-        actionRoute: '/supplier_screen',
+        actionRoute: '/profile_screen',
       ),
       body: Column(
         children: [
