@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:logo/utils/app_text_styles.dart';
 
-import '../../utils/app_colors.dart';
+import '../utils/app_colors.dart';
 
 String? textHelper;
 
-class TextFormFieldCustom extends StatelessWidget {
-  const TextFormFieldCustom({
+class CustomTextFormField extends StatelessWidget {
+  const CustomTextFormField({
     super.key,
     required this.textEditingController,
     required this.hintText,
@@ -33,13 +33,13 @@ class TextFormFieldCustom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var outlineInputBorder = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(6),
+      borderRadius: BorderRadius.circular(16.r),
       borderSide: const BorderSide(
-        color: AppColors.lightGrey,
+        color: AppColors.sugarWhite,
       ),
     );
     var outlineInputBorderError = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(6),
+      borderRadius: BorderRadius.circular(16.r),
       borderSide: const BorderSide(
         color: AppColors.red,
       ),
@@ -48,6 +48,10 @@ class TextFormFieldCustom extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16.r),
+          ),
+          // clipBehavior: Clip.hardEdge,
           elevation: 3,
           child: TextFormField(
             textInputAction: textInputAction,
@@ -60,7 +64,29 @@ class TextFormFieldCustom extends StatelessWidget {
               fontSize: 14.sp,
             ),
             decoration: InputDecoration(
-              suffixIcon: suffixIcon,
+              // contentPadding: EdgeInsets.symmetric(
+              //   vertical: 21.h,
+              //   horizontal: 24.w,
+              // ),
+              // isDense: true,
+              suffixIcon: Padding(
+                padding: EdgeInsetsDirectional.only(
+                  end: 16.w,
+                ),
+                child: suffixIcon,
+              ),
+              prefixIcon: SizedBox(
+                width: 16.w,
+                height: 16.h,
+              ),
+              prefixIconConstraints: BoxConstraints(
+                maxWidth: 16.w,
+              ),
+              // suffixIcon: suffixIcon,
+              suffixIconConstraints: BoxConstraints(
+                maxHeight: 21.h,
+                maxWidth: 37.h,
+              ),
               enabledBorder: outlineInputBorder,
               errorBorder: outlineInputBorderError,
               focusedBorder: outlineInputBorder,
@@ -69,18 +95,20 @@ class TextFormFieldCustom extends StatelessWidget {
               ),
               hintText: hintText,
               filled: true,
-              fillColor: AppColors.lightGrey,
+              fillColor: AppColors.sugarWhite,
             ),
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: validateFunctionEmpty,
           ),
         ),
         Padding(
-          padding: const EdgeInsetsDirectional.only(start: 16),
+          padding: EdgeInsetsDirectional.only(
+            start: 16.w,
+          ),
           child: Text(
             textHelper ?? '',
-            style: const TextStyle(
-              fontSize: 11,
+            style: TextStyle(
+              fontSize: 11.sp,
               color: AppColors.red,
             ),
           ),

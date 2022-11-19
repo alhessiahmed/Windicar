@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../utils/app_colors.dart';
 import '../../utils/app_text_styles.dart';
 import '../profiles/app_bar_widget.dart';
-import '../profiles/text_form_field_widget.dart';
+import '../../widgets/custom_text_form_field.dart';
 
 class VerificationScreen extends StatelessWidget {
   const VerificationScreen({super.key});
@@ -47,7 +47,7 @@ class VerificationScreen extends StatelessWidget {
               SizedBox(
                 height: 40.h,
               ),
-              TextFormFieldCustom(
+              CustomTextFormField(
                 textEditingController: TextEditingController(),
                 hintText: 'Votre de E-mail',
                 textInputType: TextInputType.emailAddress,

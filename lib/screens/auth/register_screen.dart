@@ -6,7 +6,7 @@ import 'package:logo/screens/profiles/app_bar_widget.dart';
 
 import '../../utils/app_colors.dart';
 import '../../utils/app_text_styles.dart';
-import '../profiles/text_form_field_widget.dart';
+import '../../widgets/custom_text_form_field.dart';
 
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
@@ -44,25 +44,25 @@ class RegisterScreen extends StatelessWidget {
               SizedBox(
                 height: 24.h,
               ),
-              TextFormFieldCustom(
+              CustomTextFormField(
                 textEditingController: TextEditingController(),
                 hintText: 'Votre nom',
               ),
-              TextFormFieldCustom(
+              CustomTextFormField(
                 textEditingController: TextEditingController(),
                 hintText: 'Votre n° de téléphone',
                 textInputType: TextInputType.phone,
               ),
-              TextFormFieldCustom(
+              CustomTextFormField(
                 textEditingController: TextEditingController(),
                 hintText: 'Votre de E-mail',
                 textInputType: TextInputType.emailAddress,
               ),
-              TextFormFieldCustom(
+              CustomTextFormField(
                 textEditingController: TextEditingController(),
                 hintText: 'Votre ville',
               ),
-              TextFormFieldCustom(
+              CustomTextFormField(
                 textEditingController: TextEditingController(),
                 hintText: 'Votre mot de passe',
                 textInputType: TextInputType.visiblePassword,

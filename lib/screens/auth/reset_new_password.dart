@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:logo/screens/profiles/app_bar_widget.dart';
 
-import '../profiles/text_form_field_widget.dart';
+import '../../widgets/custom_text_form_field.dart';
 
 class ResetNewPasswordScreen extends StatelessWidget {
   const ResetNewPasswordScreen({super.key});
@@ -22,12 +22,12 @@ class ResetNewPasswordScreen extends StatelessWidget {
                 SizedBox(
                   height: 20.h,
                 ),
-                TextFormFieldCustom(
+                CustomTextFormField(
                   textEditingController: TextEditingController(),
                   hintText: 'Le nouveau mot de passe',
                   textInputType: TextInputType.phone,
                 ),
-                TextFormFieldCustom(
+                CustomTextFormField(
                   textEditingController: TextEditingController(),
                   hintText: 'Confirmer le mot de passe',
                   textInputAction: TextInputAction.done,

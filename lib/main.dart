@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:logo/screens/add_or_update_car.dart';
 import 'package:logo/screens/auth/login_screen.dart';
 import 'package:logo/screens/auth/register_screen.dart';
 import 'package:logo/screens/auth/verification_screen.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
+            scaffoldBackgroundColor: AppColors.white,
             colorScheme: const ColorScheme.light().copyWith(
               primary: AppColors.darkGreen,
             ),
@@ -71,13 +73,13 @@ class MyApp extends StatelessWidget {
                 const ResetNewPasswordScreen(),
             '/favorite_screen': (context) => const FavoriteScreen(),
             '/supplier_screen': (context) => const SupplierScreen(),
+            '/add_or_update_car': (context) => AddOrUpdateCar(),
           },
           // initialRoute: '/profile_screen',
           // initialRoute: '/favorite_screen',
-          initialRoute: '/splash_screen',
+          // initialRoute: '/splash_screen',
           // initialRoute: '/supplier_screen',
-          // getPages: AppRoutes.getPage(),
-          // initialRoute: RoutesNames.splashScreen,
+          initialRoute: '/add_or_update_car',
         );
       },
     );
