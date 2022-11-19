@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:logo/utils/app_colors.dart';
 
 import 'app_bar_widget.dart';
-import 'text_form_field_widget.dart';
+import '../../widgets/custom_text_form_field.dart';
 
 class UpdateProfileScreen extends StatelessWidget {
   const UpdateProfileScreen({
@@ -71,16 +71,16 @@ class UpdateProfileScreen extends StatelessWidget {
               SizedBox(
                 height: 20.h,
               ),
-              TextFormFieldCustom(
+              CustomTextFormField(
                 textEditingController: TextEditingController(),
                 hintText: 'appeler',
               ),
-              TextFormFieldCustom(
+              CustomTextFormField(
                 textEditingController: TextEditingController(),
                 hintText: 'téléphone',
                 textInputType: TextInputType.phone,
               ),
-              TextFormFieldCustom(
+              CustomTextFormField(
                 textEditingController: TextEditingController(),
                 hintText: 'Casablanca',
                 textInputAction: TextInputAction.done,

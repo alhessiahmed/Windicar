@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:logo/utils/app_colors.dart';
 import 'package:logo/utils/app_text_styles.dart';
 
-import '../profiles/text_form_field_widget.dart';
+import '../../widgets/custom_text_form_field.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -36,12 +36,12 @@ class LoginScreen extends StatelessWidget {
               SizedBox(
                 height: 80.h,
               ),
-              TextFormFieldCustom(
+              CustomTextFormField(
                 textEditingController: TextEditingController(),
                 hintText: 'Votre n° de téléphone',
                 textInputType: TextInputType.phone,
               ),
-              TextFormFieldCustom(
+              CustomTextFormField(
                 textEditingController: TextEditingController(),
                 hintText: 'Votre mot de passe',
                 textInputType: TextInputType.visiblePassword,
