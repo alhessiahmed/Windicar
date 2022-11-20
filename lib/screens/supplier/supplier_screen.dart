@@ -6,6 +6,7 @@ import 'package:logo/getx/home_getx_controller.dart';
 import 'package:logo/utils/app_colors.dart';
 import 'package:logo/utils/app_text_styles.dart';
 import 'package:logo/widgets/car_card.dart';
+import 'package:logo/widgets/custome_bottom_navigation_bar.dart';
 
 class SupplierScreen extends StatelessWidget {
   const SupplierScreen({super.key});
@@ -182,6 +183,7 @@ class SupplierScreen extends StatelessWidget {
           )
         ],
       ),
+      bottomNavigationBar: const CustomBottomNavigationBar(),
     );
   }
 }
