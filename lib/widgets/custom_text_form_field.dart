@@ -45,9 +45,11 @@ class CustomTextFormField extends StatelessWidget {
       ),
     );
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      // mainAxisAlignment: MainAxisAlignment.center,
+      // crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Card(
+          // margin: EdgeInsets.zero,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16.r),
           ),
@@ -64,11 +66,8 @@ class CustomTextFormField extends StatelessWidget {
               fontSize: 14.sp,
             ),
             decoration: InputDecoration(
-              // contentPadding: EdgeInsets.symmetric(
-              //   vertical: 21.h,
-              //   horizontal: 24.w,
-              // ),
-              // isDense: true,
+              contentPadding: EdgeInsets.symmetric(vertical: 16.h),
+              isDense: false,
               suffixIcon: Padding(
                 padding: EdgeInsetsDirectional.only(
                   end: 16.w,
@@ -101,15 +100,18 @@ class CustomTextFormField extends StatelessWidget {
             validator: validateFunctionEmpty,
           ),
         ),
-        Padding(
-          padding: EdgeInsetsDirectional.only(
-            start: 16.w,
-          ),
-          child: Text(
-            textHelper ?? '',
-            style: TextStyle(
-              fontSize: 11.sp,
-              color: AppColors.red,
+        Visibility(
+          visible: textHelper?.isNotEmpty ?? false,
+          child: Padding(
+            padding: EdgeInsetsDirectional.only(
+              start: 16.w,
+            ),
+            child: Text(
+              textHelper ?? '',
+              style: TextStyle(
+                fontSize: 11.sp,
+                color: AppColors.red,
+              ),
             ),
           ),
         ),

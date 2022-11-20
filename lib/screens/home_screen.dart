@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:logo/getx/home_getx_controller.dart';
+import 'package:logo/screens/add_or_update_car.dart';
 import 'package:logo/screens/car_details_screen.dart';
 import 'package:logo/utils/app_bars.dart';
 import 'package:logo/utils/app_colors.dart';
 import 'package:logo/utils/app_text_styles.dart';
 import 'package:logo/widgets/car_card.dart';
+import 'package:logo/widgets/custom_floating_button.dart';
+import 'package:logo/widgets/custom_text_form_field.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -24,22 +27,36 @@ class HomeScreen extends StatelessWidget {
       body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.all(16.r),
+            padding: EdgeInsets.symmetric(horizontal: 16.w),
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Expanded(
-                  flex: 3,
-                  child: Text('data'),
+                Expanded(
+                  flex: 4,
+                  child: CustomTextFormField(
+                    textEditingController: TextEditingController(),
+                    hintText: 'Voiture',
+                    suffixIcon: const Icon(Icons.keyboard_arrow_down_rounded),
+                  ),
                 ),
-                const Expanded(
-                  flex: 2,
-                  child: Text('00'),
+                Expanded(
+                  flex: 3,
+                  child: CustomTextFormField(
+                    textEditingController: TextEditingController(),
+                    hintText: 'Ville',
+                    suffixIcon: const Icon(Icons.keyboard_arrow_down_rounded),
+                  ),
                 ),
                 Expanded(
                   flex: 1,
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.search),
+                  child: CircleAvatar(
+                    backgroundColor: AppColors.darkGreen,
+                    foregroundColor: AppColors.white,
+                    radius: 19.r,
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.search),
+                    ),
                   ),
                 ),
               ],
@@ -84,10 +101,7 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.add_rounded),
-      ),
+      floatingActionButton: const CustomFloatingButton(),
     );
   }
 }

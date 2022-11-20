@@ -6,6 +6,7 @@ import 'package:logo/getx/home_getx_controller.dart';
 import 'package:logo/screens/profiles/update_profile_screen.dart';
 import 'package:logo/utils/app_colors.dart';
 import 'package:logo/utils/app_text_styles.dart';
+import 'package:logo/widgets/custom_floating_button.dart';
 import 'package:logo/widgets/modify_car_card.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -25,9 +26,7 @@ class ProfileScreen extends StatelessWidget {
               style: AppTextStyles.whiteTextStyle17,
             ),
             centerTitle: true,
-            
             flexibleSpace: FlexibleSpaceBar(
-
               background: Container(
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
@@ -153,6 +152,9 @@ class ProfileScreen extends StatelessWidget {
                     );
                   } else if (value == 'logout') {
                     ///TODO: LOGOUT AND GO BACK TO HOME SCREEN
+                    ///
+                    ///
+                    Navigator.pushNamed(context, '/login_screen');
                   }
                 },
               ),
@@ -220,10 +222,7 @@ class ProfileScreen extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.add_rounded),
-      ),
+      floatingActionButton: const CustomFloatingButton(),
     );
   }
 }

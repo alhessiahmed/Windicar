@@ -77,9 +77,9 @@ class MyApp extends StatelessWidget {
           },
           // initialRoute: '/profile_screen',
           // initialRoute: '/favorite_screen',
-          // initialRoute: '/splash_screen',
+          initialRoute: '/splash_screen',
           // initialRoute: '/supplier_screen',
-          initialRoute: '/add_or_update_car',
+          // initialRoute: '/add_or_update_car',
         );
       },
     );
