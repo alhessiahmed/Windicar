@@ -72,16 +72,16 @@ class UpdateProfileScreen extends StatelessWidget {
                 height: 20.h,
               ),
               CustomTextFormField(
-                textEditingController: TextEditingController(),
+                controller: TextEditingController(),
                 hintText: 'appeler',
               ),
               CustomTextFormField(
-                textEditingController: TextEditingController(),
+                controller: TextEditingController(),
                 hintText: 'téléphone',
-                textInputType: TextInputType.phone,
+                isPhone: true,
               ),
               CustomTextFormField(
-                textEditingController: TextEditingController(),
+                controller: TextEditingController(),
                 hintText: 'Casablanca',
                 textInputAction: TextInputAction.done,
               ),

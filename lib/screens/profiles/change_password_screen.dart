@@ -23,16 +23,16 @@ class ChangePasswordScreen extends StatelessWidget {
                 height: 20.h,
               ),
               CustomTextFormField(
-                textEditingController: TextEditingController(),
+                controller: TextEditingController(),
                 hintText: 'de passe actuel',
               ),
               CustomTextFormField(
-                textEditingController: TextEditingController(),
+                controller: TextEditingController(),
                 hintText: 'Le nouveau mot de passe',
-                textInputType: TextInputType.phone,
+                isPassword: true,
               ),
               CustomTextFormField(
-                textEditingController: TextEditingController(),
+                controller: TextEditingController(),
                 hintText: 'Confirmer le mot de passe',
                 textInputAction: TextInputAction.done,
               ),

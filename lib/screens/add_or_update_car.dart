@@ -46,7 +46,7 @@ class _AddOrUpdateCarState extends State<AddOrUpdateCar> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CustomTextFormField(
-                textEditingController: cityController,
+                controller: cityController,
                 hintText: 'Entrez le nom de la ville',
                 suffixIcon: SvgPicture.asset(
                   'assets/images/ic_edit.svg',
@@ -56,7 +56,7 @@ class _AddOrUpdateCarState extends State<AddOrUpdateCar> {
                 ),
               ),
               CustomTextFormField(
-                textEditingController: cityController,
+                controller: cityController,
                 hintText: 'Entrez le nom de la ville',
                 suffixIcon: SvgPicture.asset(
                   'assets/images/ic_edit.svg',
@@ -66,7 +66,7 @@ class _AddOrUpdateCarState extends State<AddOrUpdateCar> {
                 ),
               ),
               CustomTextFormField(
-                textEditingController: cityController,
+                controller: cityController,
                 hintText: 'Entrez le nom de la ville',
                 suffixIcon: SvgPicture.asset(
                   'assets/images/ic_edit.svg',
@@ -76,7 +76,7 @@ class _AddOrUpdateCarState extends State<AddOrUpdateCar> {
                 ),
               ),
               CustomTextFormField(
-                textEditingController: cityController,
+                controller: cityController,
                 hintText: 'Entrez le nom de la ville',
                 maxLines: 6,
                 suffixIcon: SvgPicture.asset(

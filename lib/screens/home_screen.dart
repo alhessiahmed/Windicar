@@ -34,7 +34,7 @@ class HomeScreen extends StatelessWidget {
                 Expanded(
                   flex: 4,
                   child: CustomTextFormField(
-                    textEditingController: TextEditingController(),
+                    controller: TextEditingController(),
                     hintText: 'Voiture',
                     suffixIcon: const Icon(Icons.keyboard_arrow_down_rounded),
                   ),
@@ -42,7 +42,7 @@ class HomeScreen extends StatelessWidget {
                 Expanded(
                   flex: 3,
                   child: CustomTextFormField(
-                    textEditingController: TextEditingController(),
+                    controller: TextEditingController(),
                     hintText: 'Ville',
                     suffixIcon: const Icon(Icons.keyboard_arrow_down_rounded),
                   ),
