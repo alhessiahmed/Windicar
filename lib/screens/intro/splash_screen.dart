@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:logo/pref/shared_pref_controller.dart';
 // import 'package:get/get.dart';
 // import 'package:logo/core/routes/routes_names.dart';
 import 'package:logo/utils/app_text_styles.dart';
@@ -15,9 +16,10 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
-      // Navigator.pushReplacementNamed(context, '/home_screen');
-      Navigator.pushReplacementNamed(context, '/on_boarding_screen');
-      // Get.toNamed(RoutesNames.onBoardingScreen);
+      String route = SharedPrefController().firstVisit
+          ? '/on_boarding_screen'
+          : '/home_screen';
+      Navigator.pushReplacementNamed(context, route);
     });
   }
 
@@ -42,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
         child: Center(
           child: Text(
-            'LOGO',
+            'Windicar',
             style: AppTextStyles.logoTextStyle,
           ),
         ),

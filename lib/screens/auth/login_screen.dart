@@ -37,14 +37,13 @@ class LoginScreen extends StatelessWidget {
                 height: 80.h,
               ),
               CustomTextFormField(
-                textEditingController: TextEditingController(),
+                controller: TextEditingController(),
                 hintText: 'Votre n° de téléphone',
-                textInputType: TextInputType.phone,
+isPhone: true,
               ),
               CustomTextFormField(
-                textEditingController: TextEditingController(),
+                controller: TextEditingController(),
                 hintText: 'Votre mot de passe',
-                textInputType: TextInputType.visiblePassword,
                 isPassword: true,
               ),
               Align(
