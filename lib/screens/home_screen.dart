@@ -1,13 +1,9 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:logo/getx/home_getx_controller.dart';
-import 'package:logo/screens/add_or_update_car.dart';
-import 'package:logo/screens/car_details_screen.dart';
 import 'package:logo/utils/app_bars.dart';
 import 'package:logo/utils/app_colors.dart';
-import 'package:logo/utils/app_text_styles.dart';
 import 'package:logo/widgets/car_card.dart';
 import 'package:logo/widgets/custom_floating_button.dart';
 import 'package:logo/widgets/custom_text_form_field.dart';
@@ -21,8 +17,6 @@ class HomeScreen extends StatelessWidget {
       backgroundColor: AppColors.white,
       appBar: AppBars.homeAppBar(
         context: context,
-        leadingRoute: '/favorite_screen',
-        actionRoute: '/profile_screen',
       ),
       body: Column(
         children: [
@@ -39,6 +33,7 @@ class HomeScreen extends StatelessWidget {
                     suffixIcon: const Icon(Icons.keyboard_arrow_down_rounded),
                   ),
                 ),
+                SizedBox(width: 8.w),
                 Expanded(
                   flex: 3,
                   child: CustomTextFormField(
@@ -47,6 +42,7 @@ class HomeScreen extends StatelessWidget {
                     suffixIcon: const Icon(Icons.keyboard_arrow_down_rounded),
                   ),
                 ),
+                SizedBox(width: 8.w),
                 Expanded(
                   flex: 1,
                   child: CircleAvatar(

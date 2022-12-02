@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:logo/model/car.dart';
-import 'package:logo/screens/profiles/app_bar_widget.dart';
+import 'package:logo/widgets/app_bar_widget.dart';
 import 'package:logo/utils/app_colors.dart';
 import 'package:logo/utils/app_text_styles.dart';
 import 'package:logo/widgets/custom_text_form_field.dart';
@@ -55,9 +55,10 @@ class _AddOrUpdateCarState extends State<AddOrUpdateCar> {
                   color: AppColors.grey,
                 ),
               ),
+              SizedBox(height: 16.h),
               CustomTextFormField(
                 controller: cityController,
-                hintText: 'Entrez le nom de la ville',
+                hintText: 'Nom de voiture',
                 suffixIcon: SvgPicture.asset(
                   'assets/images/ic_edit.svg',
                   height: 21.h,
@@ -65,9 +66,10 @@ class _AddOrUpdateCarState extends State<AddOrUpdateCar> {
                   color: AppColors.grey,
                 ),
               ),
+              SizedBox(height: 16.h),
               CustomTextFormField(
                 controller: cityController,
-                hintText: 'Entrez le nom de la ville',
+                hintText: 'Prix/jour',
                 suffixIcon: SvgPicture.asset(
                   'assets/images/ic_edit.svg',
                   height: 21.h,
@@ -75,9 +77,10 @@ class _AddOrUpdateCarState extends State<AddOrUpdateCar> {
                   color: AppColors.grey,
                 ),
               ),
+              SizedBox(height: 16.h),
               CustomTextFormField(
                 controller: cityController,
-                hintText: 'Entrez le nom de la ville',
+                hintText: 'Description',
                 maxLines: 6,
                 suffixIcon: SvgPicture.asset(
                   'assets/images/ic_edit.svg',
@@ -86,6 +89,7 @@ class _AddOrUpdateCarState extends State<AddOrUpdateCar> {
                   color: AppColors.grey,
                 ),
               ),
+              SizedBox(height: 16.h),
               FlipFlopButton(
                 firstButtonTitle: 'Essence',
                 secondButtonTitle: 'Gasoil',

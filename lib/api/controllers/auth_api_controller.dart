@@ -16,7 +16,7 @@ class AuthApiController with ApiHelper {
         'name': user.name,
         'phone': user.phone,
         'email': user.email,
-        'city_id': user.cityId,
+        'city_id': user.cityId.toString(),
         'password': user.password,
       },
       headers: {'Accept': 'application/json'},
@@ -32,14 +32,14 @@ class AuthApiController with ApiHelper {
   }
 
   Future<ApiResponse> login({
-    required String phone,
+    required String email,
     required String password,
   }) async {
     Uri uri = Uri.parse(ApiSettings.login);
     var response = await http.post(
       uri,
       body: {
-        'phone': phone,
+        'email': email,
         'password': password,
       },
       headers: {'Accept': 'application/json'},

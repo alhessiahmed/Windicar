@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:logo/screens/home_screen.dart';
-import 'package:logo/screens/profiles/app_bar_widget.dart';
+import 'package:logo/widgets/app_bar_widget.dart';
 import 'package:logo/widgets/car_card.dart';
-import 'favorite_screen_controller.dart';
+import '../getx/favorite_screen_controller.dart';
 
 class FavoriteScreen extends StatelessWidget {
   const FavoriteScreen({super.key});

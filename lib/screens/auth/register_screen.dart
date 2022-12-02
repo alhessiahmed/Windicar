@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:logo/api/controllers/auth_api_controller.dart';
-import 'package:logo/getx/register_getx_controller.dart';
+import 'package:logo/getx/auth/register_getx_controller.dart';
 import 'package:logo/model/api_response.dart';
 import 'package:logo/model/city.dart';
 import 'package:logo/model/user.dart';
-import 'package:logo/screens/profiles/app_bar_widget.dart';
+import 'package:logo/widgets/app_bar_widget.dart';
 import 'package:logo/utils/app_colors.dart';
 import 'package:logo/utils/app_text_styles.dart';
 import 'package:logo/utils/helpers.dart';
@@ -146,28 +146,7 @@ class RegisterScreen extends StatelessWidget with Helpers {
                       ),
                       ElevatedButton(
                         onPressed: () async {
-                          // Navigator.pushNamed(context, '/verification_screen');
-                          if (controller.formKey.currentState!.validate()) {
-                            if (controller.selectedCountryId != null) {
-                              User user = User();
-                              user.name = controller.nameController.text;
-                              user.phone = controller.phoneController.text;
-                              user.email = controller.emailController.text;
-                              user.password =
-                                  controller.passwordController.text;
-                              user.cityId =
-                                  controller.selectedCountryId!.toString();
-                              ApiResponse response = await AuthApiController()
-                                  .register(user: user);
-                              // if (response.success) {
-                              showSnackBar(
-                                context,
-                                message: response.message,
-                                error: !response.success,
-                              );
-                              // }
-                            }
-                          }
+                          _performRegister(controller, context);
                         },
                         child: Text(
                           'Valider',
@@ -206,5 +185,34 @@ class RegisterScreen extends StatelessWidget with Helpers {
         ),
       ),
     );
+  }
+
+  Future<void> _performRegister(
+    RegisterGetxController controller,
+    BuildContext context,
+  ) async {
+    if (controller.formKey.currentState!.validate()) {
+      if (controller.selectedCountryId != null) {
+        User user = User();
+        user.name = controller.nameController.text;
+        user.phone = controller.phoneController.text;
+        user.email = controller.emailController.text;
+        user.password = controller.passwordController.text;
+        user.cityId = controller.selectedCountryId!;
+        ApiResponse response = await AuthApiController().register(user: user);
+        if (response.success) {
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            '/login_screen',
+            (route) => false,
+          );
+        }
+        showSnackBar(
+          context,
+          message: response.message,
+          error: !response.success,
+        );
+      }
+    }
   }
 }

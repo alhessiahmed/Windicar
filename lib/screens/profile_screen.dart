@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:logo/api/controllers/auth_api_controller.dart';
 import 'package:logo/getx/home_getx_controller.dart';
-import 'package:logo/screens/profiles/update_profile_screen.dart';
+import 'package:logo/model/api_response.dart';
+import 'package:logo/screens/update_profile_screen.dart';
 import 'package:logo/utils/app_colors.dart';
 import 'package:logo/utils/app_text_styles.dart';
+import 'package:logo/utils/helpers.dart';
 import 'package:logo/widgets/custom_floating_button.dart';
 import 'package:logo/widgets/modify_car_card.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatelessWidget with Helpers {
   const ProfileScreen({Key? key}) : super(key: key);
 
   @override
@@ -142,7 +145,7 @@ class ProfileScreen extends StatelessWidget {
                     ),
                   ),
                 ],
-                onSelected: (value) {
+                onSelected: (value) async {
                   if (value == 'modify') {
                     Navigator.push(
                       context,
@@ -151,10 +154,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     );
                   } else if (value == 'logout') {
-                    ///TODO: LOGOUT AND GO BACK TO HOME SCREEN
-                    ///
-                    ///
-                    Navigator.pushNamed(context, '/login_screen');
+                    _performLogout(context);
                   }
                 },
               ),
@@ -224,5 +224,15 @@ class ProfileScreen extends StatelessWidget {
       ),
       floatingActionButton: const CustomFloatingButton(),
     );
+  }
+
+  void _performLogout(BuildContext context) async {
+    ApiResponse response = await AuthApiController().logout();
+    showSnackBar(
+      context,
+      message: response.message,
+      error: !response.success,
+    );
+    Navigator.pushNamed(context, '/home_screen');
   }
 }

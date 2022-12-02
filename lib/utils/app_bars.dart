@@ -1,45 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:logo/pref/shared_pref_controller.dart';
 import 'package:logo/utils/app_colors.dart';
 import 'package:logo/utils/app_text_styles.dart';
 
 class AppBars {
-  static AppBar customeAppBar({
+  static AppBar customAppBar({
     required BuildContext context,
     required Color backgroundColor,
     // required String leadingRoute,
     // Widget? leadingIcon,
+    Color? iconColor,
     double? elevation,
     String? title,
+    TextStyle? titleStyle,
   }) {
     return AppBar(
       backgroundColor: backgroundColor,
       elevation: elevation,
       title: Text(
         title ?? '',
-        style: AppTextStyles.whiteTextStyle17,
+        style: titleStyle ?? AppTextStyles.whiteTextStyle17,
       ),
       centerTitle: true,
       leading: IconButton(
         onPressed: () {
           Navigator.pop(context);
         },
-        icon: const Icon(
+        icon: Icon(
           Icons.arrow_back_ios_rounded,
-          color: AppColors.white,
+          color: iconColor ?? AppColors.white,
         ),
       ),
     );
   }
 
-  static AppBar homeAppBar({
-    required BuildContext context,
-    required String leadingRoute,
-    required String actionRoute,
-  }) {
+  static AppBar homeAppBar({required BuildContext context}) {
     return AppBar(
       title: Text(
-        'LOGO',
+        'Windicar',
         style: AppTextStyles.textStyle17,
       ),
       centerTitle: true,
@@ -47,7 +46,10 @@ class AppBars {
       elevation: 0,
       leading: IconButton(
         onPressed: () {
-          Navigator.pushNamed(context, leadingRoute);
+          String route = SharedPrefController().loggedIn
+              ? '/favorite_screen'
+              : '/login_screen';
+          Navigator.pushNamed(context, route);
         },
         icon: const Icon(
           Icons.favorite,
@@ -57,7 +59,10 @@ class AppBars {
       actions: [
         IconButton(
           onPressed: () {
-            Navigator.pushNamed(context, actionRoute);
+            String route = SharedPrefController().loggedIn
+                ? '/profile_screen'
+                : '/login_screen';
+            Navigator.pushNamed(context, route);
           },
           icon: SvgPicture.asset('assets/images/ic_person.svg'),
         ),

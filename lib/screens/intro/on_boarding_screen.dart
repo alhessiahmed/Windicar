@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:logo/pref/shared_pref_controller.dart';
 import 'package:logo/utils/app_text_styles.dart';
 
 class OnBoardingScreen extends StatelessWidget {
@@ -32,7 +33,8 @@ class OnBoardingScreen extends StatelessWidget {
             ),
             SizedBox(height: 50.h),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
+                await SharedPrefController().loginForFirstTime();
                 Navigator.pushReplacementNamed(context, '/home_screen');
                 // Get.toNamed(RoutesNames.homeScreen);
               },

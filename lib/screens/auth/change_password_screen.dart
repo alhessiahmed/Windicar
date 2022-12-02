@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:logo/widgets/custom_text_form_field.dart';
-import 'app_bar_widget.dart';
+import '../../widgets/app_bar_widget.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
   const ChangePasswordScreen({super.key});
@@ -25,16 +25,24 @@ class ChangePasswordScreen extends StatelessWidget {
               CustomTextFormField(
                 controller: TextEditingController(),
                 hintText: 'de passe actuel',
+                isPassword: true,
+              ),
+              SizedBox(
+                height: 16.h,
               ),
               CustomTextFormField(
                 controller: TextEditingController(),
                 hintText: 'Le nouveau mot de passe',
                 isPassword: true,
               ),
+              SizedBox(
+                height: 16.h,
+              ),
               CustomTextFormField(
                 controller: TextEditingController(),
                 hintText: 'Confirmer le mot de passe',
                 textInputAction: TextInputAction.done,
+                isPassword: true,
               ),
               SizedBox(
                 height: 40.h,
