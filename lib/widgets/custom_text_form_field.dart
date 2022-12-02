@@ -149,7 +149,6 @@ class CustomTextFormField extends StatelessWidget {
     this.isPhone = false,
     this.hasEditIcon = false,
     this.maxLines = 1,
-    this.minLines = 1,
     this.onChange,
     this.onSubmitted,
   }) : super(key: key);
@@ -165,7 +164,6 @@ class CustomTextFormField extends StatelessWidget {
   final bool isPhone;
   final bool hasEditIcon;
   final int maxLines;
-  final int minLines;
   final Function(String)? onChange;
   final Function(String)? onSubmitted;
 
@@ -215,7 +213,6 @@ class CustomTextFormField extends StatelessWidget {
           cursorColor: AppColors.grey,
           // cursorHeight: 20.h,
           maxLines: maxLines,
-          minLines: minLines,
           maxLength: isPhone ? 10 : null,
           onChanged: onChange,
           onFieldSubmitted: onSubmitted,

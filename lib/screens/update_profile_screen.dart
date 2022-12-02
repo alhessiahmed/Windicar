@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:logo/utils/app_colors.dart';
 
-import 'app_bar_widget.dart';
-import '../../widgets/custom_text_form_field.dart';
+import '../widgets/app_bar_widget.dart';
+import '../widgets/custom_text_form_field.dart';
 
 class UpdateProfileScreen extends StatelessWidget {
   const UpdateProfileScreen({

@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:logo/pref/shared_pref_controller.dart';
 import 'package:logo/screens/add_or_update_car.dart';
 import 'package:logo/screens/auth/login_screen.dart';
 import 'package:logo/screens/auth/register_screen.dart';
 import 'package:logo/screens/auth/verification_screen.dart';
-import 'package:logo/screens/profiles/change_password_screen.dart';
+import 'package:logo/screens/auth/change_password_screen.dart';
 // import 'package:logo/screens/profiles/profile_screen.dart';
 import 'package:logo/screens/profile_screen.dart';
 import 'package:logo/screens/home_screen.dart';
@@ -14,10 +15,12 @@ import 'package:logo/utils/app_colors.dart';
 import 'package:logo/utils/app_text_styles.dart';
 
 import 'screens/auth/reset_new_password.dart';
-import 'screens/favorite/favorite_screen.dart';
-import 'screens/supplier/supplier_screen.dart';
+import 'screens/favorite_screen.dart';
+import 'screens/supplier_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedPrefController().initPreferences();
   runApp(const MyApp());
 }
 
@@ -58,7 +61,7 @@ class MyApp extends StatelessWidget {
               ),
             ),
           ),
-          title: 'Logo',
+          title: 'Windicar',
           routes: {
             '/splash_screen': (context) => const SplashScreen(),
             '/on_boarding_screen': (context) => const OnBoardingScreen(),
@@ -77,8 +80,8 @@ class MyApp extends StatelessWidget {
           },
           // initialRoute: '/profile_screen',
           // initialRoute: '/favorite_screen',
-          // initialRoute: '/splash_screen',
-          initialRoute: '/register_screen',
+          initialRoute: '/splash_screen',
+          // initialRoute: '/register_screen',
           // initialRoute: '/supplier_screen',
           // initialRoute: '/add_or_update_car',
         );

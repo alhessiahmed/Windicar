@@ -28,13 +28,17 @@ class SharedPrefController {
     _sharedPreferences = await SharedPreferences.getInstance();
   }
 
+  Future<void> loginForFirstTime() async {
+    await _sharedPreferences.setBool(PrefKeys.firstVisit.name, true);
+  }
+
   Future<void> save({required User user}) async {
     await _sharedPreferences.setBool(PrefKeys.isLoggedIn.name, true);
     await _sharedPreferences.setInt(PrefKeys.id.name, user.id);
     await _sharedPreferences.setString(PrefKeys.phone.name, user.phone);
     await _sharedPreferences.setString(PrefKeys.name.name, user.name);
     await _sharedPreferences.setString(PrefKeys.email.name, user.email);
-    await _sharedPreferences.setString(PrefKeys.city_id.name, user.cityId);
+    await _sharedPreferences.setInt(PrefKeys.city_id.name, user.cityId);
     await _sharedPreferences.setString(
         PrefKeys.token.name, 'Bearer ${user.token}');
   }
@@ -57,7 +61,7 @@ class SharedPrefController {
   bool get loggedIn =>
       _sharedPreferences.getBool(PrefKeys.isLoggedIn.name) ?? false;
 
-  bool get firstVisit =>
+  bool get notFirstVisit =>
       _sharedPreferences.getBool(PrefKeys.firstVisit.name) ?? false;
 
   String get token => _sharedPreferences.getString(PrefKeys.token.name) ?? '';

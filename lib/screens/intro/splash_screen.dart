@@ -16,9 +16,9 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
-      String route = SharedPrefController().firstVisit
-          ? '/on_boarding_screen'
-          : '/home_screen';
+      String route = SharedPrefController().notFirstVisit
+          ? '/home_screen'
+          : '/on_boarding_screen';
       Navigator.pushReplacementNamed(context, route);
     });
   }
