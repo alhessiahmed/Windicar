@@ -2,16 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:logo/api/controllers/auth_api_controller.dart';
+import 'package:logo/getx/auth/forget_password_getx_controller.dart';
 import 'package:logo/getx/auth/login_getx_controller.dart';
 import 'package:logo/model/api_response.dart';
+import 'package:logo/screens/auth/reset_password_screen.dart';
 import 'package:logo/utils/app_bars.dart';
 import 'package:logo/utils/app_colors.dart';
 import 'package:logo/utils/app_text_styles.dart';
 import 'package:logo/utils/helpers.dart';
 import 'package:logo/widgets/custom_text_form_field.dart';
 
-class LoginScreen extends StatelessWidget with Helpers {
-  const LoginScreen({super.key});
+class ForgetPasswordScreen extends StatelessWidget with Helpers {
+  const ForgetPasswordScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +29,13 @@ class LoginScreen extends StatelessWidget with Helpers {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.w),
-          child: GetBuilder<LoginGetxController>(
-              init: LoginGetxController(),
-              builder: (LoginGetxController controller) {
+          child: GetBuilder<ForgetPasswordGetxController>(
+              init: ForgetPasswordGetxController(),
+              builder: (ForgetPasswordGetxController controller) {
                 return Form(
                   key: controller.formKey,
                   child: Column(
+                    // crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(
                         height: 55.h,
@@ -45,7 +48,22 @@ class LoginScreen extends StatelessWidget with Helpers {
                         ),
                       ),
                       SizedBox(
-                        height: 80.h,
+                        height: 32.h,
+                      ),
+                      Text(
+                        'Récupérer le de mot de passe ',
+                        style: AppTextStyles.textStyle17,
+                      ),
+                      SizedBox(
+                        height: 32.h,
+                      ),
+                      Text(
+                        'Indiquez votre de E-mail pour  récuperer votre mot passe',
+                        style: AppTextStyles.textStyle16,
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(
+                        height: 32.h,
                       ),
                       CustomTextFormField(
                         controller: controller.emailController,
@@ -53,39 +71,15 @@ class LoginScreen extends StatelessWidget with Helpers {
                         isEmail: true,
                       ),
                       SizedBox(
-                        height: 16.h,
-                      ),
-                      CustomTextFormField(
-                        controller: controller.passwordController,
-                        hintText: 'Votre mot de passe',
-                        isPassword: true,
-                      ),
-                      Align(
-                        alignment: AlignmentDirectional.centerStart,
-                        child: TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(
-                                context, '/forget_password_screen');
-                          },
-                          child: const Text('Mot de passe oublié ?'),
-                        ),
-                      ),
-                      SizedBox(
                         height: 40.h,
                       ),
                       ElevatedButton(
                         onPressed: () async =>
-                            await _performLogin(controller, context),
-                        child: const Text('Valider'),
+                            await _resetPassword(controller, context),
+                        child: const Text('Envoyer'),
                       ),
                       SizedBox(
                         height: 30.h,
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/register_screen');
-                        },
-                        child: const Text("S'inscrire gratuitement"),
                       ),
                     ],
                   ),
@@ -96,12 +90,11 @@ class LoginScreen extends StatelessWidget with Helpers {
     );
   }
 
-  Future<void> _performLogin(
-      LoginGetxController controller, BuildContext context) async {
+  Future<void> _resetPassword(
+      ForgetPasswordGetxController controller, BuildContext context) async {
     if (controller.formKey.currentState!.validate()) {
-      ApiResponse response = await AuthApiController().login(
+      ApiResponse response = await AuthApiController().forgotPassword(
         email: controller.emailController.text,
-        password: controller.passwordController.text,
       );
       showSnackBar(
         context,
@@ -109,10 +102,13 @@ class LoginScreen extends StatelessWidget with Helpers {
         error: !response.success,
       );
       if (response.success) {
-        Navigator.pushNamedAndRemoveUntil(
+        // Navigator.pushReplacementNamed(context, '/reset_password_screen');
+        Navigator.pushReplacement(
           context,
-          '/home_screen',
-          (route) => false,
+          MaterialPageRoute(
+            builder: (context) =>
+                ResetPasswordScreen(email: controller.emailController.text),
+          ),
         );
       }
     }

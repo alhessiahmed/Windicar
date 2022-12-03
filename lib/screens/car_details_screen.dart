@@ -76,7 +76,7 @@ class CarDetailsScreen extends StatelessWidget {
     // ),
     // child:
     return Container(
-      color: AppColors.darkGreen,
+      color: AppColors.white,
       child: SafeArea(
         child: Scaffold(
           extendBodyBehindAppBar: true,
