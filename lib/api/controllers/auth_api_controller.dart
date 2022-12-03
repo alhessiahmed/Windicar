@@ -16,7 +16,7 @@ class AuthApiController with ApiHelper {
         'name': user.name,
         'phone': user.phone,
         'email': user.email,
-        'city_id': user.cityId.toString(),
+        'city_id': user.cityId,
         'password': user.password,
       },
       headers: {'Accept': 'application/json'},
@@ -102,9 +102,13 @@ class AuthApiController with ApiHelper {
       body: {
         'email': email,
       },
+      headers: {
+        'Accept': 'application/json',
+      },
     );
     if (response.statusCode == 200 || response.statusCode == 400) {
       var jsonResponse = jsonDecode(response.body);
+      print('-------------------${jsonResponse['code']}-------------------');
       return ApiResponse(
         message: jsonResponse['message'],
         success: jsonResponse['status'],
