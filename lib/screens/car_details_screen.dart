@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:logo/getx/car_details_getx_controller.dart';
 import 'package:logo/model/car.dart';
+import 'package:logo/model/test_car.dart';
 import 'package:logo/utils/app_colors.dart';
 import 'package:logo/utils/app_text_styles.dart';
 import 'package:logo/widgets/car_card.dart';
@@ -18,8 +19,8 @@ class CarDetailsScreen extends StatelessWidget {
   });
   final int id;
 
-  final List<Car> temp = [
-    Car(
+  final List<TestCar> temp = [
+    TestCar(
       id: 1,
       imgUrls: ['assets/images/car.png'],
       title: 'Mercedes gt 63',
@@ -27,7 +28,7 @@ class CarDetailsScreen extends StatelessWidget {
       rating: '4.5',
       isFav: false,
     ),
-    Car(
+    TestCar(
       id: 2,
       imgUrls: ['assets/images/car.png'],
       title: 'BMW Loz 63',
@@ -35,7 +36,7 @@ class CarDetailsScreen extends StatelessWidget {
       rating: '4.6',
       isFav: false,
     ),
-    Car(
+    TestCar(
       id: 3,
       imgUrls: ['assets/images/car.png'],
       title: 'Lambornini 63',
@@ -43,7 +44,7 @@ class CarDetailsScreen extends StatelessWidget {
       rating: '4.7',
       isFav: false,
     ),
-    Car(
+    TestCar(
       id: 4,
       imgUrls: ['assets/images/car.png'],
       title: 'Toyota yoyo 63',
@@ -51,7 +52,7 @@ class CarDetailsScreen extends StatelessWidget {
       rating: '4.8',
       isFav: false,
     ),
-    Car(
+    TestCar(
       id: 5,
       imgUrls: ['assets/images/car.png'],
       title: 'Hyonda huhu 63',

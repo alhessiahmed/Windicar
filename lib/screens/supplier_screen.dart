@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:logo/getx/home_getx_controller.dart';
+import 'package:logo/getx/test_home_getx_controller.dart';
 import 'package:logo/utils/app_colors.dart';
 import 'package:logo/utils/app_text_styles.dart';
 import 'package:logo/widgets/car_card.dart';
@@ -140,8 +140,8 @@ class SupplierScreen extends StatelessWidget {
             ),
           ),
           GetBuilder(
-            init: HomeGetxController(),
-            builder: (HomeGetxController controller) {
+            init: TestHomeGetxController(),
+            builder: (TestHomeGetxController controller) {
               if (controller.loading) {
                 return const SliverFillRemaining(
                   child: Center(

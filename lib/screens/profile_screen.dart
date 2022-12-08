@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:logo/api/controllers/auth_api_controller.dart';
-import 'package:logo/getx/home_getx_controller.dart';
+import 'package:logo/getx/test_home_getx_controller.dart';
 import 'package:logo/model/api_response.dart';
 import 'package:logo/screens/update_profile_screen.dart';
 import 'package:logo/utils/app_colors.dart';
@@ -181,8 +181,8 @@ class ProfileScreen extends StatelessWidget with Helpers {
             ),
           ),
           GetBuilder(
-            init: HomeGetxController(),
-            builder: (HomeGetxController controller) {
+            init: TestHomeGetxController(),
+            builder: (TestHomeGetxController controller) {
               if (controller.loading) {
                 return const SliverFillRemaining(
                   child: Center(

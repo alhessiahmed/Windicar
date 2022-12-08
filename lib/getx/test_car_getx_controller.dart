@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:logo/model/car_details.dart';
 
-class CarGetxController extends GetxController {
+class TestCarGetxController extends GetxController {
   bool isLoading = false;
   late CarDetails carDetails;
 

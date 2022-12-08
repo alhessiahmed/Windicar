@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:logo/screens/home_screen.dart';
+import 'package:logo/getx/favorite_getx_controller.dart';
+import 'package:logo/model/car.dart';
+import 'package:logo/model/favorite_car.dart';
+import 'package:logo/utils/app_text_styles.dart';
 import 'package:logo/widgets/app_bar_widget.dart';
 import 'package:logo/widgets/car_card.dart';
-import '../getx/favorite_screen_controller.dart';
 
 class FavoriteScreen extends StatelessWidget {
   const FavoriteScreen({super.key});
@@ -16,41 +18,53 @@ class FavoriteScreen extends StatelessWidget {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          GetBuilder(
-            init: FavoriteScreenController(),
-            builder: (FavoriteScreenController controller) {
-              if (controller.loading) {
+          GetBuilder<FavoriteGetxController>(
+            init: FavoriteGetxController(),
+            builder: (FavoriteGetxController controller) {
+              if (controller.isLoading) {
                 return const Center(
                   child: CircularProgressIndicator(),
                 );
               } else {
-                return Expanded(
-                  child: GridView.builder(
-                    shrinkWrap: true,
-                    // physics: const NeverScrollableScrollPhysics(),
-                    physics: const BouncingScrollPhysics(),
-                    padding: EdgeInsets.all(16.r),
-                    itemCount: controller.items.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 16.h,
-                      crossAxisSpacing: 16.w,
-                      childAspectRatio: 166.w / 220.h,
+                if (controller.favoriteCars.isNotEmpty) {
+                  return Expanded(
+                    child: GridView.builder(
+                      shrinkWrap: true,
+                      physics: const BouncingScrollPhysics(),
+                      padding: EdgeInsets.all(16.r),
+                      itemCount: controller.favoriteCars.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 16.h,
+                        crossAxisSpacing: 16.w,
+                        childAspectRatio: 166.w / 220.h,
+                      ),
+                      itemBuilder: (context, index) {
+                        Car car = controller.favoriteCars[index].car;
+                        return CarCard(
+                          id: car.id,
+                          // imgUrl: controller
+                          //         .favoriteCars[index].car.images.first,
+                          imgUrl:
+                              car.images.isNotEmpty ? car.images.first : null,
+                          title: car.carName,
+                          subtitle: car.price,
+                          rating: car.owner.rate.toString(),
+                          isFav: true,
+                          onTap: (() async =>
+                              await controller.deleteFavorite(index: index)),
+                        );
+                      },
                     ),
-                    itemBuilder: (context, index) {
-                      return CarCard(
-                        id: controller.items[index].id,
-                        imgUrl: controller.items[index].imgUrls.first,
-                        title: controller.items[index].title,
-                        subtitle: controller.items[index].subtitle,
-                        rating: controller.items[index].rating,
-                        isFav: controller.items[index].isFav,
-                        onTap: (() async =>
-                            await controller.toggleFavorite(index: index)),
-                      );
-                    },
-                  ),
-                );
+                  );
+                } else {
+                  return Center(
+                    child: Text(
+                      'You didn\'t add any car to your favorite list',
+                      style: AppTextStyles.textStyle17,
+                    ),
+                  );
+                }
               }
             },
           ),

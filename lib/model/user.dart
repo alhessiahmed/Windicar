@@ -1,3 +1,5 @@
+import 'package:logo/model/car.dart';
+
 class User {
   late int id;
   late String name;
@@ -11,7 +13,7 @@ class User {
   late String createdAt;
   late String updatedAt;
   late String token;
-
+  List<Car> cars = [];
   User();
 
   User.fromJson(Map<String, dynamic> json) {
@@ -26,5 +28,10 @@ class User {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     token = json['token'];
+    if (json['cars'] != null) {
+      json['cars'].forEach((v) {
+        cars.add(Car.fromJson(v));
+      });
+    }
   }
 }

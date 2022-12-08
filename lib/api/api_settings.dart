@@ -8,4 +8,7 @@ class ApiSettings {
   static const String forgetPassword = '$_auth/forgot-password';
   static const String resetPassword = '$_auth/reset-password';
   static const String city = '$_baseUrl/city';
+  static const String car = '$_baseUrl/car';
+  static const String favorite = '$_baseUrl/favorite';
+  static const String userDetails = '$_baseUrl/show/owner/';
 }

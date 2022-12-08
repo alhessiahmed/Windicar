@@ -1,10 +1,11 @@
 import 'package:get/get.dart';
-import 'package:logo/model/car.dart';
 import 'package:logo/model/test_car.dart';
 
-class FavoriteScreenController extends GetxController {
+class TestHomeGetxController extends GetxController {
+  // final loading = false.obs;
+  // final items = <Car>[].obs;
   bool loading = false;
-  List<TestCar> items = [];
+  List<TestCar> items = <TestCar>[];
 
   @override
   void onInit() async {
@@ -13,13 +14,11 @@ class FavoriteScreenController extends GetxController {
   }
 
   Future<void> read() async {
+    // loading(true);
     loading = true;
-    await Future.delayed(
-      Duration(seconds: 3),
-      () {
-        items = fillList();
-      },
-    );
+    // items.value = fillList();
+    items = fillList();
+    // loading(false);
     loading = false;
     update();
   }
@@ -28,7 +27,6 @@ class FavoriteScreenController extends GetxController {
     required index,
   }) async {
     items[index].isFav = !items[index].isFav;
-    items.removeAt(index);
     update();
   }
 
@@ -40,7 +38,7 @@ class FavoriteScreenController extends GetxController {
         title: 'Mercedes gt 63',
         subtitle: '300 DH/Jour',
         rating: '4.5',
-        isFav: true,
+        isFav: false,
       ),
       TestCar(
         id: 2,
@@ -48,7 +46,7 @@ class FavoriteScreenController extends GetxController {
         title: 'BMW Loz 63',
         subtitle: '310 DH/Jour',
         rating: '4.6',
-        isFav: true,
+        isFav: false,
       ),
       TestCar(
         id: 3,
@@ -56,7 +54,7 @@ class FavoriteScreenController extends GetxController {
         title: 'Lambornini 63',
         subtitle: '320 DH/Jour',
         rating: '4.7',
-        isFav: true,
+        isFav: false,
       ),
       TestCar(
         id: 4,
@@ -64,7 +62,7 @@ class FavoriteScreenController extends GetxController {
         title: 'Toyota yoyo 63',
         subtitle: '330 DH/Jour',
         rating: '4.8',
-        isFav: true,
+        isFav: false,
       ),
       TestCar(
         id: 5,
@@ -72,7 +70,31 @@ class FavoriteScreenController extends GetxController {
         title: 'Hyonda huhu 63',
         subtitle: '340 DH/Jour',
         rating: '4.9',
-        isFav: true,
+        isFav: false,
+      ),
+      TestCar(
+        id: 6,
+        imgUrls: ['assets/images/car.png'],
+        title: 'Tesla Space X',
+        subtitle: '340 DH/Jour',
+        rating: '4.9',
+        isFav: false,
+      ),
+      TestCar(
+        id: 7,
+        imgUrls: ['assets/images/car.png'],
+        title: 'Batata Zakya',
+        subtitle: '340 DH/Jour',
+        rating: '4.9',
+        isFav: false,
+      ),
+      TestCar(
+        id: 8,
+        imgUrls: ['assets/images/car.png'],
+        title: 'Shawarma Zakya',
+        subtitle: '340 DH/Jour',
+        rating: '4.9',
+        isFav: false,
       ),
     ];
   }
