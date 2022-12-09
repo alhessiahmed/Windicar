@@ -5,6 +5,7 @@ import 'package:logo/api/api_settings.dart';
 import 'package:logo/model/api_response.dart';
 import 'package:logo/model/car.dart';
 import 'package:http/http.dart' as http;
+import 'package:logo/model/car_details.dart';
 
 class CarApiController with ApiHelper {
   Future<List<Car>> readCars() async {
@@ -22,7 +23,7 @@ class CarApiController with ApiHelper {
     return cars;
   }
 
-  Future<Car?> getCarDetails({required int id}) async {
+  Future<CarDetails?> getCarDetails({required int id}) async {
     Uri uri = Uri.parse('${ApiSettings.car}/$id');
     var response = await http.get(
       uri,
@@ -30,7 +31,7 @@ class CarApiController with ApiHelper {
     );
     if (response.statusCode == 200) {
       var jsonResponse = jsonDecode(response.body);
-      return Car.fromJson(jsonResponse['data']);
+      return CarDetails.fromJson(jsonResponse['data']);
     }
     return null;
   }

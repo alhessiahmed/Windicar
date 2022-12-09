@@ -14,7 +14,7 @@ class UserApiController with ApiHelper {
     );
     if (response.statusCode == 200) {
       var jsonResponse = jsonDecode(response.body);
-      return User.fromJson(jsonResponse);
+      return User.fromJson(jsonResponse['data']);
     }
     return null;
   }

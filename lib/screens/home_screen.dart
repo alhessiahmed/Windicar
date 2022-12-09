@@ -89,7 +89,7 @@ class HomeScreen extends StatelessWidget {
                         imgUrl: car.images.isNotEmpty ? car.images.first : null,
                         title: car.carName,
                         subtitle: car.price,
-                        rating: car.owner.rate.toString(),
+                        rating: car.owner?.rate.toString() ?? '0',
                         isFav: SharedPrefController().loggedIn
                             ? car.isFavorite
                             : false,

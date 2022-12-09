@@ -22,7 +22,7 @@ class FavoriteGetxController extends GetxController {
 
   Future<void> deleteFavorite({required int index}) async {
     ApiResponse response = await FavoriteApiController().toggleFavorite(
-      id: favoriteCars[index].id,
+      id: favoriteCars[index].carId,
       wasFavorite: true,
     );
     if (response.success) {

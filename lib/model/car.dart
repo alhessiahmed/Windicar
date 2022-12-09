@@ -1,3 +1,4 @@
+import 'package:logo/model/city.dart';
 import 'package:logo/model/owner.dart';
 
 class Car {
@@ -12,8 +13,9 @@ class Car {
   late String createdAt;
   late String updatedAt;
   late bool isFavorite;
-  late Owner owner;
+  Owner? owner;
   late List<String> images = [];
+  City? city;
 
   Car();
 
@@ -29,11 +31,16 @@ class Car {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     isFavorite = json['is_favorite'];
-    owner = Owner.fromJson(json['owner']);
+    if (json['owner'] != null) {
+      owner = Owner.fromJson(json['owner']);
+    }
     if (json['images'] != null) {
       for (var imgUrl in (json['images'] as List)) {
         images.add(imgUrl);
       }
+    }
+    if (json['city'] != null) {
+      city = City.fromJson(json['city']);
     }
   }
 

@@ -1,27 +1,17 @@
-enum FuelType {
-  gasoil,
-  essence,
-}
-
-enum CarType {
-  auto,
-  manuel,
-}
+import 'package:logo/model/car.dart';
 
 class CarDetails {
-  final String city;
-  final String name;
-  final double price;
-  final String description;
-  FuelType fuelType;
-  CarType carType;
+  late Car car;
+  late List<Car> similarCars = [];
 
-  CarDetails({
-    required this.city,
-    required this.name,
-    required this.price,
-    required this.description,
-    required this.fuelType,
-    required this.carType,
-  });
+  CarDetails();
+
+  CarDetails.fromJson(Map<String, dynamic> json) {
+    car = Car.fromJson(json['car']);
+    if (json['sameCars'] != null) {
+      json['sameCars'].forEach((v) {
+        similarCars.add(Car.fromJson(v));
+      });
+    }
+  }
 }

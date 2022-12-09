@@ -49,7 +49,7 @@ class FavoriteScreen extends StatelessWidget {
                               car.images.isNotEmpty ? car.images.first : null,
                           title: car.carName,
                           subtitle: car.price,
-                          rating: car.owner.rate.toString(),
+                          rating: car.owner?.rate.toString() ?? '0',
                           isFav: true,
                           onTap: (() async =>
                               await controller.deleteFavorite(index: index)),

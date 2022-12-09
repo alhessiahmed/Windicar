@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:logo/pref/shared_pref_controller.dart';
+import 'package:logo/screens/profile_screen.dart';
 import 'package:logo/utils/app_colors.dart';
 import 'package:logo/utils/app_text_styles.dart';
 
@@ -59,10 +60,16 @@ class AppBars {
       actions: [
         IconButton(
           onPressed: () {
-            String route = SharedPrefController().loggedIn
-                ? '/profile_screen'
-                : '/login_screen';
-            Navigator.pushNamed(context, route);
+            SharedPrefController().loggedIn
+                ? Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProfileScreen(
+                        userId: SharedPrefController()
+                            .getByKey(key: PrefKeys.id.name),
+                      ),
+                    ))
+                : Navigator.pushNamed(context, '/login_screen');
           },
           icon: SvgPicture.asset('assets/images/ic_person.svg'),
         ),

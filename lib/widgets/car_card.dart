@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:logo/screens/car_details_screen.dart';
@@ -33,6 +32,7 @@ class CarCard extends StatelessWidget {
           MaterialPageRoute(
             builder: (context) => CarDetailsScreen(
               id: id,
+              isFav: isFav,
             ),
           ),
         );

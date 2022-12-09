@@ -63,7 +63,6 @@ class MyApp extends StatelessWidget {
             '/splash_screen': (context) => const SplashScreen(),
             '/on_boarding_screen': (context) => const OnBoardingScreen(),
             '/home_screen': (context) => const HomeScreen(),
-            '/profile_screen': (context) => const ProfileScreen(),
             '/change_password_screen': (context) =>
                 const ChangePasswordScreen(),
             '/login_screen': (context) => const LoginScreen(),
@@ -71,14 +70,11 @@ class MyApp extends StatelessWidget {
                 const ForgetPasswordScreen(),
             '/register_screen': (context) => const RegisterScreen(),
             '/favorite_screen': (context) => const FavoriteScreen(),
-            '/supplier_screen': (context) => const SupplierScreen(),
             '/add_or_update_car': (context) => AddOrUpdateCar(),
           },
-          // initialRoute: '/profile_screen',
           // initialRoute: '/favorite_screen',
           initialRoute: '/splash_screen',
           // initialRoute: '/register_screen',
-          // initialRoute: '/supplier_screen',
           // initialRoute: '/add_or_update_car',
         );
       },
