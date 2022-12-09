@@ -5,15 +5,15 @@ import 'package:logo/utils/app_colors.dart';
 import 'package:logo/utils/app_text_styles.dart';
 
 class ModifyCarCard extends StatelessWidget {
-  const ModifyCarCard({
-    required this.imgUrl,
+  ModifyCarCard({
+    this.imgUrl,
     required this.title,
     required this.subtitle,
     required this.id,
     required this.onTap,
     Key? key,
   }) : super(key: key);
-  final String imgUrl;
+  String? imgUrl;
   final String title;
   final String subtitle;
   final int id;
@@ -40,8 +40,9 @@ class ModifyCarCard extends StatelessWidget {
                     topRight: Radius.circular(12.r),
                   ),
                 ),
-                child: Image.asset(
-                  imgUrl,
+                child: Image.network(
+                  imgUrl ??
+                      'https://th.bing.com/th/id/OIP.M7kw1oNiYcA4AYoVb_fx7gHaFj?pid=ImgDet&rs=1',
                   width: 166.w,
                   height: 141.h,
                   fit: BoxFit.cover,

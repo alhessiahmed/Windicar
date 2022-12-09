@@ -1,14 +1,19 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:logo/utils/app_colors.dart';
 import 'package:logo/utils/app_text_styles.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CustomBottomNavigationBar extends StatelessWidget {
   const CustomBottomNavigationBar({
     Key? key,
+    required this.phone,
   }) : super(key: key);
 
+  final String phone;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -45,7 +50,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.transparent, elevation: 0),
                 onPressed: () {
-                  //TODO : Dial
+                  callTelephone(context: context, number: phone);
                 },
                 label: Text(
                   'Appeler',
@@ -62,7 +67,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                 backgroundColor: AppColors.greenWhatapp,
               ),
               onPressed: () {
-                //TODO : whatapp
+                openWhatsapp(context: context, number: '+$phone');
               },
               label: Text(
                 'Whatsapp',
@@ -73,5 +78,52 @@ class CustomBottomNavigationBar extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  void callTelephone({
+    required BuildContext context,
+    required String number,
+  }) async {
+    final Uri launchUri = Uri(
+      scheme: 'tel',
+      path: number,
+    );
+
+    if (await canLaunchUrl(launchUri)) {
+      await launchUrl(launchUri);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text("Can't make phone calls")));
+    }
+  }
+
+  void openWhatsapp(
+      {required BuildContext context,
+      // required String text,
+      required String number}) async {
+    var whatsapp = number; //+92xx enter like this
+    var whatsappURlAndroid = "whatsapp://send?phone=$whatsapp";
+    //     "whatsapp://send?phone=" + whatsapp + "&text=$text";
+    // var whatsappURLIos = "https://wa.me/$whatsapp?text=${Uri.tryParse(text)}";
+    var whatsappURLIos = "https://wa.me/$whatsapp";
+    if (Platform.isIOS) {
+      // for iOS phone only
+      if (await canLaunchUrl(Uri.parse(whatsappURLIos))) {
+        await launchUrl(Uri.parse(
+          whatsappURLIos,
+        ));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Whatsapp not installed")));
+      }
+    } else {
+      // android , web
+      if (await canLaunchUrl(Uri.parse(whatsappURlAndroid))) {
+        await launchUrl(Uri.parse(whatsappURlAndroid));
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Whatsapp not installed")));
+      }
+    }
   }
 }

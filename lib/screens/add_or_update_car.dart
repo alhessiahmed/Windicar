@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:logo/model/car.dart';
 import 'package:logo/widgets/app_bar_widget.dart';
 import 'package:logo/utils/app_colors.dart';
@@ -27,6 +28,8 @@ class _AddOrUpdateCarState extends State<AddOrUpdateCar> {
   TextEditingController priceController = TextEditingController();
 
   TextEditingController descriptionController = TextEditingController();
+  List<XFile>? images;
+  late ImagePicker imagePicker = ImagePicker();
 
   bool fuelFirstButtonIsSelected = false;
   bool carFirstButtonIsSelected = false;
@@ -130,42 +133,59 @@ class _AddOrUpdateCarState extends State<AddOrUpdateCar> {
                 'Ajouter des photos',
                 style: AppTextStyles.textStyle16,
               ),
-              GridView.builder(
-                padding: EdgeInsets.symmetric(
-                  vertical: 24.h,
-                  horizontal: 97,
+              InkWell(
+                onTap: () {},
+                child: GridView.builder(
+                  padding: EdgeInsets.symmetric(
+                    vertical: 24.h,
+                    horizontal: 97,
+                  ),
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: 6,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    mainAxisSpacing: 8.h,
+                    crossAxisSpacing: 8.w,
+                    childAspectRatio: 54.w / 54.h,
+                  ),
+                  itemBuilder: (context, index) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: AppColors.lightGrey,
+                        borderRadius: BorderRadius.circular(12.r),
+                      ),
+                      child: Icon(
+                        Icons.add_rounded,
+                        color: AppColors.white,
+                        size: 40.r,
+                      ),
+                    );
+                  },
                 ),
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: 6,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  mainAxisSpacing: 8.h,
-                  crossAxisSpacing: 8.w,
-                  childAspectRatio: 54.w / 54.h,
-                ),
-                itemBuilder: (context, index) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: AppColors.lightGrey,
-                      borderRadius: BorderRadius.circular(12.r),
-                    ),
-                    child: Icon(
-                      Icons.add_rounded,
-                      color: AppColors.white,
-                      size: 40.r,
-                    ),
-                  );
-                },
               ),
               ElevatedButton(
                 onPressed: () {},
-                child: Text('Valider'),
+                child: Text(
+                  'Valider',
+                  style: AppTextStyles.whiteTextStyle14,
+                ),
               ),
             ],
           ),
         ),
       ),
     );
+  }
+
+  Future<void> _pickImages() async {
+    images = await imagePicker.pickMultiImage(
+      imageQuality: 70,
+    );
+    // if (images != null) {
+    //   setState(() {
+    //     pickedImage = img;
+    //   });
+    // }
   }
 }

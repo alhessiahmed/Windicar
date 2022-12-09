@@ -5,17 +5,13 @@ import 'package:logo/screens/add_or_update_car.dart';
 import 'package:logo/screens/auth/forget_password_screen.dart';
 import 'package:logo/screens/auth/login_screen.dart';
 import 'package:logo/screens/auth/register_screen.dart';
-import 'package:logo/screens/auth/verification_screen.dart';
 import 'package:logo/screens/auth/change_password_screen.dart';
-// import 'package:logo/screens/profiles/profile_screen.dart';
 import 'package:logo/screens/profile_screen.dart';
 import 'package:logo/screens/home_screen.dart';
 import 'package:logo/screens/intro/on_boarding_screen.dart';
 import 'package:logo/screens/intro/splash_screen.dart';
 import 'package:logo/utils/app_colors.dart';
 import 'package:logo/utils/app_text_styles.dart';
-
-import 'screens/auth/reset_password_screen.dart';
 import 'screens/favorite_screen.dart';
 import 'screens/supplier_screen.dart';
 
@@ -67,24 +63,18 @@ class MyApp extends StatelessWidget {
             '/splash_screen': (context) => const SplashScreen(),
             '/on_boarding_screen': (context) => const OnBoardingScreen(),
             '/home_screen': (context) => const HomeScreen(),
-            '/profile_screen': (context) => const ProfileScreen(),
             '/change_password_screen': (context) =>
                 const ChangePasswordScreen(),
             '/login_screen': (context) => const LoginScreen(),
             '/forget_password_screen': (context) =>
                 const ForgetPasswordScreen(),
             '/register_screen': (context) => const RegisterScreen(),
-            '/verification_screen': (context) => const VerificationScreen(),
-            // '/reset_password_screen': (context) => const ResetPasswordScreen(),
             '/favorite_screen': (context) => const FavoriteScreen(),
-            '/supplier_screen': (context) => const SupplierScreen(),
             '/add_or_update_car': (context) => AddOrUpdateCar(),
           },
-          // initialRoute: '/profile_screen',
           // initialRoute: '/favorite_screen',
           initialRoute: '/splash_screen',
           // initialRoute: '/register_screen',
-          // initialRoute: '/supplier_screen',
           // initialRoute: '/add_or_update_car',
         );
       },

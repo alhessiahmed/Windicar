@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:logo/screens/car_details_screen.dart';
@@ -6,8 +5,8 @@ import 'package:logo/utils/app_colors.dart';
 import 'package:logo/utils/app_text_styles.dart';
 
 class CarCard extends StatelessWidget {
-  const CarCard({
-    required this.imgUrl,
+  CarCard({
+    this.imgUrl,
     required this.title,
     required this.subtitle,
     required this.rating,
@@ -16,7 +15,7 @@ class CarCard extends StatelessWidget {
     required this.onTap,
     Key? key,
   }) : super(key: key);
-  final String imgUrl;
+  String? imgUrl;
   final String title;
   final String subtitle;
   final String rating;
@@ -33,6 +32,7 @@ class CarCard extends StatelessWidget {
           MaterialPageRoute(
             builder: (context) => CarDetailsScreen(
               id: id,
+              isFav: isFav,
             ),
           ),
         );
@@ -56,8 +56,9 @@ class CarCard extends StatelessWidget {
                       topRight: Radius.circular(12.r),
                     ),
                   ),
-                  child: Image.asset(
-                    imgUrl,
+                  child: Image.network(
+                    imgUrl ??
+                        'https://th.bing.com/th/id/OIP.M7kw1oNiYcA4AYoVb_fx7gHaFj?pid=ImgDet&rs=1',
                     width: 166.w,
                     height: 141.h,
                     fit: BoxFit.cover,
@@ -87,16 +88,21 @@ class CarCard extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 8.w),
               child: Row(
                 children: [
-                  AutoSizeText(
-                    title,
-                    style: AppTextStyles.textStyle14,
+                  SizedBox(
+                    width: 104.w,
+                    child: Text(
+                      title,
+                      style: AppTextStyles.textStyle14,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                  const Spacer(),
+                  // const Spacer(),
                   Image.asset('assets/images/star.png'),
                   SizedBox(
                     width: 4.w,
                   ),
-                  AutoSizeText(
+                  Text(
                     rating,
                     style: AppTextStyles.textStyle12,
                   ),
@@ -108,8 +114,8 @@ class CarCard extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 8.w),
-              child: AutoSizeText(
-                subtitle,
+              child: Text(
+                '$subtitle DH/Jour',
                 style: AppTextStyles.darkGreenTextStyle14,
               ),
             ),

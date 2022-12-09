@@ -1,101 +1,42 @@
 import 'package:get/get.dart';
+import 'package:logo/api/controllers/car_api_controller.dart';
+import 'package:logo/api/controllers/favorite_api_controller.dart';
+import 'package:logo/model/api_response.dart';
 import 'package:logo/model/car.dart';
 
 class HomeGetxController extends GetxController {
-  // final loading = false.obs;
-  // final items = <Car>[].obs;
-  bool loading = false;
-  List<Car> items = <Car>[];
+  bool isLoading = false;
+  List<Car> cars = [];
 
   @override
   void onInit() async {
-    await read();
+    await readCars();
     super.onInit();
   }
 
-  Future<void> read() async {
-    // loading(true);
-    loading = true;
-    // items.value = fillList();
-    items = fillList();
-    // loading(false);
-    loading = false;
+  Future<void> readCars() async {
+    isLoading = true;
+    cars = await CarApiController().readCars();
+    isLoading = false;
     update();
   }
 
   Future<void> toggleFavorite({
-    required index,
+    required int index,
+    required bool wasFavorite,
   }) async {
-    items[index].isFav = !items[index].isFav;
+    ApiResponse response = await FavoriteApiController().toggleFavorite(
+      id: cars[index].id,
+      wasFavorite: wasFavorite,
+    );
+    print(response.message);
+    if (response.success) {
+      cars[index].isFavorite = !cars[index].isFavorite;
+    }
     update();
   }
 
-  List<Car> fillList() {
-    return [
-      Car(
-        id: 1,
-        imgUrls: ['assets/images/car.png'],
-        title: 'Mercedes gt 63',
-        subtitle: '300 DH/Jour',
-        rating: '4.5',
-        isFav: false,
-      ),
-      Car(
-        id: 2,
-        imgUrls: ['assets/images/car.png'],
-        title: 'BMW Loz 63',
-        subtitle: '310 DH/Jour',
-        rating: '4.6',
-        isFav: false,
-      ),
-      Car(
-        id: 3,
-        imgUrls: ['assets/images/car.png'],
-        title: 'Lambornini 63',
-        subtitle: '320 DH/Jour',
-        rating: '4.7',
-        isFav: false,
-      ),
-      Car(
-        id: 4,
-        imgUrls: ['assets/images/car.png'],
-        title: 'Toyota yoyo 63',
-        subtitle: '330 DH/Jour',
-        rating: '4.8',
-        isFav: false,
-      ),
-      Car(
-        id: 5,
-        imgUrls: ['assets/images/car.png'],
-        title: 'Hyonda huhu 63',
-        subtitle: '340 DH/Jour',
-        rating: '4.9',
-        isFav: false,
-      ),
-      Car(
-        id: 6,
-        imgUrls: ['assets/images/car.png'],
-        title: 'Tesla Space X',
-        subtitle: '340 DH/Jour',
-        rating: '4.9',
-        isFav: false,
-      ),
-      Car(
-        id: 7,
-        imgUrls: ['assets/images/car.png'],
-        title: 'Batata Zakya',
-        subtitle: '340 DH/Jour',
-        rating: '4.9',
-        isFav: false,
-      ),
-      Car(
-        id: 8,
-        imgUrls: ['assets/images/car.png'],
-        title: 'Shawarma Zakya',
-        subtitle: '340 DH/Jour',
-        rating: '4.9',
-        isFav: false,
-      ),
-    ];
-  }
+  // Future<ApiResponse> addCar({required Car car}) async {
+
+  // }
 }

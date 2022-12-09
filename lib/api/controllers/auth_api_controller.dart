@@ -16,7 +16,7 @@ class AuthApiController with ApiHelper {
         'name': user.name,
         'phone': user.phone,
         'email': user.email,
-        'city_id': user.cityId,
+        'city_id': user.cityId.toString(),
         'password': user.password,
       },
       headers: {'Accept': 'application/json'},

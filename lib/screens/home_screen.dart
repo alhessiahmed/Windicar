@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:logo/getx/home_getx_controller.dart';
+import 'package:logo/model/car.dart';
+import 'package:logo/pref/shared_pref_controller.dart';
 import 'package:logo/utils/app_bars.dart';
 import 'package:logo/utils/app_colors.dart';
 import 'package:logo/widgets/car_card.dart';
@@ -58,36 +60,47 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
           ),
-          GetBuilder(
+          GetBuilder<HomeGetxController>(
             init: HomeGetxController(),
             builder: (HomeGetxController controller) {
-              if (controller.loading) {
+              if (controller.isLoading) {
                 return const Center(
                   child: CircularProgressIndicator(),
                 );
               } else {
+                // print('------ ${controller.cars.length} ------');
                 return Expanded(
                   child: GridView.builder(
                     shrinkWrap: true,
                     physics: const BouncingScrollPhysics(),
                     padding: EdgeInsets.all(16.r),
-                    itemCount: controller.items.length,
+                    itemCount: controller.cars.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       mainAxisSpacing: 16.h,
                       crossAxisSpacing: 16.w,
-                      childAspectRatio: 166.w / 220.h,
+                      childAspectRatio: 166.w / 224.h,
                     ),
                     itemBuilder: (context, index) {
+                      Car car = controller.cars[index];
+
                       return CarCard(
-                        id: controller.items[index].id,
-                        imgUrl: controller.items[index].imgUrls.first,
-                        title: controller.items[index].title,
-                        subtitle: controller.items[index].subtitle,
-                        rating: controller.items[index].rating,
-                        isFav: controller.items[index].isFav,
-                        onTap: (() async =>
-                            await controller.toggleFavorite(index: index)),
+                        id: car.id,
+                        imgUrl: car.images.isNotEmpty ? car.images.first : null,
+                        title: car.carName,
+                        subtitle: car.price,
+                        rating: car.owner?.rate.toString() ?? '0',
+                        isFav: SharedPrefController().loggedIn
+                            ? car.isFavorite
+                            : false,
+                        onTap: () async {
+                          if (SharedPrefController().loggedIn) {
+                            await controller.toggleFavorite(
+                                index: index, wasFavorite: car.isFavorite);
+                          } else {
+                            Navigator.pushNamed(context, '/login_screen');
+                          }
+                        },
                       );
                     },
                   ),
