@@ -141,6 +141,7 @@ class CustomTextFormField extends StatelessWidget {
     required this.controller,
     required this.hintText,
     this.suffixIcon,
+    // this.controllerContent,
     this.textInputAction = TextInputAction.next,
     this.keyboardType = TextInputType.text,
     this.obscureText = false,
@@ -154,6 +155,7 @@ class CustomTextFormField extends StatelessWidget {
   }) : super(key: key);
 
   final TextEditingController controller;
+  // final String? controllerContent;
   final Widget? suffixIcon;
   final String hintText;
   final TextInputAction textInputAction;
@@ -187,6 +189,7 @@ class CustomTextFormField extends StatelessWidget {
           ),
         ),
         TextFormField(
+          // initialValue: controllerContent,
           controller: controller,
           autovalidateMode: AutovalidateMode.onUserInteraction,
           validator: (value) {

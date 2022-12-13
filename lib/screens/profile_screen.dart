@@ -168,7 +168,13 @@ class ProfileScreen extends StatelessWidget with Helpers {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const UpdateProfileScreen(),
+                              builder: (context) => UpdateProfileScreen(
+                                userId: userId,
+                                imgUrl: controller.user?.imageUrl,
+                                name: controller.user!.name,
+                                email: controller.user!.email,
+                                mobile: controller.user!.phone,
+                              ),
                             ),
                           );
                         } else if (value == 'logout') {

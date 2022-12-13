@@ -13,7 +13,6 @@ import 'package:logo/screens/intro/splash_screen.dart';
 import 'package:logo/utils/app_colors.dart';
 import 'package:logo/utils/app_text_styles.dart';
 import 'screens/favorite_screen.dart';
-import 'screens/supplier_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

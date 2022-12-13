@@ -11,4 +11,5 @@ class ApiSettings {
   static const String car = '$_baseUrl/car';
   static const String favorite = '$_baseUrl/favorite';
   static const String userDetails = '$_baseUrl/show/owner/';
+  static const String updateUserProfile = '$_baseUrl/owner/update';
 }
