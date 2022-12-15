@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:logo/model/car_image.dart';
 import 'package:logo/model/city.dart';
 import 'package:logo/model/owner.dart';
 
@@ -14,12 +17,13 @@ class Car {
   late String updatedAt;
   late bool isFavorite;
   Owner? owner;
-  late List<String> images = [];
+  late List<CarImage> images = [];
   City? city;
 
   Car();
 
   Car.fromJson(Map<String, dynamic> json) {
+    log(json.toString() + "\n\n\n\n");
     id = json['id'];
     ownerId = json['owner_id'];
     carName = json['car_name'];
@@ -35,9 +39,9 @@ class Car {
       owner = Owner.fromJson(json['owner']);
     }
     if (json['images'] != null) {
-      for (var imgUrl in (json['images'] as List)) {
-        images.add(imgUrl);
-      }
+      json['images'].forEach((v) {
+        images.add(CarImage.fromJson(v));
+      });
     }
     if (json['city'] != null) {
       city = City.fromJson(json['city']);

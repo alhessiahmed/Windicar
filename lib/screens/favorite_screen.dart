@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:logo/getx/favorite_getx_controller.dart';
 import 'package:logo/model/car.dart';
-import 'package:logo/model/favorite_car.dart';
+import 'package:logo/screens/car_details_screen.dart';
 import 'package:logo/utils/app_text_styles.dart';
 import 'package:logo/widgets/app_bar_widget.dart';
 import 'package:logo/widgets/car_card.dart';
@@ -41,18 +41,33 @@ class FavoriteScreen extends StatelessWidget {
                       ),
                       itemBuilder: (context, index) {
                         Car car = controller.favoriteCars[index].car;
-                        return CarCard(
-                          id: car.id,
-                          // imgUrl: controller
-                          //         .favoriteCars[index].car.images.first,
-                          imgUrl:
-                              car.images.isNotEmpty ? car.images.first : null,
-                          title: car.carName,
-                          subtitle: car.price,
-                          rating: car.owner?.rate.toString() ?? '0',
-                          isFav: true,
-                          onTap: (() async =>
-                              await controller.deleteFavorite(index: index)),
+                        return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CarDetailsScreen(
+                                  id: car.id,
+                                  isFav: car.isFavorite,
+                                ),
+                              ),
+                            ).then((value) => controller.readFavorites());
+                          },
+                          child: CarCard(
+                            id: car.id,
+                            // imgUrl: controller
+                            //         .favoriteCars[index].car.images.first,
+                            imgUrl: car.images.isNotEmpty
+                                ? car.images.first.imageUrl
+                                : null,
+                            title: car.carName,
+                            subtitle: car.price,
+                            rating: car.owner?.rate.toString() ?? '0',
+                            isFav: true,
+                            // initialRoute: '/favorite_screen',
+                            onTap: (() async =>
+                                await controller.deleteFavorite(index: index)),
+                          ),
                         );
                       },
                     ),

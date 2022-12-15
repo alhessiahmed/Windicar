@@ -89,8 +89,10 @@ class UpdateProfileScreen extends StatelessWidget with Helpers {
                                   child: IconButton(
                                     padding: EdgeInsets.zero,
                                     onPressed: () async {
-                                      await controller
-                                          .pickImageFrom(ImageSource.gallery);
+                                      pickImageSource(
+                                        context: context,
+                                        controller: controller,
+                                      );
                                     },
                                     icon: const Icon(
                                       Icons.edit,
@@ -145,6 +147,10 @@ class UpdateProfileScreen extends StatelessWidget with Helpers {
                       ),
                       ElevatedButton(
                         onPressed: () async {
+                          print(controller.pickedImage?.path);
+                          print(controller.nameController.text);
+                          print(controller.mobileController.text);
+                          print(controller.emailController.text);
                           ApiResponse response =
                               await UserApiController().updateUserProfile(
                             imgPath: controller.pickedImage?.path,
