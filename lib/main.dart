@@ -10,6 +10,7 @@ import 'package:logo/screens/profile_screen.dart';
 import 'package:logo/screens/home_screen.dart';
 import 'package:logo/screens/intro/on_boarding_screen.dart';
 import 'package:logo/screens/intro/splash_screen.dart';
+import 'package:logo/screens/search_screen.dart';
 import 'package:logo/utils/app_colors.dart';
 import 'package:logo/utils/app_text_styles.dart';
 import 'screens/favorite_screen.dart';

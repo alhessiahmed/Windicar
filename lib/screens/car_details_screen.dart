@@ -155,13 +155,12 @@ class CarDetailsScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            Positioned(
-                              bottom: 10.5.h,
-                              left: (Get.width * 0.5) - 39,
+                            Align(
+                              alignment: Alignment.bottomCenter,
                               child: SizedBox(
-                                width: 78.w,
-                                height: 11.h,
+                                height: 32.h,
                                 child: ListView.separated(
+                                  padding: EdgeInsets.zero,
                                   shrinkWrap: true,
                                   scrollDirection: Axis.horizontal,
                                   itemBuilder: (context, index) {

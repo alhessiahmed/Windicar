@@ -1,7 +1,6 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
-
-import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:logo/api/api_helper.dart';
 import 'package:logo/api/api_settings.dart';
@@ -25,6 +24,40 @@ class CarApiController with ApiHelper {
       cars = list.map((e) => Car.fromJson(e)).toList();
     }
     return cars;
+  }
+
+  Future<List<String>> readCitiesNames() async {
+    List<String> citiesNames = [];
+    Uri uri = Uri.parse(ApiSettings.cityNames);
+    var response = await http.get(
+      uri,
+      headers: headers,
+    );
+    if (response.statusCode == 200) {
+      var jsonResponse = jsonDecode(response.body);
+      var list = jsonResponse['data'] as List;
+      for (var element in list) {
+        citiesNames.add(element['name']);
+      }
+    }
+    return citiesNames;
+  }
+
+  Future<List<String>> readCarsNames() async {
+    List<String> carsNames = [];
+    Uri uri = Uri.parse(ApiSettings.carNames);
+    var response = await http.get(
+      uri,
+      headers: headers,
+    );
+    if (response.statusCode == 200) {
+      var jsonResponse = jsonDecode(response.body);
+      var list = jsonResponse['data'] as List;
+      for (var element in list) {
+        carsNames.add(element['car_name']);
+      }
+    }
+    return carsNames;
   }
 
   Future<CarDetails?> getCarDetails({required int id}) async {
@@ -190,5 +223,45 @@ class CarApiController with ApiHelper {
     } else {
       return failedResponse;
     }
+  }
+
+  Future<List<Car>> searchCars({
+    String? carName,
+    String? cityName,
+  }) async {
+    List<Car> cars = [];
+    Uri uri = Uri.parse(ApiSettings.filter);
+    log('----------');
+    log(carName.toString());
+    log(cityName.toString());
+    log((carName != null && cityName != null).toString());
+    log((carName != null && cityName == null).toString());
+    final map = carName != null && cityName != null
+        ? {
+            'car': carName,
+            'city': cityName,
+          }
+        : carName != null && cityName == null
+            ? {
+                'car': carName,
+              }
+            : {
+                'city': cityName,
+              };
+    log(map.toString());
+    log('----------');
+    var response = await http.post(
+      uri,
+      headers: {
+        'Accept': 'application/json',
+      },
+      body: map,
+    );
+    if (response.statusCode == 200) {
+      var jsonResponse = jsonDecode(response.body);
+      var list = jsonResponse['data'] as List;
+      cars = list.map((e) => Car.fromJson(e)).toList();
+    }
+    return cars;
   }
 }

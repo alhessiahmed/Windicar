@@ -12,4 +12,7 @@ class ApiSettings {
   static const String favorite = '$_baseUrl/favorite';
   static const String userDetails = '$_baseUrl/show/owner/';
   static const String updateUserProfile = '$_baseUrl/owner/update';
+  static const String carNames = '$_baseUrl/carName';
+  static const String cityNames = '$_baseUrl/cityName';
+  static const String filter = '$_baseUrl/filtering';
 }

@@ -5,11 +5,12 @@ import 'package:logo/getx/home_getx_controller.dart';
 import 'package:logo/model/car.dart';
 import 'package:logo/pref/shared_pref_controller.dart';
 import 'package:logo/screens/car_details_screen.dart';
+import 'package:logo/screens/search_screen.dart';
 import 'package:logo/utils/app_bars.dart';
 import 'package:logo/utils/app_colors.dart';
 import 'package:logo/widgets/car_card.dart';
 import 'package:logo/widgets/custom_floating_button.dart';
-import 'package:logo/widgets/custom_text_form_field.dart';
+import 'package:logo/widgets/drop_down_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -21,56 +22,78 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBars.homeAppBar(
         context: context,
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
+      body: GetBuilder<HomeGetxController>(
+        init: HomeGetxController(),
+        builder: (HomeGetxController controller) {
+          if (controller.isLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else {
+            return Column(
               children: [
-                Expanded(
-                  flex: 4,
-                  child: CustomTextFormField(
-                    controller: TextEditingController(),
-                    hintText: 'Voiture',
-                    suffixIcon: const Icon(Icons.keyboard_arrow_down_rounded),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        flex: 4,
+                        child: DropDownWidget(
+                          hintText: "Voiture",
+                          items: controller.carsNames,
+                          onChanged: (String? carName) {
+                            if (carName != null) {
+                              controller.changeSelectedCarName(carName);
+                            }
+                          },
+                        ),
+                      ),
+                      SizedBox(width: 8.w),
+                      Expanded(
+                        flex: 3,
+                        child: DropDownWidget(
+                          hintText: "Ville",
+                          items: controller.citiesNames,
+                          onChanged: (String? city) {
+                            if (city != null) {
+                              controller.changeSelectedCityName(city);
+                            }
+                          },
+                        ),
+                      ),
+                      SizedBox(width: 8.w),
+                      Expanded(
+                        flex: 1,
+                        child: CircleAvatar(
+                          backgroundColor: AppColors.darkGreen,
+                          foregroundColor: AppColors.white,
+                          radius: 19.r,
+                          child: IconButton(
+                            onPressed: () {
+                              if (controller.selectedCarName != null ||
+                                  controller.selectedCityName != null) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SearchResultsScreen(
+                                      carName: controller.selectedCarName,
+                                      cityName: controller.selectedCityName,
+                                    ),
+                                  ),
+                                );
+                              } else {
+                                /// TODO : SHOW SNACK BAR
+                              }
+                            },
+                            icon: const Icon(Icons.search),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                SizedBox(width: 8.w),
                 Expanded(
-                  flex: 3,
-                  child: CustomTextFormField(
-                    controller: TextEditingController(),
-                    hintText: 'Ville',
-                    suffixIcon: const Icon(Icons.keyboard_arrow_down_rounded),
-                  ),
-                ),
-                SizedBox(width: 8.w),
-                Expanded(
-                  flex: 1,
-                  child: CircleAvatar(
-                    backgroundColor: AppColors.darkGreen,
-                    foregroundColor: AppColors.white,
-                    radius: 19.r,
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.search),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          GetBuilder<HomeGetxController>(
-            init: HomeGetxController(),
-            builder: (HomeGetxController controller) {
-              if (controller.isLoading) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else {
-                // print('------ ${controller.cars.length} ------');
-                return Expanded(
                   child: GridView.builder(
                     shrinkWrap: true,
                     physics: const BouncingScrollPhysics(),
@@ -84,7 +107,6 @@ class HomeScreen extends StatelessWidget {
                     ),
                     itemBuilder: (context, index) {
                       Car car = controller.cars[index];
-
                       return InkWell(
                         onTap: () {
                           Navigator.push(
@@ -123,11 +145,11 @@ class HomeScreen extends StatelessWidget {
                       );
                     },
                   ),
-                );
-              }
-            },
-          ),
-        ],
+                ),
+              ],
+            );
+          }
+        },
       ),
       floatingActionButton: const CustomFloatingButton(),
     );

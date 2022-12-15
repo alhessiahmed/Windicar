@@ -23,7 +23,7 @@ class Car {
   Car();
 
   Car.fromJson(Map<String, dynamic> json) {
-    log(json.toString() + "\n\n\n\n");
+    // log(json.toString() + "\n\n\n\n");
     id = json['id'];
     ownerId = json['owner_id'];
     carName = json['car_name'];
