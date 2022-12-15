@@ -114,6 +114,7 @@ class AuthApiController with ApiHelper {
       return ApiResponse(
         message: jsonResponse['message'],
         success: jsonResponse['status'],
+        object: jsonResponse['code'],
       );
     }
     return failedResponse;

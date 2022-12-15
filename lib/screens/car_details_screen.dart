@@ -10,6 +10,7 @@ import 'package:logo/utils/app_colors.dart';
 import 'package:logo/utils/app_text_styles.dart';
 import 'package:logo/widgets/car_card.dart';
 import 'package:logo/widgets/custome_bottom_navigation_bar.dart';
+import 'package:share_plus/share_plus.dart';
 
 class CarDetailsScreen extends StatelessWidget {
   CarDetailsScreen({
@@ -88,7 +89,11 @@ class CarDetailsScreen extends StatelessWidget {
                     ),
                     actions: [
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Share.share(controller.carDetails?.car
+                                  .images[controller.imgIndex].imageUrl ??
+                              'Error');
+                        },
                         child: CircleAvatar(
                           backgroundColor: AppColors.white,
                           // radius: 12.r,
@@ -391,6 +396,7 @@ class CarDetailsScreen extends StatelessWidget {
                   bottomNavigationBar: CustomBottomNavigationBar(
                     phone: controller.carDetails?.car.owner?.phone ??
                         '00970592464423',
+                    supplierId: controller.carDetails!.car.ownerId,
                   ),
                 );
               }

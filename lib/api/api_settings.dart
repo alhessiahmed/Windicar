@@ -15,4 +15,5 @@ class ApiSettings {
   static const String carNames = '$_baseUrl/carName';
   static const String cityNames = '$_baseUrl/cityName';
   static const String filter = '$_baseUrl/filtering';
+  static const String phone = '$_baseUrl/phone';
 }

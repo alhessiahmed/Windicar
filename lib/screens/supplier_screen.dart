@@ -212,6 +212,7 @@ class SupplierScreen extends StatelessWidget {
             ),
             bottomNavigationBar: CustomBottomNavigationBar(
               phone: controller.user?.phone ?? '+970592464423',
+              supplierId: controller.userId,
             ),
           );
         }

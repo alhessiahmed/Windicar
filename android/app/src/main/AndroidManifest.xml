@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.logo">
-
+<uses-permission android:name="android.permission.INTERNET"/>
 <queries>
         <!-- If your app opens https URLs -->
         <!-- <intent>

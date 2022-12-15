@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:logo/api/controllers/phone_api_controller.dart';
 import 'package:logo/utils/app_colors.dart';
 import 'package:logo/utils/app_text_styles.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -11,9 +12,11 @@ class CustomBottomNavigationBar extends StatelessWidget {
   const CustomBottomNavigationBar({
     Key? key,
     required this.phone,
+    required this.supplierId,
   }) : super(key: key);
 
   final String phone;
+  final int supplierId;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -50,6 +53,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.transparent, elevation: 0),
                 onPressed: () {
+                  PhoneApiController().increaseCallCount(supplierId);
                   callTelephone(context: context, number: phone);
                 },
                 label: Text(
