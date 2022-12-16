@@ -362,7 +362,7 @@ class CarDetailsScreen extends StatelessWidget {
                                     controller.carDetails!.similarCars[index];
                                 return InkWell(
                                   onTap: () {
-                                    Navigator.push(
+                                    Navigator.pushReplacement(
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => CarDetailsScreen(

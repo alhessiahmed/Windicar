@@ -5,7 +5,7 @@ import 'package:logo/utils/app_colors.dart';
 class AppTextStyles {
   static TextStyle logoTextStyle = TextStyle(
     color: AppColors.white,
-    fontSize: 80.sp,
+    fontSize: 64.sp,
     fontFamily: 'CenturyGothic',
   );
 

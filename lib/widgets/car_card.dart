@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:logo/screens/car_details_screen.dart';
 import 'package:logo/utils/app_colors.dart';
 import 'package:logo/utils/app_text_styles.dart';
 

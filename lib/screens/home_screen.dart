@@ -17,20 +17,23 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.white,
-      appBar: AppBars.homeAppBar(
-        context: context,
-      ),
-      body: GetBuilder<HomeGetxController>(
-        init: HomeGetxController(),
-        builder: (HomeGetxController controller) {
-          if (controller.isLoading) {
-            return const Center(
+    return GetBuilder<HomeGetxController>(
+      init: HomeGetxController(),
+      builder: (HomeGetxController controller) {
+        if (controller.isLoading) {
+          return const Scaffold(
+            body: Center(
               child: CircularProgressIndicator(),
-            );
-          } else {
-            return Column(
+            ),
+          );
+        } else {
+          return Scaffold(
+            backgroundColor: AppColors.white,
+            appBar: AppBars.homeAppBar(
+              context: context,
+              onReturn: () => controller.readCars(),
+            ),
+            body: Column(
               children: [
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -136,7 +139,9 @@ class HomeScreen extends StatelessWidget {
                           onTap: () async {
                             if (SharedPrefController().loggedIn) {
                               await controller.toggleFavorite(
-                                  index: index, wasFavorite: car.isFavorite);
+                                index: index,
+                                wasFavorite: car.isFavorite,
+                              );
                             } else {
                               Navigator.pushNamed(context, '/login_screen');
                             }
@@ -147,11 +152,11 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ],
-            );
-          }
-        },
-      ),
-      floatingActionButton: const CustomFloatingButton(),
+            ),
+            floatingActionButton: const CustomFloatingButton(),
+          );
+        }
+      },
     );
   }
 }

@@ -36,7 +36,7 @@ class AppBars {
     );
   }
 
-  static AppBar homeAppBar({required BuildContext context}) {
+  static AppBar homeAppBar({required BuildContext context, required Function() onReturn}) {
     return AppBar(
       title: Text(
         'Windicar',
@@ -50,7 +50,7 @@ class AppBars {
           String route = SharedPrefController().loggedIn
               ? '/favorite_screen'
               : '/login_screen';
-          Navigator.pushNamed(context, route);
+          Navigator.pushNamed(context, route).then((value) => onReturn());
         },
         icon: const Icon(
           Icons.favorite,
