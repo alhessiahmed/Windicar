@@ -220,24 +220,21 @@ class CarDetailsScreen extends StatelessWidget {
                             //   color: AppColors.grey,
                             //   height: 24.h,
                             // ),
-                            Row(
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    // print(controller.carDetails!.car.ownerId);
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => SupplierScreen(
-                                          userId: controller
-                                              .carDetails!.car.ownerId,
-                                        ),
-                                      ),
-                                    );
-                                    // Navigator.pushNamed(
-                                    //     context, '/supplier_screen');
-                                  },
-                                  child: CircleAvatar(
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SupplierScreen(
+                                      userId:
+                                          controller.carDetails!.car.ownerId,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Row(
+                                children: [
+                                  CircleAvatar(
                                     radius: 33.w,
                                     backgroundColor: AppColors.darkGreen,
                                     child: CircleAvatar(
@@ -253,33 +250,35 @@ class CarDetailsScreen extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                ),
-                                SizedBox(
-                                  width: 16.w,
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      car?.owner?.name ?? 'User',
-                                      style: AppTextStyles.textStyle16,
-                                    ),
-                                    Text(
-                                      car?.city?.name ?? 'City',
-                                      style: AppTextStyles.darkGreenTextStyle14,
-                                    ),
-                                  ],
-                                ),
-                                const Spacer(),
-                                Image.asset('assets/images/star.png'),
-                                SizedBox(
-                                  width: 8.w,
-                                ),
-                                Text(
-                                  car?.owner?.rate.toString() ?? '0',
-                                  style: AppTextStyles.textStyle16,
-                                ),
-                              ],
+                                  SizedBox(
+                                    width: 16.w,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        car?.owner?.name ?? 'User',
+                                        style: AppTextStyles.textStyle16,
+                                      ),
+                                      Text(
+                                        car?.city?.name ?? 'City',
+                                        style:
+                                            AppTextStyles.darkGreenTextStyle14,
+                                      ),
+                                    ],
+                                  ),
+                                  const Spacer(),
+                                  Image.asset('assets/images/star.png'),
+                                  SizedBox(
+                                    width: 8.w,
+                                  ),
+                                  Text(
+                                    car?.owner?.rate.toString() ?? '0',
+                                    style: AppTextStyles.textStyle16,
+                                  ),
+                                ],
+                              ),
                             ),
                             SizedBox(
                               height: 16.h,

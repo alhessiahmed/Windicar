@@ -106,7 +106,7 @@ class HomeScreen extends StatelessWidget {
                       crossAxisCount: 2,
                       mainAxisSpacing: 16.h,
                       crossAxisSpacing: 16.w,
-                      childAspectRatio: 166.w / 224.h,
+                      childAspectRatio: 166.w / 232.h,
                     ),
                     itemBuilder: (context, index) {
                       Car car = controller.cars[index];
