@@ -10,6 +10,7 @@ import 'package:logo/utils/app_bars.dart';
 import 'package:logo/utils/app_colors.dart';
 import 'package:logo/widgets/car_card.dart';
 import 'package:logo/widgets/custom_floating_button.dart';
+import 'package:logo/widgets/custom_text_form_field.dart';
 import 'package:logo/widgets/drop_down_widget.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -42,28 +43,38 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         flex: 4,
-                        child: DropDownWidget(
-                          hintText: "Voiture",
-                          items: controller.carsNames,
-                          onChanged: (String? carName) {
-                            if (carName != null) {
-                              controller.changeSelectedCarName(carName);
-                            }
-                          },
+                        child: CustomTextFormField(
+                          controller: controller.nameController,
+                          hintText: 'Voiture',
+                          suffixIcon: Icon(Icons.keyboard_arrow_down_rounded),
                         ),
+                        // DropDownWidget(
+                        //   hintText: "Voiture",
+                        //   items: controller.carsNames,
+                        //   onChanged: (String? carName) {
+                        //     if (carName != null) {
+                        //       controller.changeSelectedCarName(carName);
+                        //     }
+                        //   },
+                        // ),
                       ),
                       SizedBox(width: 8.w),
                       Expanded(
                         flex: 3,
-                        child: DropDownWidget(
-                          hintText: "Ville",
-                          items: controller.citiesNames,
-                          onChanged: (String? city) {
-                            if (city != null) {
-                              controller.changeSelectedCityName(city);
-                            }
-                          },
+                        child: CustomTextFormField(
+                          controller: controller.cityController,
+                          hintText: 'Ville',
+                          suffixIcon: Icon(Icons.keyboard_arrow_down_rounded),
                         ),
+                        // DropDownWidget(
+                        //   hintText: "Ville",
+                        //   items: controller.citiesNames,
+                        //   onChanged: (String? city) {
+                        //     if (city != null) {
+                        //       controller.changeSelectedCityName(city);
+                        //     }
+                        //   },
+                        // ),
                       ),
                       SizedBox(width: 8.w),
                       Expanded(
@@ -74,14 +85,22 @@ class HomeScreen extends StatelessWidget {
                           radius: 19.r,
                           child: IconButton(
                             onPressed: () {
-                              if (controller.selectedCarName != null ||
-                                  controller.selectedCityName != null) {
+                              // if (controller.selectedCarName != null ||
+                              //     controller.selectedCityName != null) {
+                              if (controller.nameController.text
+                                      .trim()
+                                      .isNotEmpty ||
+                                  controller.cityController.text
+                                      .trim()
+                                      .isNotEmpty) {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => SearchResultsScreen(
-                                      carName: controller.selectedCarName,
-                                      cityName: controller.selectedCityName,
+                                      carName:
+                                          controller.nameController.text.trim(),
+                                      cityName:
+                                          controller.cityController.text.trim(),
                                     ),
                                   ),
                                 );

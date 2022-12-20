@@ -226,22 +226,22 @@ class CarApiController with ApiHelper {
   }
 
   Future<List<Car>> searchCars({
-    String? carName,
-    String? cityName,
+    required String carName,
+    required String cityName,
   }) async {
     List<Car> cars = [];
     Uri uri = Uri.parse(ApiSettings.filter);
-    log('----------');
-    log(carName.toString());
-    log(cityName.toString());
-    log((carName != null && cityName != null).toString());
-    log((carName != null && cityName == null).toString());
-    final map = carName != null && cityName != null
+    // log('----------');
+    // log(carName.toString());
+    // log(cityName.toString());
+    // log((carName != null && cityName != null).toString());
+    // log((carName != null && cityName == null).toString());
+    final map = carName.isNotEmpty && cityName.isNotEmpty
         ? {
             'car': carName,
             'city': cityName,
           }
-        : carName != null && cityName == null
+        : carName.isNotEmpty && cityName.isEmpty
             ? {
                 'car': carName,
               }

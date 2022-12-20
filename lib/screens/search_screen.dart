@@ -13,12 +13,12 @@ import 'package:logo/widgets/car_card.dart';
 class SearchResultsScreen extends StatelessWidget {
   SearchResultsScreen({
     super.key,
-    this.carName,
-    this.cityName,
+    required this.carName,
+    required this.cityName,
   });
 
-  String? carName;
-  String? cityName;
+  final String carName;
+  final String cityName;
 
   @override
   Widget build(BuildContext context) {
