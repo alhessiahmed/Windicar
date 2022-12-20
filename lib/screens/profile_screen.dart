@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -24,7 +27,7 @@ class ProfileScreen extends StatelessWidget with Helpers {
   Widget build(BuildContext context) {
     return GetBuilder<UserGetxController>(
       init: UserGetxController(userId: userId),
-      builder: (controller) {
+      builder: (UserGetxController controller) {
         if (controller.isLoading) {
           return const Scaffold(
             body: Center(
@@ -239,6 +242,13 @@ class ProfileScreen extends StatelessWidget with Helpers {
                               ),
                             ).then((value) => controller.readUser());
                           },
+                          onDelete: () {
+                            _confirmDelete(
+                              context: context,
+                              controller: controller,
+                              id: car.id,
+                            );
+                          },
                         );
                       },
                       childCount: controller.user?.cars.length ?? 0,
@@ -258,6 +268,82 @@ class ProfileScreen extends StatelessWidget with Helpers {
         }
       },
     );
+  }
+
+  Future<void> _confirmDelete({
+    required BuildContext context,
+    required UserGetxController controller,
+    required int id,
+  }) async {
+    bool? result = await showDialog<bool>(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          if (Platform.isAndroid) {
+            return AlertDialog(
+              title: const Text(
+                'Are you sure?',
+              ),
+              content: const Text(
+                'This car will be deleted',
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context, true);
+                  },
+                  child: const Text(
+                    'Delete',
+                    style: TextStyle(
+                      color: AppColors.red,
+                    ),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context, false);
+                  },
+                  child: const Text('No'),
+                ),
+              ],
+            );
+          } else {
+            return CupertinoAlertDialog(
+              title: const Text(
+                'Are you sure?',
+              ),
+              content: const Text(
+                'This car will be deleted',
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context, true);
+                  },
+                  child: const Text('Delete'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context, false);
+                  },
+                  child: const Text('No'),
+                ),
+              ],
+            );
+          }
+        });
+    if (result ?? false) {
+      ApiResponse response = await controller.deleteCar(id: id);
+
+      if (response.success) {
+        controller.readUser();
+      }
+      showSnackBar(
+        context,
+        message: response.message,
+        error: !response.success,
+      );
+    }
   }
 
   void _performLogout(BuildContext context) async {

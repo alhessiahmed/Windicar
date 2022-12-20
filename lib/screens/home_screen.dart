@@ -8,12 +8,13 @@ import 'package:logo/screens/car_details_screen.dart';
 import 'package:logo/screens/search_screen.dart';
 import 'package:logo/utils/app_bars.dart';
 import 'package:logo/utils/app_colors.dart';
+import 'package:logo/utils/helpers.dart';
 import 'package:logo/widgets/car_card.dart';
 import 'package:logo/widgets/custom_floating_button.dart';
 import 'package:logo/widgets/custom_text_form_field.dart';
 import 'package:logo/widgets/drop_down_widget.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatelessWidget with Helpers {
   const HomeScreen({super.key});
 
   @override
@@ -106,6 +107,7 @@ class HomeScreen extends StatelessWidget {
                                 );
                               } else {
                                 /// TODO : SHOW SNACK BAR
+                                // getDeleteDialog(context: context);
                               }
                             },
                             icon: const Icon(Icons.search),
