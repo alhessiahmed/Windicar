@@ -11,6 +11,7 @@ class ModifyCarCard extends StatelessWidget {
     required this.subtitle,
     required this.id,
     required this.onTap,
+    required this.onDelete,
     Key? key,
   }) : super(key: key);
   String? imgUrl;
@@ -18,6 +19,7 @@ class ModifyCarCard extends StatelessWidget {
   final String subtitle;
   final int id;
   final Function() onTap;
+  final void Function()? onDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -84,6 +86,41 @@ class ModifyCarCard extends StatelessWidget {
                   ],
                 ),
               ),
+              PositionedDirectional(
+                top: 6,
+                end: 6,
+                child: InkWell(
+                  onTap: onDelete,
+                  child: const CircleAvatar(
+                    backgroundColor: AppColors.white,
+                    radius: 16,
+                    child: Icon(
+                      Icons.delete_forever_rounded,
+                      color: AppColors.red,
+                      size: 24,
+                    ),
+                  ),
+                ),
+              )
+              // PositionedDirectional(
+              //   top: 8.r,
+              //   end: 8.r,
+              //   child: InkWell(
+              //     onTap: () {},
+              //     child: Container(
+              //       padding: EdgeInsets.all(2.r),
+              //       decoration: BoxDecoration(
+              //         color: AppColors.white,
+              //         borderRadius: BorderRadius.circular(8.r),
+              //       ),
+              //       child: Icon(
+              //         Icons.delete_forever_rounded,
+              //         color: AppColors.red,
+              //         size: 28.r,
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ],
           ),
           Center(

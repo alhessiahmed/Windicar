@@ -215,7 +215,7 @@ class CarApiController with ApiHelper {
         message: jsonResponse['message'],
         success: jsonResponse['status'],
       );
-    } else if (response.statusCode == 400) {
+    } else if (response.statusCode == 404) {
       return ApiResponse(
         message: 'This car doesn\'t exist',
         success: false,

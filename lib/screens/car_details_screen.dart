@@ -393,8 +393,9 @@ class CarDetailsScreen extends StatelessWidget {
                     ],
                   ),
                   bottomNavigationBar: CustomBottomNavigationBar(
-                    phone: controller.carDetails?.car.owner?.phone ??
-                        '00970592464423',
+                    phone: '+212${controller.carDetails?.car.owner?.phone}',
+                    // ??
+                    //     '00970592464423',
                     supplierId: controller.carDetails!.car.ownerId,
                   ),
                 );
