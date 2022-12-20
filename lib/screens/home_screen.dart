@@ -4,72 +4,118 @@ import 'package:get/get.dart';
 import 'package:logo/getx/home_getx_controller.dart';
 import 'package:logo/model/car.dart';
 import 'package:logo/pref/shared_pref_controller.dart';
+import 'package:logo/screens/car_details_screen.dart';
+import 'package:logo/screens/search_screen.dart';
 import 'package:logo/utils/app_bars.dart';
 import 'package:logo/utils/app_colors.dart';
 import 'package:logo/widgets/car_card.dart';
 import 'package:logo/widgets/custom_floating_button.dart';
 import 'package:logo/widgets/custom_text_form_field.dart';
+import 'package:logo/widgets/drop_down_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.white,
-      appBar: AppBars.homeAppBar(
-        context: context,
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16.w),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(
-                  flex: 4,
-                  child: CustomTextFormField(
-                    controller: TextEditingController(),
-                    hintText: 'Voiture',
-                    suffixIcon: const Icon(Icons.keyboard_arrow_down_rounded),
-                  ),
-                ),
-                SizedBox(width: 8.w),
-                Expanded(
-                  flex: 3,
-                  child: CustomTextFormField(
-                    controller: TextEditingController(),
-                    hintText: 'Ville',
-                    suffixIcon: const Icon(Icons.keyboard_arrow_down_rounded),
-                  ),
-                ),
-                SizedBox(width: 8.w),
-                Expanded(
-                  flex: 1,
-                  child: CircleAvatar(
-                    backgroundColor: AppColors.darkGreen,
-                    foregroundColor: AppColors.white,
-                    radius: 19.r,
-                    child: IconButton(
-                      onPressed: () {},
-                      icon: const Icon(Icons.search),
-                    ),
-                  ),
-                ),
-              ],
+    return GetBuilder<HomeGetxController>(
+      init: HomeGetxController(),
+      builder: (HomeGetxController controller) {
+        if (controller.isLoading) {
+          return const Scaffold(
+            body: Center(
+              child: CircularProgressIndicator(),
             ),
-          ),
-          GetBuilder<HomeGetxController>(
-            init: HomeGetxController(),
-            builder: (HomeGetxController controller) {
-              if (controller.isLoading) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else {
-                // print('------ ${controller.cars.length} ------');
-                return Expanded(
+          );
+        } else {
+          return Scaffold(
+            backgroundColor: AppColors.white,
+            appBar: AppBars.homeAppBar(
+              context: context,
+              onReturn: () => controller.readCars(),
+            ),
+            body: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        flex: 4,
+                        child: CustomTextFormField(
+                          controller: controller.nameController,
+                          hintText: 'Voiture',
+                          suffixIcon: Icon(Icons.keyboard_arrow_down_rounded),
+                        ),
+                        // DropDownWidget(
+                        //   hintText: "Voiture",
+                        //   items: controller.carsNames,
+                        //   onChanged: (String? carName) {
+                        //     if (carName != null) {
+                        //       controller.changeSelectedCarName(carName);
+                        //     }
+                        //   },
+                        // ),
+                      ),
+                      SizedBox(width: 8.w),
+                      Expanded(
+                        flex: 3,
+                        child: CustomTextFormField(
+                          controller: controller.cityController,
+                          hintText: 'Ville',
+                          suffixIcon: Icon(Icons.keyboard_arrow_down_rounded),
+                        ),
+                        // DropDownWidget(
+                        //   hintText: "Ville",
+                        //   items: controller.citiesNames,
+                        //   onChanged: (String? city) {
+                        //     if (city != null) {
+                        //       controller.changeSelectedCityName(city);
+                        //     }
+                        //   },
+                        // ),
+                      ),
+                      SizedBox(width: 8.w),
+                      Expanded(
+                        flex: 1,
+                        child: CircleAvatar(
+                          backgroundColor: AppColors.darkGreen,
+                          foregroundColor: AppColors.white,
+                          radius: 19.r,
+                          child: IconButton(
+                            onPressed: () {
+                              // if (controller.selectedCarName != null ||
+                              //     controller.selectedCityName != null) {
+                              if (controller.nameController.text
+                                      .trim()
+                                      .isNotEmpty ||
+                                  controller.cityController.text
+                                      .trim()
+                                      .isNotEmpty) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SearchResultsScreen(
+                                      carName:
+                                          controller.nameController.text.trim(),
+                                      cityName:
+                                          controller.cityController.text.trim(),
+                                    ),
+                                  ),
+                                );
+                              } else {
+                                /// TODO : SHOW SNACK BAR
+                              }
+                            },
+                            icon: const Icon(Icons.search),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
                   child: GridView.builder(
                     shrinkWrap: true,
                     physics: const BouncingScrollPhysics(),
@@ -79,38 +125,57 @@ class HomeScreen extends StatelessWidget {
                       crossAxisCount: 2,
                       mainAxisSpacing: 16.h,
                       crossAxisSpacing: 16.w,
-                      childAspectRatio: 166.w / 224.h,
+                      childAspectRatio: 166.w / 232.h,
                     ),
                     itemBuilder: (context, index) {
                       Car car = controller.cars[index];
-
-                      return CarCard(
-                        id: car.id,
-                        imgUrl: car.images.isNotEmpty ? car.images.first : null,
-                        title: car.carName,
-                        subtitle: car.price,
-                        rating: car.owner?.rate.toString() ?? '0',
-                        isFav: SharedPrefController().loggedIn
-                            ? car.isFavorite
-                            : false,
-                        onTap: () async {
-                          if (SharedPrefController().loggedIn) {
-                            await controller.toggleFavorite(
-                                index: index, wasFavorite: car.isFavorite);
-                          } else {
-                            Navigator.pushNamed(context, '/login_screen');
-                          }
+                      return InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CarDetailsScreen(
+                                id: car.id,
+                                isFav: SharedPrefController().loggedIn
+                                    ? car.isFavorite
+                                    : false,
+                              ),
+                            ),
+                          ).then((value) => controller.readCars());
                         },
+                        child: CarCard(
+                          id: car.id,
+                          imgUrl: car.images.isNotEmpty
+                              ? car.images.first.imageUrl
+                              : null,
+                          title: car.carName,
+                          subtitle: car.price,
+                          rating: car.owner?.rate.toString() ?? '0',
+                          isFav: SharedPrefController().loggedIn
+                              ? car.isFavorite
+                              : false,
+                          // initialRoute: '/home_screen',
+                          onTap: () async {
+                            if (SharedPrefController().loggedIn) {
+                              await controller.toggleFavorite(
+                                index: index,
+                                wasFavorite: car.isFavorite,
+                              );
+                            } else {
+                              Navigator.pushNamed(context, '/login_screen');
+                            }
+                          },
+                        ),
                       );
                     },
                   ),
-                );
-              }
-            },
-          ),
-        ],
-      ),
-      floatingActionButton: const CustomFloatingButton(),
+                ),
+              ],
+            ),
+            floatingActionButton: const CustomFloatingButton(),
+          );
+        }
+      },
     );
   }
 }

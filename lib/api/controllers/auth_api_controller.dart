@@ -45,13 +45,11 @@ class AuthApiController with ApiHelper {
       headers: {'Accept': 'application/json'},
     );
 
-    if (response.statusCode == 200 || response.statusCode == 400) {
+    if (response.statusCode == 200) {
       var jsonResponse = jsonDecode(response.body);
-      if (response.statusCode == 200) {
-        var jsonObject = jsonResponse['data'];
-        User user = User.fromJson(jsonObject);
-        await SharedPrefController().save(user: user);
-      }
+      var jsonObject = jsonResponse['data'];
+      User user = User.fromJson(jsonObject);
+      await SharedPrefController().save(user: user);
       return ApiResponse(
         message: jsonResponse['message'],
         success: jsonResponse['status'],
@@ -87,6 +85,10 @@ class AuthApiController with ApiHelper {
     var response = await http.post(
       uri,
       headers: headers,
+      body: {
+        'current_password': currentPassword,
+        'new_password': newPassword,
+      },
     );
     var jsonResponse = jsonDecode(response.body);
     return ApiResponse(
@@ -112,6 +114,7 @@ class AuthApiController with ApiHelper {
       return ApiResponse(
         message: jsonResponse['message'],
         success: jsonResponse['status'],
+        object: jsonResponse['code'],
       );
     }
     return failedResponse;

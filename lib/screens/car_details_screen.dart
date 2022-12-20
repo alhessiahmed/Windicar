@@ -4,19 +4,23 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:logo/getx/car_details_getx_controller.dart';
 import 'package:logo/model/car.dart';
+import 'package:logo/model/car_image.dart';
 import 'package:logo/screens/supplier_screen.dart';
 import 'package:logo/utils/app_colors.dart';
 import 'package:logo/utils/app_text_styles.dart';
 import 'package:logo/widgets/car_card.dart';
 import 'package:logo/widgets/custome_bottom_navigation_bar.dart';
+import 'package:share_plus/share_plus.dart';
 
 class CarDetailsScreen extends StatelessWidget {
   CarDetailsScreen({
     required this.id,
     required this.isFav,
+    // required this.route,
     super.key,
   });
   final int id;
+  // final String route;
   bool isFav;
 
   @override
@@ -61,7 +65,15 @@ class CarDetailsScreen extends StatelessWidget {
                         ),
                         InkWell(
                           onTap: () {
+                            // if (controller.favStatusGotUpdated) {
+                            //   Navigator.pushNamedAndRemoveUntil(
+                            //     context,
+                            //     route,
+                            //     (r) => false,
+                            //   );
+                            // } else {
                             Navigator.pop(context);
+                            // }
                           },
                           child: CircleAvatar(
                             backgroundColor: AppColors.white,
@@ -77,7 +89,11 @@ class CarDetailsScreen extends StatelessWidget {
                     ),
                     actions: [
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Share.share(controller.carDetails?.car
+                                  .images[controller.imgIndex].imageUrl ??
+                              'Error');
+                        },
                         child: CircleAvatar(
                           backgroundColor: AppColors.white,
                           // radius: 12.r,
@@ -92,12 +108,14 @@ class CarDetailsScreen extends StatelessWidget {
                         width: 8.w,
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          controller.toggleFavorite();
+                        },
                         child: CircleAvatar(
                           backgroundColor: AppColors.white,
                           // radius: 12.r,
                           child: Icon(
-                            isFav
+                            controller.carDetails?.car.isFavorite ?? false
                                 ? Icons.favorite_rounded
                                 : Icons.favorite_border_rounded,
                             color: AppColors.darkGreen,
@@ -125,7 +143,11 @@ class CarDetailsScreen extends StatelessWidget {
                               // maintainState: true,
                               // maintainSize: true,
                               // maintainAnimation: true,
-                              replacement: Text('NO IMAGES TO SHOW'),
+                              replacement: const Center(
+                                child: Text(
+                                  'NO IMAGES TO SHOW',
+                                ),
+                              ),
                               child: PageView(
                                 // controller: controller.pageController,
                                 physics: const BouncingScrollPhysics(),
@@ -133,16 +155,17 @@ class CarDetailsScreen extends StatelessWidget {
                                 onPageChanged: (int newImgIndex) {
                                   controller.updateImgIndex(index: newImgIndex);
                                 },
-                                children: getPictures(),
+                                children: getPictures(
+                                  controller.carDetails!.car.images,
+                                ),
                               ),
                             ),
-                            Positioned(
-                              bottom: 10.5.h,
-                              left: (Get.width * 0.5) - 39,
+                            Align(
+                              alignment: Alignment.bottomCenter,
                               child: SizedBox(
-                                width: 78.w,
-                                height: 11.h,
+                                height: 32.h,
                                 child: ListView.separated(
+                                  padding: EdgeInsets.zero,
                                   shrinkWrap: true,
                                   scrollDirection: Axis.horizontal,
                                   itemBuilder: (context, index) {
@@ -157,7 +180,8 @@ class CarDetailsScreen extends StatelessWidget {
                                   },
                                   separatorBuilder: (context, index) =>
                                       SizedBox(width: 4.w),
-                                  itemCount: 5,
+                                  itemCount:
+                                      controller.carDetails!.car.images.length,
                                   // itemCount: controller.images.length,
                                 ),
                               ),
@@ -196,24 +220,21 @@ class CarDetailsScreen extends StatelessWidget {
                             //   color: AppColors.grey,
                             //   height: 24.h,
                             // ),
-                            Row(
-                              children: [
-                                InkWell(
-                                  onTap: () {
-                                    // print(controller.carDetails!.car.ownerId);
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => SupplierScreen(
-                                          userId: controller
-                                              .carDetails!.car.ownerId,
-                                        ),
-                                      ),
-                                    );
-                                    // Navigator.pushNamed(
-                                    //     context, '/supplier_screen');
-                                  },
-                                  child: CircleAvatar(
+                            InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SupplierScreen(
+                                      userId:
+                                          controller.carDetails!.car.ownerId,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: Row(
+                                children: [
+                                  CircleAvatar(
                                     radius: 33.w,
                                     backgroundColor: AppColors.darkGreen,
                                     child: CircleAvatar(
@@ -229,33 +250,35 @@ class CarDetailsScreen extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                ),
-                                SizedBox(
-                                  width: 16.w,
-                                ),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      car?.owner?.name ?? 'User',
-                                      style: AppTextStyles.textStyle16,
-                                    ),
-                                    Text(
-                                      car?.city?.name ?? 'City',
-                                      style: AppTextStyles.darkGreenTextStyle14,
-                                    ),
-                                  ],
-                                ),
-                                const Spacer(),
-                                Image.asset('assets/images/star.png'),
-                                SizedBox(
-                                  width: 8.w,
-                                ),
-                                Text(
-                                  car?.owner?.rate.toString() ?? '0',
-                                  style: AppTextStyles.textStyle16,
-                                ),
-                              ],
+                                  SizedBox(
+                                    width: 16.w,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        car?.owner?.name ?? 'User',
+                                        style: AppTextStyles.textStyle16,
+                                      ),
+                                      Text(
+                                        car?.city?.name ?? 'City',
+                                        style:
+                                            AppTextStyles.darkGreenTextStyle14,
+                                      ),
+                                    ],
+                                  ),
+                                  const Spacer(),
+                                  Image.asset('assets/images/star.png'),
+                                  SizedBox(
+                                    width: 8.w,
+                                  ),
+                                  Text(
+                                    car?.owner?.rate.toString() ?? '0',
+                                    style: AppTextStyles.textStyle16,
+                                  ),
+                                ],
+                              ),
                             ),
                             SizedBox(
                               height: 16.h,
@@ -336,17 +359,33 @@ class CarDetailsScreen extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 Car similarCar =
                                     controller.carDetails!.similarCars[index];
-                                return CarCard(
-                                  id: similarCar.id,
-                                  imgUrl: similarCar.images.isNotEmpty
-                                      ? similarCar.images.first
-                                      : null,
-                                  title: similarCar.carName,
-                                  subtitle: similarCar.price,
-                                  rating:
-                                      similarCar.owner?.rate?.toString() ?? '0',
-                                  isFav: similarCar.isFavorite,
-                                  onTap: () {},
+                                return InkWell(
+                                  onTap: () {
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => CarDetailsScreen(
+                                          id: car!.id,
+                                          isFav: car.isFavorite,
+                                        ),
+                                      ),
+                                    ).then(
+                                        (value) => controller.readCarDetails());
+                                  },
+                                  child: CarCard(
+                                    id: similarCar.id,
+                                    imgUrl: similarCar.images.isNotEmpty
+                                        ? similarCar.images.first.imageUrl
+                                        : null,
+                                    title: similarCar.carName,
+                                    subtitle: similarCar.price,
+                                    rating:
+                                        similarCar.owner?.rate?.toString() ??
+                                            '0',
+                                    isFav: similarCar.isFavorite,
+                                    // initialRoute: '/home_screen',
+                                    onTap: () {},
+                                  ),
                                 );
                               },
                             )
@@ -356,6 +395,7 @@ class CarDetailsScreen extends StatelessWidget {
                   bottomNavigationBar: CustomBottomNavigationBar(
                     phone: controller.carDetails?.car.owner?.phone ??
                         '00970592464423',
+                    supplierId: controller.carDetails!.car.ownerId,
                   ),
                 );
               }
@@ -365,12 +405,12 @@ class CarDetailsScreen extends StatelessWidget {
   }
 }
 
-List<Widget> getPictures() {
+List<Widget> getPictures(List<CarImage> images) {
   List<Widget> items = [];
-  for (var i = 0; i < 5; i++) {
+  for (var i = 0; i < images.length; i++) {
     items.add(
-      Image.asset(
-        'assets/images/car2.jpg',
+      Image.network(
+        images[i].imageUrl,
         fit: BoxFit.cover,
       ),
     );

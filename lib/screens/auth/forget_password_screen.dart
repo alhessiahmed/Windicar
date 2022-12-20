@@ -101,6 +101,11 @@ class ForgetPasswordScreen extends StatelessWidget with Helpers {
         message: response.message,
         error: !response.success,
       );
+      showSnackBar(
+        context,
+        message: response.object,
+        error: false,
+      );
       if (response.success) {
         // Navigator.pushReplacementNamed(context, '/reset_password_screen');
         Navigator.pushReplacement(

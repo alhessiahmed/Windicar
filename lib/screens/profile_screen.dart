@@ -6,6 +6,7 @@ import 'package:logo/api/controllers/auth_api_controller.dart';
 import 'package:logo/getx/user_getx_controller.dart';
 import 'package:logo/model/api_response.dart';
 import 'package:logo/model/car.dart';
+import 'package:logo/screens/add_or_update_car.dart';
 import 'package:logo/screens/update_profile_screen.dart';
 import 'package:logo/utils/app_colors.dart';
 import 'package:logo/utils/app_text_styles.dart';
@@ -168,7 +169,13 @@ class ProfileScreen extends StatelessWidget with Helpers {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const UpdateProfileScreen(),
+                              builder: (context) => UpdateProfileScreen(
+                                userId: userId,
+                                imgUrl: controller.user?.imageUrl,
+                                name: controller.user!.name,
+                                email: controller.user!.email,
+                                mobile: controller.user!.phone,
+                              ),
                             ),
                           );
                         } else if (value == 'logout') {
@@ -208,13 +215,30 @@ class ProfileScreen extends StatelessWidget with Helpers {
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
                         Car car = controller.user!.cars[index];
+                        // print(car.images[index]);
                         return ModifyCarCard(
                           id: car.id,
-                          imgUrl:
-                              car.images.isNotEmpty ? car.images.first : null,
+                          imgUrl: car.images.isNotEmpty
+                              ? car.images.first.imageUrl
+                              : null,
                           title: car.carName,
                           subtitle: car.price,
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AddOrUpdateCar(
+                                  carId: car.id,
+                                  oldCityId: car.cityId,
+                                  oldDescription: car.description,
+                                  oldName: car.carName,
+                                  oldPrice: car.price,
+                                  wasEssence: car.fueltype == 'Essence',
+                                  wasManuel: car.cartype == 'Manuel',
+                                ),
+                              ),
+                            ).then((value) => controller.readUser());
+                          },
                         );
                       },
                       childCount: controller.user?.cars.length ?? 0,

@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:logo/getx/user_getx_controller.dart';
+import 'package:logo/screens/car_details_screen.dart';
 import 'package:logo/utils/app_colors.dart';
 import 'package:logo/utils/app_text_styles.dart';
 import 'package:logo/widgets/car_card.dart';
@@ -166,18 +167,35 @@ class SupplierScreen extends StatelessWidget {
                   sliver: SliverGrid(
                     delegate: SliverChildBuilderDelegate(
                       (context, index) {
-                        return CarCard(
-                          id: controller.user!.cars[index].id,
-                          imgUrl: controller.user!.cars[index].images.isNotEmpty
-                              ? controller.user!.cars[index].images.first
-                              : null,
-                          title: controller.user!.cars[index].carName,
-                          subtitle: controller.user!.cars[index].price,
-                          rating: controller.user!.rate ?? '0',
-                          isFav: controller.user!.cars[index].isFavorite,
-                          onTap: () async {
-                            // await controller.toggleFavorite(index: index);
+                        return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CarDetailsScreen(
+                                  id: controller.user!.cars[index].id,
+                                  isFav:
+                                      controller.user!.cars[index].isFavorite,
+                                ),
+                              ),
+                            ).then((value) => controller.readUser());
                           },
+                          child: CarCard(
+                            id: controller.user!.cars[index].id,
+                            imgUrl:
+                                controller.user!.cars[index].images.isNotEmpty
+                                    ? controller
+                                        .user!.cars[index].images.first.imageUrl
+                                    : null,
+                            title: controller.user!.cars[index].carName,
+                            subtitle: controller.user!.cars[index].price,
+                            rating: controller.user!.rate ?? '0',
+                            isFav: controller.user!.cars[index].isFavorite,
+                            // initialRoute: '/home_screen',
+                            onTap: () async {
+                              // await controller.toggleFavorite(index: index);
+                            },
+                          ),
                         );
                       },
                       childCount: controller.user?.cars.length ?? 0,
@@ -194,6 +212,7 @@ class SupplierScreen extends StatelessWidget {
             ),
             bottomNavigationBar: CustomBottomNavigationBar(
               phone: controller.user?.phone ?? '+970592464423',
+              supplierId: controller.userId,
             ),
           );
         }

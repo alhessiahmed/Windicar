@@ -1,31 +1,31 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.logo">
-
+<uses-permission android:name="android.permission.INTERNET"/>
 <queries>
         <!-- If your app opens https URLs -->
-        <!-- <intent>
+         <intent>
             <action android:name="android.intent.action.VIEW" />
             <data android:scheme="https" />
-        </intent> -->
+        </intent>
         <!-- If your app makes calls -->
         <intent>
             <action android:name="android.intent.action.DIAL" />
             <data android:scheme="tel" />
         </intent>
         <!-- If your sends SMS messages -->
-        <!-- <intent>
+        <intent>
             <action android:name="android.intent.action.SENDTO" />
             <data android:scheme="smsto" />
-        </intent> -->
+        </intent>
         <!-- If your app sends emails -->
-        <!-- <intent>
+        <intent>
             <action android:name="android.intent.action.SEND" />
             <data android:mimeType="*/*" />
-        </intent> -->
+        </intent>
     </queries>
 
    <application
-        android:label="logo"
+        android:label="Windicar"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
 
