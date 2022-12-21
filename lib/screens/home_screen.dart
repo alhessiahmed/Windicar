@@ -1,3 +1,4 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -64,7 +65,7 @@ class HomeScreen extends StatelessWidget with Helpers {
                       ),
                       SizedBox(width: 8.w),
                       Expanded(
-                        flex: 3,
+                        flex: 5,
                         child:
                             // CustomTextFormField(
                             //   controller: controller.cityController,
@@ -74,15 +75,14 @@ class HomeScreen extends StatelessWidget with Helpers {
                             DropDownWidget(
                           hintText: "Ville",
                           items: controller.citiesNames,
-                          onChanged: (String? city) {
-                            if (city != null) {
-                              controller.changeSelectedCityName(city);
-                            }
-                          },
-                          // onDismissed: () {
-
+                          // onDelete: () {
+                          //   controller.changeSelectedCityName(null);
                           // },
-                          // selectedItem: controller.selectedCityName,
+                          onChanged: (String? city) {
+                            // if (city != null) {
+                            controller.changeSelectedCityName(city);
+                            // }
+                          },
                         ),
                       ),
                       SizedBox(width: 8.w),
