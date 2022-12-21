@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:logo/api/api_helper.dart';
@@ -141,13 +140,13 @@ class CarApiController with ApiHelper {
     request.files.addAll(files);
 
     var response = await request.send();
-    print('-------------- ${response.statusCode} --------------');
+    // print('-------------- ${response.statusCode} --------------');
     if (response.statusCode == 201 ||
         response.statusCode == 400 ||
         response.statusCode == 401) {
       var body = await response.stream.transform(utf8.decoder).first;
       var jsonResponse = jsonDecode(body);
-      print('--------------$jsonResponse--------------');
+      // print('--------------$jsonResponse--------------');
       return ApiResponse(
         message: jsonResponse['message'],
         success: jsonResponse['status'],
@@ -187,13 +186,13 @@ class CarApiController with ApiHelper {
       request.files.addAll(files);
     }
     var response = await request.send();
-    print('-------------- ${response.statusCode} --------------');
+    // print('-------------- ${response.statusCode} --------------');
     if (response.statusCode == 201 ||
         response.statusCode == 400 ||
         response.statusCode == 401) {
       var body = await response.stream.transform(utf8.decoder).first;
       var jsonResponse = jsonDecode(body);
-      print('--------------$jsonResponse--------------');
+      // print('--------------$jsonResponse--------------');
       return ApiResponse(
         message: jsonResponse['message'],
         success: jsonResponse['status'],
@@ -227,7 +226,7 @@ class CarApiController with ApiHelper {
 
   Future<List<Car>> searchCars({
     required String carName,
-    required String cityName,
+    String? cityName,
   }) async {
     List<Car> cars = [];
     Uri uri = Uri.parse(ApiSettings.filter);
@@ -236,20 +235,20 @@ class CarApiController with ApiHelper {
     // log(cityName.toString());
     // log((carName != null && cityName != null).toString());
     // log((carName != null && cityName == null).toString());
-    final map = carName.isNotEmpty && cityName.isNotEmpty
+    final map = carName.isNotEmpty && cityName != null
         ? {
             'car': carName,
             'city': cityName,
           }
-        : carName.isNotEmpty && cityName.isEmpty
+        : carName.isNotEmpty && cityName == null
             ? {
                 'car': carName,
               }
             : {
                 'city': cityName,
               };
-    log(map.toString());
-    log('----------');
+    // log(map.toString());
+    // log('----------');
     var response = await http.post(
       uri,
       headers: {

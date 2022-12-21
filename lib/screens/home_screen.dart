@@ -35,11 +35,14 @@ class HomeScreen extends StatelessWidget with Helpers {
               context: context,
               onReturn: () => controller.readCars(),
             ),
-            body: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  child: Row(
+            body: RefreshIndicator(
+              onRefresh: () async {
+                await controller.readCars();
+              },
+              child: ListView(
+                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                children: [
+                  Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Expanded(
@@ -62,20 +65,25 @@ class HomeScreen extends StatelessWidget with Helpers {
                       SizedBox(width: 8.w),
                       Expanded(
                         flex: 3,
-                        child: CustomTextFormField(
-                          controller: controller.cityController,
-                          hintText: 'Ville',
-                          suffixIcon: Icon(Icons.keyboard_arrow_down_rounded),
+                        child:
+                            // CustomTextFormField(
+                            //   controller: controller.cityController,
+                            //   hintText: 'Ville',
+                            //   suffixIcon: Icon(Icons.keyboard_arrow_down_rounded),
+                            // ),
+                            DropDownWidget(
+                          hintText: "Ville",
+                          items: controller.citiesNames,
+                          onChanged: (String? city) {
+                            if (city != null) {
+                              controller.changeSelectedCityName(city);
+                            }
+                          },
+                          // onDismissed: () {
+
+                          // },
+                          // selectedItem: controller.selectedCityName,
                         ),
-                        // DropDownWidget(
-                        //   hintText: "Ville",
-                        //   items: controller.citiesNames,
-                        //   onChanged: (String? city) {
-                        //     if (city != null) {
-                        //       controller.changeSelectedCityName(city);
-                        //     }
-                        //   },
-                        // ),
                       ),
                       SizedBox(width: 8.w),
                       Expanded(
@@ -91,17 +99,18 @@ class HomeScreen extends StatelessWidget with Helpers {
                               if (controller.nameController.text
                                       .trim()
                                       .isNotEmpty ||
-                                  controller.cityController.text
-                                      .trim()
-                                      .isNotEmpty) {
+                                  // controller.cityController.text
+                                  //     .trim()
+                                  //     .isNotEmpty
+                                  controller.selectedCityName != null) {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => SearchResultsScreen(
                                       carName:
                                           controller.nameController.text.trim(),
-                                      cityName:
-                                          controller.cityController.text.trim(),
+                                      cityName: controller.selectedCityName,
+                                      // controller.cityController.text.trim(),
                                     ),
                                   ),
                                 );
@@ -116,63 +125,63 @@ class HomeScreen extends StatelessWidget with Helpers {
                       ),
                     ],
                   ),
-                ),
-                Expanded(
-                  child: GridView.builder(
-                    shrinkWrap: true,
-                    physics: const BouncingScrollPhysics(),
-                    padding: EdgeInsets.all(16.r),
-                    itemCount: controller.cars.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 16.h,
-                      crossAxisSpacing: 16.w,
-                      childAspectRatio: 166.w / 232.h,
-                    ),
-                    itemBuilder: (context, index) {
-                      Car car = controller.cars[index];
-                      return InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => CarDetailsScreen(
-                                id: car.id,
-                                isFav: SharedPrefController().loggedIn
-                                    ? car.isFavorite
-                                    : false,
+                  Expanded(
+                    child: GridView.builder(
+                      shrinkWrap: true,
+                      physics: const BouncingScrollPhysics(),
+                      padding: EdgeInsets.only(top: 16.r),
+                      itemCount: controller.cars.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 16.h,
+                        crossAxisSpacing: 16.w,
+                        childAspectRatio: 166.w / 232.h,
+                      ),
+                      itemBuilder: (context, index) {
+                        Car car = controller.cars[index];
+                        return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CarDetailsScreen(
+                                  id: car.id,
+                                  isFav: SharedPrefController().loggedIn
+                                      ? car.isFavorite
+                                      : false,
+                                ),
                               ),
-                            ),
-                          ).then((value) => controller.readCars());
-                        },
-                        child: CarCard(
-                          id: car.id,
-                          imgUrl: car.images.isNotEmpty
-                              ? car.images.first.imageUrl
-                              : null,
-                          title: car.carName,
-                          subtitle: car.price,
-                          rating: car.owner?.rate.toString() ?? '0',
-                          isFav: SharedPrefController().loggedIn
-                              ? car.isFavorite
-                              : false,
-                          // initialRoute: '/home_screen',
-                          onTap: () async {
-                            if (SharedPrefController().loggedIn) {
-                              await controller.toggleFavorite(
-                                index: index,
-                                wasFavorite: car.isFavorite,
-                              );
-                            } else {
-                              Navigator.pushNamed(context, '/login_screen');
-                            }
+                            ).then((value) => controller.readCars());
                           },
-                        ),
-                      );
-                    },
+                          child: CarCard(
+                            id: car.id,
+                            imgUrl: car.images.isNotEmpty
+                                ? car.images.first.imageUrl
+                                : null,
+                            title: car.carName,
+                            subtitle: car.price,
+                            rating: car.owner?.rate.toString() ?? '0',
+                            isFav: SharedPrefController().loggedIn
+                                ? car.isFavorite
+                                : false,
+                            // initialRoute: '/home_screen',
+                            onTap: () async {
+                              if (SharedPrefController().loggedIn) {
+                                await controller.toggleFavorite(
+                                  index: index,
+                                  wasFavorite: car.isFavorite,
+                                );
+                              } else {
+                                Navigator.pushNamed(context, '/login_screen');
+                              }
+                            },
+                          ),
+                        );
+                      },
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             floatingActionButton: const CustomFloatingButton(isHome: true),
           );

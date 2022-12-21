@@ -10,11 +10,15 @@ class DropDownWidget extends StatelessWidget {
     required this.items,
     required this.hintText,
     required this.onChanged,
+    // this.selectedItem,
+    // required this.onDismissed,
   }) : super(key: key);
 
   final List<String> items;
+  // String? selectedItem;
   final String hintText;
   final void Function(String?) onChanged;
+  // final Function() onDismissed;
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +43,7 @@ class DropDownWidget extends StatelessWidget {
           dropdownButtonProps: const DropdownButtonProps(
               icon: Icon(Icons.keyboard_arrow_down_rounded)),
           popupProps: const PopupProps.dialog(
+            // onDismissed: onDismissed,
             showSearchBox: true,
             searchFieldProps: TextFieldProps(
               decoration: InputDecoration(hintText: 'Search..'),
@@ -88,7 +93,7 @@ class DropDownWidget extends StatelessWidget {
             ),
           ),
           onChanged: onChanged,
-          // selectedItem: "Brazil",
+          // selectedItem: selectedItem,
         ),
       ],
     );

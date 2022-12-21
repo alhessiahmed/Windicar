@@ -23,7 +23,7 @@ class CustomFloatingButton extends StatelessWidget with Helpers {
                 child: FloatingActionButton(
                   heroTag: 'supportFloatingActionButton',
                   onPressed: () {
-                    callTelephone(context: context, number: '+212773445063');
+                    callTelephone(context: context, number: '+212648950766');
                   },
                   child: const Icon(Icons.support_agent_rounded),
                 ),
