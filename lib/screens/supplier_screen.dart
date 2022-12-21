@@ -146,7 +146,8 @@ class SupplierScreen extends StatelessWidget {
                         padding:
                             EdgeInsetsDirectional.only(start: 16.w, top: 16.h),
                         child: Text(
-                          '${controller.user?.callCount ?? '0'} Annonces',
+                          // '${controller.user?.callCount ?? '0'} Annonces',
+                          '${controller.user?.cars.length ?? '0'} Annonces',
                           style: AppTextStyles.textStyle16,
                           // textAlign: TextAlign.start,
                         ),

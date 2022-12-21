@@ -14,19 +14,19 @@ class SearchResultsScreen extends StatelessWidget {
   SearchResultsScreen({
     super.key,
     required this.carName,
-    required this.cityName,
+    this.cityName,
   });
 
   final String carName;
-  final String cityName;
+  String? cityName;
 
   @override
   Widget build(BuildContext context) {
-    log(carName.toString());
-    log(cityName.toString());
+    // log(carName.toString());
+    // log(cityName.toString());
     return Scaffold(
       appBar: AppBar(
-        title: Text('Search Results'),
+        title: const Text('Résultats de recherche'),
       ),
       body: GetBuilder<SearchGetxController>(
         init: SearchGetxController(
@@ -34,55 +34,66 @@ class SearchResultsScreen extends StatelessWidget {
           cityName: cityName,
         ),
         builder: (SearchGetxController controller) {
-          return GridView.builder(
-            shrinkWrap: true,
-            physics: const BouncingScrollPhysics(),
-            padding: EdgeInsets.all(16.r),
-            itemCount: controller.cars.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              mainAxisSpacing: 16.h,
-              crossAxisSpacing: 16.w,
-              childAspectRatio: 166.w / 224.h,
-            ),
-            itemBuilder: (context, index) {
-              Car car = controller.cars[index];
-              return InkWell(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CarDetailsScreen(
+          return controller.cars.isEmpty
+              ? const Center(
+                  child: Text(
+                    'Aucun résultat trouvé !',
+                    style: TextStyle(
+                      fontSize: 32,
+                    ),
+                  ),
+                )
+              : GridView.builder(
+                  shrinkWrap: true,
+                  physics: const BouncingScrollPhysics(),
+                  padding: EdgeInsets.all(16.r),
+                  itemCount: controller.cars.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 16.h,
+                    crossAxisSpacing: 16.w,
+                    childAspectRatio: 166.w / 224.h,
+                  ),
+                  itemBuilder: (context, index) {
+                    Car car = controller.cars[index];
+                    return InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CarDetailsScreen(
+                              id: car.id,
+                              isFav: SharedPrefController().loggedIn
+                                  ? car.isFavorite
+                                  : false,
+                            ),
+                          ),
+                        ).then((value) => controller.readCars());
+                      },
+                      child: CarCard(
                         id: car.id,
+                        imgUrl: car.images.isNotEmpty
+                            ? car.images.first.imageUrl
+                            : null,
+                        title: car.carName,
+                        subtitle: car.price,
+                        rating: car.owner?.rate.toString() ?? '0',
                         isFav: SharedPrefController().loggedIn
                             ? car.isFavorite
                             : false,
+                        // initialRoute: '/home_screen',
+                        onTap: () async {
+                          if (SharedPrefController().loggedIn) {
+                            await controller.toggleFavorite(
+                                index: index, wasFavorite: car.isFavorite);
+                          } else {
+                            Navigator.pushNamed(context, '/login_screen');
+                          }
+                        },
                       ),
-                    ),
-                  ).then((value) => controller.readCars());
-                },
-                child: CarCard(
-                  id: car.id,
-                  imgUrl:
-                      car.images.isNotEmpty ? car.images.first.imageUrl : null,
-                  title: car.carName,
-                  subtitle: car.price,
-                  rating: car.owner?.rate.toString() ?? '0',
-                  isFav:
-                      SharedPrefController().loggedIn ? car.isFavorite : false,
-                  // initialRoute: '/home_screen',
-                  onTap: () async {
-                    if (SharedPrefController().loggedIn) {
-                      await controller.toggleFavorite(
-                          index: index, wasFavorite: car.isFavorite);
-                    } else {
-                      Navigator.pushNamed(context, '/login_screen');
-                    }
+                    );
                   },
-                ),
-              );
-            },
-          );
+                );
         },
       ),
     );

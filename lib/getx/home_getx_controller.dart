@@ -21,7 +21,7 @@ class HomeGetxController extends GetxController {
     super.onInit();
   }
 
-  void changeSelectedCityName(String city) {
+  void changeSelectedCityName(String? city) {
     selectedCityName = city;
     update();
   }
@@ -45,7 +45,7 @@ class HomeGetxController extends GetxController {
     isLoading = true;
     cars = await CarApiController().readCars();
     // await readNames();
-    // await readCities();
+    await readCities();
     isLoading = false;
     update();
   }

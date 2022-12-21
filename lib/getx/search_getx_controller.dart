@@ -9,12 +9,12 @@ import 'package:logo/model/car.dart';
 class SearchGetxController extends GetxController {
   SearchGetxController({
     required this.carName,
-    required this.cityName,
+     this.cityName,
   });
 
   bool isLoading = false;
   late String carName;
-  late String cityName;
+   String? cityName;
   List<Car> cars = [];
 
   // @override

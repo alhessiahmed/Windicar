@@ -283,10 +283,10 @@ class ProfileScreen extends StatelessWidget with Helpers {
           if (Platform.isAndroid) {
             return AlertDialog(
               title: const Text(
-                'Are you sure?',
+                'Êtes-vous sûr?',
               ),
               content: const Text(
-                'This car will be deleted',
+                'Supprimer la voiture',
               ),
               actions: [
                 TextButton(
@@ -294,7 +294,7 @@ class ProfileScreen extends StatelessWidget with Helpers {
                     Navigator.pop(context, true);
                   },
                   child: const Text(
-                    'Delete',
+                    'Supprimer',
                     style: TextStyle(
                       color: AppColors.red,
                     ),
@@ -304,30 +304,30 @@ class ProfileScreen extends StatelessWidget with Helpers {
                   onPressed: () {
                     Navigator.pop(context, false);
                   },
-                  child: const Text('No'),
+                  child: const Text('Annuler'),
                 ),
               ],
             );
           } else {
             return CupertinoAlertDialog(
               title: const Text(
-                'Are you sure?',
+                'Êtes-vous sûr?',
               ),
               content: const Text(
-                'This car will be deleted',
+                'Supprimer la voiture',
               ),
               actions: [
                 TextButton(
                   onPressed: () {
                     Navigator.pop(context, true);
                   },
-                  child: const Text('Delete'),
+                  child: const Text('Supprimer'),
                 ),
                 TextButton(
                   onPressed: () {
                     Navigator.pop(context, false);
                   },
-                  child: const Text('No'),
+                  child: const Text('Annuler'),
                 ),
               ],
             );
