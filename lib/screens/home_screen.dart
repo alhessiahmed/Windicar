@@ -174,7 +174,7 @@ class HomeScreen extends StatelessWidget with Helpers {
                 ),
               ],
             ),
-            floatingActionButton: const CustomFloatingButton(),
+            floatingActionButton: const CustomFloatingButton(isHome: true),
           );
         }
       },
