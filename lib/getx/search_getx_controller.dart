@@ -9,26 +9,26 @@ import 'package:logo/model/car.dart';
 class SearchGetxController extends GetxController {
   SearchGetxController({
     required this.carName,
-     this.cityName,
+    this.cityName,
   });
 
   bool isLoading = false;
   late String carName;
-   String? cityName;
+  String? cityName;
   List<Car> cars = [];
 
-  // @override
-  // void onInit() async {
-  //   await readCars();
-  //   super.onInit();
-  // }
+  @override
+  void onInit() async {
+    await readCars();
+    super.onInit();
+  }
 
   Future<void> readCars() async {
     isLoading = true;
-    log('++++++++++++');
-    log(carName.toString());
-    log(cityName.toString());
-    log('++++++++++++');
+    // log('++++++++++++');
+    // log(carName.toString());
+    // log(cityName.toString());
+    // log('++++++++++++');
     cars = await CarApiController().searchCars(
       carName: carName,
       cityName: cityName,
@@ -52,9 +52,9 @@ class SearchGetxController extends GetxController {
     update();
   }
 
-  @override
-  void onReady() async {
-    await readCars();
-    super.onReady();
-  }
+  // @override
+  // void onReady() async {
+  //   await readCars();
+  //   super.onReady();
+  // }
 }
