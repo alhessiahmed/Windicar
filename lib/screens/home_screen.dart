@@ -92,8 +92,8 @@ class HomeScreen extends StatelessWidget with Helpers {
                           backgroundColor: AppColors.darkGreen,
                           foregroundColor: AppColors.white,
                           radius: 19.r,
-                          child: IconButton(
-                            onPressed: () {
+                          child: InkWell(
+                            onTap: () {
                               // if (controller.selectedCarName != null ||
                               //     controller.selectedCityName != null) {
                               if (controller.nameController.text
@@ -119,7 +119,10 @@ class HomeScreen extends StatelessWidget with Helpers {
                                 // getDeleteDialog(context: context);
                               }
                             },
-                            icon: const Icon(Icons.search),
+                            child: Icon(
+                              Icons.search,
+                              // size: 24.r,
+                            ),
                           ),
                         ),
                       ),

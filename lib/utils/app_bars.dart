@@ -36,11 +36,14 @@ class AppBars {
     );
   }
 
-  static AppBar homeAppBar({required BuildContext context, required Function() onReturn}) {
+  static AppBar homeAppBar(
+      {required BuildContext context, required Function() onReturn}) {
     return AppBar(
       title: Text(
-        'Windicar',
-        style: AppTextStyles.textStyle17,
+        'WINDICAR',
+        style: AppTextStyles.textStyle17.copyWith(
+          color: AppColors.darkGreen,
+        ),
       ),
       centerTitle: true,
       backgroundColor: AppColors.white,

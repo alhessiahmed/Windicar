@@ -48,9 +48,17 @@
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>LSApplicationQueriesSchemes</key>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Allow app to access image library to upload pictures</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Allow app to access camera to upload pictures</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Allow app to access microphone</string>
 <array>
-  <!-- <string>sms</string> -->
+  <string>sms</string>
   <string>tel</string>
 </array>
+
+
 </dict>
 </plist>

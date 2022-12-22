@@ -186,7 +186,7 @@ class AddOrUpdateCar extends StatelessWidget with Helpers {
                         height: 16.h,
                       ),
                       Text(
-                        'Ajouter des photos',
+                        'Vous pouvez ajouter 6 photos',
                         style: AppTextStyles.textStyle16,
                       ),
                       InkWell(
@@ -292,7 +292,7 @@ class AddOrUpdateCar extends StatelessWidget with Helpers {
                           } else {
                             showSnackBar(
                               context,
-                              message: 'Please select country',
+                              message: 'Veuillez sélectionner le pays',
                               error: true,
                             );
                           }

@@ -16,7 +16,7 @@ class OnBoardingScreen extends StatelessWidget {
           children: [
             SizedBox(height: 59.h),
             Text(
-              'Windicar',
+              'WINDICAR',
               style: AppTextStyles.darkGreenTextStyle17,
             ),
             SizedBox(height: 66.h),
