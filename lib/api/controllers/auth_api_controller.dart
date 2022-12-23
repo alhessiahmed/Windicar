@@ -45,11 +45,13 @@ class AuthApiController with ApiHelper {
       headers: {'Accept': 'application/json'},
     );
 
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 || response.statusCode == 400) {
       var jsonResponse = jsonDecode(response.body);
-      var jsonObject = jsonResponse['data'];
-      User user = User.fromJson(jsonObject);
-      await SharedPrefController().save(user: user);
+      if (response.statusCode == 200) {
+        var jsonObject = jsonResponse['data'];
+        User user = User.fromJson(jsonObject);
+        await SharedPrefController().save(user: user);
+      }
       return ApiResponse(
         message: jsonResponse['message'],
         success: jsonResponse['status'],

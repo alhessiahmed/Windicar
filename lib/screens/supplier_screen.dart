@@ -79,24 +79,24 @@ class SupplierScreen extends StatelessWidget {
                           SizedBox(
                             height: 8.h,
                           ),
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              const Icon(
-                                Icons.star,
-                                color: AppColors.yollowStar,
-                              ),
-                              SizedBox(
-                                width: 4.w,
-                              ),
-                              Text(
-                                controller.user?.rate ?? '0',
-                                style: AppTextStyles.textStyle14.copyWith(
-                                  color: AppColors.white,
-                                ),
-                              ),
-                            ],
-                          ),
+                          // Row(
+                          //   mainAxisSize: MainAxisSize.min,
+                          //   children: [
+                          //     const Icon(
+                          //       Icons.star,
+                          //       color: AppColors.yollowStar,
+                          //     ),
+                          // SizedBox(
+                          //   width: 4.w,
+                          // ),
+                          //     Text(
+                          //       controller.user?.rate ?? '0',
+                          //       style: AppTextStyles.textStyle14.copyWith(
+                          //         color: AppColors.white,
+                          //       ),
+                          //     ),
+                          //   ],
+                          // ),
                           SizedBox(
                             height: 13.h,
                           ),

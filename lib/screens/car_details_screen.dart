@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:full_screen_image_null_safe/full_screen_image_null_safe.dart';
 import 'package:get/get.dart';
 import 'package:logo/getx/car_details_getx_controller.dart';
 import 'package:logo/model/car.dart';
@@ -195,11 +196,11 @@ class CarDetailsScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
-                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
                                   car?.carName ?? 'Car Name',
-                                  style: AppTextStyles.textStyle17,
+                                  style: AppTextStyles.textStyle17
+                                      .copyWith(fontSize: 18.sp),
                                 ),
                                 const Spacer(),
                                 Text(
@@ -268,15 +269,15 @@ class CarDetailsScreen extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  const Spacer(),
-                                  Image.asset('assets/images/star.png'),
-                                  SizedBox(
-                                    width: 8.w,
-                                  ),
-                                  Text(
-                                    car?.owner?.rate.toString() ?? '0',
-                                    style: AppTextStyles.textStyle16,
-                                  ),
+                                  // const Spacer(),
+                                  // Image.asset('assets/images/star.png'),
+                                  // SizedBox(
+                                  //   width: 8.w,
+                                  // ),
+                                  // Text(
+                                  //   car?.owner?.rate.toString() ?? '0',
+                                  //   style: AppTextStyles.textStyle16,
+                                  // ),
                                 ],
                               ),
                             ),
@@ -290,7 +291,7 @@ class CarDetailsScreen extends StatelessWidget {
                             // ),
                             Text(
                               'Fonctionnalités',
-                              style: AppTextStyles.textStyle16,
+                              style: AppTextStyles.textStyle17,
                             ),
                             SizedBox(
                               height: 16.h,
@@ -319,7 +320,7 @@ class CarDetailsScreen extends StatelessWidget {
                             ),
                             Text(
                               'Description',
-                              style: AppTextStyles.textStyle16,
+                              style: AppTextStyles.textStyle17,
                             ),
                             Padding(
                               padding: EdgeInsetsDirectional.only(
@@ -337,7 +338,7 @@ class CarDetailsScreen extends StatelessWidget {
                             ),
                             Text(
                               'Autres voitures',
-                              style: AppTextStyles.textStyle16,
+                              style: AppTextStyles.textStyle17,
                             ),
                           ],
                         ),
@@ -410,9 +411,11 @@ List<Widget> getPictures(List<CarImage> images) {
   List<Widget> items = [];
   for (var i = 0; i < images.length; i++) {
     items.add(
-      Image.network(
-        images[i].imageUrl,
-        fit: BoxFit.cover,
+      FullScreenWidget(
+        child: Image.network(
+          images[i].imageUrl,
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }

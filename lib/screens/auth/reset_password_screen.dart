@@ -43,6 +43,14 @@ class ResetPasswordScreen extends StatelessWidget with Helpers {
                         CustomTextFormField(
                           controller: controller.passwordController,
                           hintText: 'Le nouveau mot de passe',
+                          obscureText: controller.newPasswordIsVisible,
+                          suffixIcon: InkWell(
+                            onTap: () =>
+                                controller.toggleNewPasswordVisibility(),
+                            child: controller.newPasswordIsVisible
+                                ? const Icon(Icons.visibility_outlined)
+                                : const Icon(Icons.visibility_off_outlined),
+                          ),
                           isPassword: true,
                         ),
                         SizedBox(
@@ -51,6 +59,14 @@ class ResetPasswordScreen extends StatelessWidget with Helpers {
                         CustomTextFormField(
                           controller: controller.confirmPasswordController,
                           hintText: 'Confirmer le mot de passe',
+                          obscureText: controller.confirmPasswordIsVisible,
+                          suffixIcon: InkWell(
+                            onTap: () =>
+                                controller.toggleConfirmPasswordVisibility(),
+                            child: controller.confirmPasswordIsVisible
+                                ? const Icon(Icons.visibility_outlined)
+                                : const Icon(Icons.visibility_off_outlined),
+                          ),
                           isPassword: true,
                           textInputAction: TextInputAction.done,
                         ),

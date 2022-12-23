@@ -12,6 +12,11 @@ class RegisterGetxController extends GetxController {
   List<City> cities = [];
   bool loading = false;
 
+  bool passwordIsVisible = true;
+  void togglePasswordVisibility() {
+    passwordIsVisible = !passwordIsVisible;
+    update();
+  }
 
   @override
   void onInit() {

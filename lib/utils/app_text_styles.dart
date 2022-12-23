@@ -44,11 +44,11 @@ class AppTextStyles {
     fontFamily: 'SFCompactDisplay',
   );
 
-  static TextStyle darkGreenTextStyle17 = textStyle14.copyWith(
+  static TextStyle darkGreenTextStyle17 = textStyle17.copyWith(
     color: AppColors.darkGreen,
   );
 
-  static TextStyle whiteTextStyle17 = textStyle14.copyWith(
+  static TextStyle whiteTextStyle17 = textStyle17.copyWith(
     color: AppColors.white,
   );
 }

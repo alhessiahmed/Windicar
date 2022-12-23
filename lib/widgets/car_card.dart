@@ -87,14 +87,14 @@ class CarCard extends StatelessWidget {
                   ),
                 ),
                 // const Spacer(),
-                Image.asset('assets/images/star.png'),
-                SizedBox(
-                  width: 4.w,
-                ),
-                Text(
-                  rating,
-                  style: AppTextStyles.textStyle12,
-                ),
+                // Image.asset('assets/images/star.png'),
+                // SizedBox(
+                //   width: 4.w,
+                // ),
+                // Text(
+                //   rating,
+                //   style: AppTextStyles.textStyle12,
+                // ),
               ],
             ),
           ),
