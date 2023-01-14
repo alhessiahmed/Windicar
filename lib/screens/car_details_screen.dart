@@ -45,12 +45,14 @@ class CarDetailsScreen extends StatelessWidget {
             init: CarDetailsGetxController(carId: id),
             builder: (CarDetailsGetxController controller) {
               if (controller.isLoading) {
+                print('fwefwefwf');
                 return const Scaffold(
                   body: Center(
                     child: CircularProgressIndicator(),
                   ),
                 );
               } else {
+                print('gegeqrgqerg;');
                 Car? car = controller.carDetails?.car;
                 return Scaffold(
                   extendBodyBehindAppBar: true,
@@ -362,16 +364,20 @@ class CarDetailsScreen extends StatelessWidget {
                                     controller.carDetails!.similarCars[index];
                                 return InkWell(
                                   onTap: () {
-                                    Navigator.pushReplacement(
+                                    print(similarCar.id);
+                                    Navigator.pop(context);
+                                    Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => CarDetailsScreen(
-                                          id: car!.id,
-                                          isFav: car.isFavorite,
+                                        builder: (BuildContext context) =>
+                                            CarDetailsScreen(
+                                          id: similarCar.id,
+                                          isFav: similarCar.isFavorite,
                                         ),
                                       ),
-                                    ).then(
-                                        (value) => controller.readCarDetails());
+                                    );
+                                    // .then(
+                                    //     (value) => controller.readCarDetails());
                                   },
                                   child: CarCard(
                                     id: similarCar.id,
@@ -385,7 +391,8 @@ class CarDetailsScreen extends StatelessWidget {
                                             '0',
                                     isFav: similarCar.isFavorite,
                                     // initialRoute: '/home_screen',
-                                    onTap: () {},
+                                    onTap: () {
+                                    },
                                   ),
                                 );
                               },

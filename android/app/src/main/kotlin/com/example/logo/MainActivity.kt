@@ -1,4 +1,4 @@
-package com.example.logo
+package com.carstore.windicar
 
 import io.flutter.embedding.android.FlutterActivity
 
