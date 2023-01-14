@@ -45,14 +45,12 @@ class CarDetailsScreen extends StatelessWidget {
             init: CarDetailsGetxController(carId: id),
             builder: (CarDetailsGetxController controller) {
               if (controller.isLoading) {
-                print('fwefwefwf');
                 return const Scaffold(
                   body: Center(
                     child: CircularProgressIndicator(),
                   ),
                 );
               } else {
-                print('gegeqrgqerg;');
                 Car? car = controller.carDetails?.car;
                 return Scaffold(
                   extendBodyBehindAppBar: true,
@@ -175,8 +173,8 @@ class CarDetailsScreen extends StatelessWidget {
                                     return CircleAvatar(
                                       backgroundColor:
                                           controller.imgIndex == index
-                                              ? AppColors.white
-                                              : AppColors.whiteWithOpacity,
+                                              ? AppColors.darkGreen
+                                              : AppColors.unselected,
                                       // backgroundColor: AppColors.whiteWithOpacity,
                                       radius: 6.r,
                                     );
@@ -363,19 +361,22 @@ class CarDetailsScreen extends StatelessWidget {
                                 Car similarCar =
                                     controller.carDetails!.similarCars[index];
                                 return InkWell(
-                                  onTap: () {
-                                    print(similarCar.id);
-                                    Navigator.pop(context);
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            CarDetailsScreen(
-                                          id: similarCar.id,
-                                          isFav: similarCar.isFavorite,
-                                        ),
-                                      ),
+                                  onTap: () async {
+                                    await controller.readAnotherCarDetails(
+                                      similarCar.id,
                                     );
+                                    // print(similarCar.id);
+                                    // Navigator.pop(context);
+                                    // Navigator.push(
+                                    //   context,
+                                    //   MaterialPageRoute(
+                                    //     builder: (BuildContext context) =>
+                                    //         CarDetailsScreen(
+                                    //       id: similarCar.id,
+                                    //       isFav: similarCar.isFavorite,
+                                    //     ),
+                                    //   ),
+                                    // );
                                     // .then(
                                     //     (value) => controller.readCarDetails());
                                   },
@@ -391,8 +392,7 @@ class CarDetailsScreen extends StatelessWidget {
                                             '0',
                                     isFav: similarCar.isFavorite,
                                     // initialRoute: '/home_screen',
-                                    onTap: () {
-                                    },
+                                    onTap: () {},
                                   ),
                                 );
                               },
@@ -421,7 +421,7 @@ List<Widget> getPictures(List<CarImage> images) {
       FullScreenWidget(
         child: Image.network(
           images[i].imageUrl,
-          fit: BoxFit.cover,
+          fit: BoxFit.contain,
         ),
       ),
     );

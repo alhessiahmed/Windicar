@@ -29,6 +29,14 @@ class CarDetailsGetxController extends GetxController {
     update();
   }
 
+  Future<void> readAnotherCarDetails(int id) async {
+    isLoading = true;
+    update();
+    carDetails = await CarApiController().getCarDetails(id: id);
+    isLoading = false;
+    update();
+  }
+
   void toggleFavorite() async {
     if (carDetails != null) {
       ApiResponse response = await FavoriteApiController().toggleFavorite(
