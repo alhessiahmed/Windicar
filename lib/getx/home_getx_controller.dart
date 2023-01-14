@@ -44,6 +44,7 @@ class HomeGetxController extends GetxController {
   Future<void> readCars() async {
     isLoading = true;
     cars = await CarApiController().readCars();
+    cars.shuffle();
     // await readNames();
     await readCities();
     isLoading = false;
