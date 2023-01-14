@@ -38,7 +38,7 @@ class LoginScreen extends StatelessWidget with Helpers {
                         height: 55.h,
                       ),
                       Text(
-                        'Windicar',
+                        'WINDICAR',
                         style: AppTextStyles.logoTextStyle.copyWith(
                           color: AppColors.grey,
                           fontSize: 56,
@@ -58,6 +58,13 @@ class LoginScreen extends StatelessWidget with Helpers {
                       CustomTextFormField(
                         controller: controller.passwordController,
                         hintText: 'Votre mot de passe',
+                        obscureText: controller.passwordIsVisible,
+                        suffixIcon: InkWell(
+                          onTap: () => controller.togglePasswordVisibility(),
+                          child: controller.passwordIsVisible
+                              ? Icon(Icons.visibility_outlined)
+                              : Icon(Icons.visibility_off_outlined),
+                        ),
                         isPassword: true,
                       ),
                       Align(

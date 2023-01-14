@@ -48,6 +48,7 @@ dependencies:
   image_picker: ^0.8.5+3
   url_launcher: ^6.1.7
   share_plus: ^6.3.0
+  full_screen_image_null_safe: ^2.0.0
 
   dropdown_search: ^5.0.5
   # dropdown_search: ^4.0.1

@@ -152,6 +152,7 @@ class CustomTextFormField extends StatelessWidget {
     this.maxLines = 1,
     this.onChange,
     this.onSubmitted,
+    this.noValidation = false,
   }) : super(key: key);
 
   final TextEditingController controller;
@@ -168,6 +169,7 @@ class CustomTextFormField extends StatelessWidget {
   final int maxLines;
   final Function(String)? onChange;
   final Function(String)? onSubmitted;
+  final bool noValidation;
 
   @override
   Widget build(BuildContext context) {
@@ -192,20 +194,23 @@ class CustomTextFormField extends StatelessWidget {
           // initialValue: controllerContent,
           controller: controller,
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          validator: (value) {
-            if (value == null || value.trim().isEmpty) {
-              return 'This field is required *';
-            } else if (isPassword && value.length < 6) {
-              return 'Password must be 6 characters at least!';
-            } else if (isEmail &&
-                (!value.contains('@') || !value.contains('.'))) {
-              return 'Enter valid email!';
-            } else if (isPhone && value.length != 10) {
-              return 'Enter valid phone number!';
-            }
-            return null;
-          },
+          validator: noValidation
+              ? null
+              : (value) {
+                  if (value == null || value.trim().isEmpty) {
+                    return 'This field is required *';
+                  } else if (isPassword && value.length < 6) {
+                    return 'Password must be 6 characters at least!';
+                  } else if (isEmail &&
+                      (!value.contains('@') || !value.contains('.'))) {
+                    return 'Enter valid email!';
+                  } else if (isPhone && value.length != 10) {
+                    return 'Enter valid phone number!';
+                  }
+                  return null;
+                },
           textInputAction: textInputAction,
+          
           keyboardType: isEmail
               ? TextInputType.emailAddress
               : isPhone

@@ -7,4 +7,16 @@ class ResetPasswordGetxController extends GetxController {
   final TextEditingController confirmPasswordController =
       TextEditingController();
   final formKey = GlobalKey<FormState>();
+
+  bool newPasswordIsVisible = true;
+  void toggleNewPasswordVisibility() {
+    newPasswordIsVisible = !newPasswordIsVisible;
+    update();
+  }
+
+  bool confirmPasswordIsVisible = true;
+  void toggleConfirmPasswordVisibility() {
+    confirmPasswordIsVisible = !confirmPasswordIsVisible;
+    update();
+  }
 }

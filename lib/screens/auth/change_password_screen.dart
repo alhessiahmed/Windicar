@@ -34,7 +34,14 @@ class ChangePasswordScreen extends StatelessWidget with Helpers {
                       ),
                       CustomTextFormField(
                         controller: controller.oldPasswordController,
-                        hintText: 'de passe actuel',
+                        hintText: 'Mot de passe actuel',
+                        obscureText: controller.oldPasswordIsVisible,
+                        suffixIcon: InkWell(
+                          onTap: () => controller.toggleOldPasswordVisibility(),
+                          child: controller.oldPasswordIsVisible
+                              ? const Icon(Icons.visibility_outlined)
+                              : const Icon(Icons.visibility_off_outlined),
+                        ),
                         isPassword: true,
                       ),
                       SizedBox(
@@ -43,6 +50,13 @@ class ChangePasswordScreen extends StatelessWidget with Helpers {
                       CustomTextFormField(
                         controller: controller.newPasswordController,
                         hintText: 'Le nouveau mot de passe',
+                        obscureText: controller.newPasswordIsVisible,
+                        suffixIcon: InkWell(
+                          onTap: () => controller.toggleNewPasswordVisibility(),
+                          child: controller.newPasswordIsVisible
+                              ? const Icon(Icons.visibility_outlined)
+                              : const Icon(Icons.visibility_off_outlined),
+                        ),
                         isPassword: true,
                       ),
                       SizedBox(
@@ -52,6 +66,14 @@ class ChangePasswordScreen extends StatelessWidget with Helpers {
                         controller: controller.confirmPasswordController,
                         hintText: 'Confirmer le mot de passe',
                         textInputAction: TextInputAction.done,
+                        obscureText: controller.confirmPasswordIsVisible,
+                        suffixIcon: InkWell(
+                          onTap: () =>
+                              controller.toggleConfirmPasswordVisibility(),
+                          child: controller.confirmPasswordIsVisible
+                              ? const Icon(Icons.visibility_outlined)
+                              : const Icon(Icons.visibility_off_outlined),
+                        ),
                         isPassword: true,
                       ),
                       SizedBox(

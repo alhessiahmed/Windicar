@@ -44,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
         child: Center(
           child: Text(
-            'Windicar',
+            'WINDICAR',
             style: AppTextStyles.logoTextStyle,
           ),
         ),

@@ -38,7 +38,7 @@ class RegisterScreen extends StatelessWidget with Helpers {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       Text(
-                        'Windicar',
+                        'WINDICAR',
                         textAlign: TextAlign.center,
                         style: AppTextStyles.logoTextStyle.copyWith(
                           color: AppColors.grey,
@@ -137,6 +137,13 @@ class RegisterScreen extends StatelessWidget with Helpers {
                         controller: controller.passwordController,
                         hintText: 'Votre mot de passe',
                         textInputAction: TextInputAction.done,
+                        obscureText: controller.passwordIsVisible,
+                        suffixIcon: InkWell(
+                          onTap: () => controller.togglePasswordVisibility(),
+                          child: controller.passwordIsVisible
+                              ? Icon(Icons.visibility_outlined)
+                              : Icon(Icons.visibility_off_outlined),
+                        ),
                         isPassword: true,
                       ),
                       SizedBox(
@@ -161,7 +168,7 @@ class RegisterScreen extends StatelessWidget with Helpers {
                           TextButton(
                             onPressed: () {
                               // TODO:  back to login page
-                              // Navigator.pop(context);
+                              Navigator.pop(context);
                             },
                             child: const Text("Se connecter"),
                           ),
@@ -198,18 +205,24 @@ class RegisterScreen extends StatelessWidget with Helpers {
         user.password = controller.passwordController.text;
         user.cityId = controller.selectedCountryId!;
         ApiResponse response = await AuthApiController().register(user: user);
-        if (response.success) {
-          Navigator.pushNamedAndRemoveUntil(
-            context,
-            '/login_screen',
-            (route) => false,
-          );
-        }
         showSnackBar(
           context,
           message: response.message,
           error: !response.success,
         );
+        if (response.success) {
+          ApiResponse loginResponse = await AuthApiController().login(
+            email: controller.emailController.text,
+            password: controller.passwordController.text,
+          );
+          if (loginResponse.success) {
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              '/home_screen',
+              (route) => false,
+            );
+          }
+        }
       }
     }
   }

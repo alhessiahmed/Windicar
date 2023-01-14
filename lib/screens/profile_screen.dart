@@ -38,231 +38,236 @@ class ProfileScreen extends StatelessWidget with Helpers {
           );
         } else {
           return Scaffold(
-            body: CustomScrollView(
-              slivers: <Widget>[
-                SliverAppBar(
-                  snap: false,
-                  pinned: true,
-                  floating: false,
-                  title: Text(
-                    controller.user?.name ?? 'Name',
-                    style: AppTextStyles.whiteTextStyle17,
-                  ),
-                  centerTitle: true,
-                  flexibleSpace: FlexibleSpaceBar(
-                    background: Container(
-                      decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Color(0xFF35CEA9),
-                            Color(0xFF14AEA1),
+            body: RefreshIndicator(
+              onRefresh: () async => await controller.readUser(),
+              child: CustomScrollView(
+                slivers: <Widget>[
+                  SliverAppBar(
+                    snap: false,
+                    pinned: true,
+                    floating: false,
+                    title: Text(
+                      controller.user?.name ?? 'User Name',
+                      style: AppTextStyles.whiteTextStyle17.copyWith(
+                        fontSize: 18.sp,
+                      ),
+                    ),
+                    centerTitle: true,
+                    flexibleSpace: FlexibleSpaceBar(
+                      background: Container(
+                        decoration: const BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Color(0xFF35CEA9),
+                              Color(0xFF14AEA1),
+                            ],
+                          ),
+                        ),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 96.h,
+                            ),
+                            CircleAvatar(
+                              radius: 33.r,
+                              backgroundColor: AppColors.white,
+                              backgroundImage: controller.user?.imageUrl != null
+                                  ? NetworkImage(controller.user!.imageUrl!)
+                                  : const AssetImage('assets/images/avatar.jpg')
+                                      as ImageProvider,
+                            ),
+                            SizedBox(
+                              height: 22.h,
+                              width: Get.width.w,
+                            ),
+                            Text(
+                              controller.user?.city?.name ?? 'City',
+                              style: AppTextStyles.textStyle14.copyWith(
+                                color: AppColors.white,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 8.h,
+                            ),
+                            // Row(
+                            //   mainAxisSize: MainAxisSize.min,
+                            //   children: [
+                            //     const Icon(
+                            //       Icons.star,
+                            //       color: AppColors.yollowStar,
+                            //     ),
+                            //     SizedBox(
+                            //       width: 4.w,
+                            //     ),
+                            //     Text(
+                            //       controller.user?.rate ?? '0',
+                            //       style: AppTextStyles.textStyle14.copyWith(
+                            //         color: AppColors.white,
+                            //       ),
+                            //     ),
+                            //   ],
+                            // ),
+                            SizedBox(
+                              height: 13.h,
+                            ),
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  'membre depuis',
+                                  style: AppTextStyles.textStyle14.copyWith(
+                                    color: AppColors.white,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 4.w,
+                                ),
+                                Text(
+                                  controller.user?.createdAt.substring(0, 10) ??
+                                      DateFormat.yMd().format(DateTime.now()),
+                                  style: AppTextStyles.textStyle14.copyWith(
+                                    color: AppColors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                       ),
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 96.h,
-                          ),
-                          CircleAvatar(
-                            radius: 33.r,
-                            backgroundColor: AppColors.white,
-                            backgroundImage: NetworkImage(
-                              controller.user?.imageUrl ??
-                                  'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-                            ),
-                          ),
-                          SizedBox(
-                            height: 22.h,
-                            width: Get.width.w,
-                          ),
-                          Text(
-                            controller.user?.city?.name ?? 'City',
-                            style: AppTextStyles.textStyle14.copyWith(
-                              color: AppColors.white,
-                            ),
-                          ),
-                          SizedBox(
-                            height: 8.h,
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              const Icon(
-                                Icons.star,
-                                color: AppColors.yollowStar,
-                              ),
-                              SizedBox(
-                                width: 4.w,
-                              ),
-                              Text(
-                                controller.user?.rate ?? '0',
-                                style: AppTextStyles.textStyle14.copyWith(
-                                  color: AppColors.white,
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 13.h,
-                          ),
-                          Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Text(
-                                'membre depuis',
-                                style: AppTextStyles.textStyle14.copyWith(
-                                  color: AppColors.white,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 4.w,
-                              ),
-                              Text(
-                                controller.user?.createdAt.substring(0, 10) ??
-                                    DateFormat.yMd().format(DateTime.now()),
-                                style: AppTextStyles.textStyle14.copyWith(
-                                  color: AppColors.white,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
                     ),
-                  ),
-                  expandedHeight: 284.h,
-                  backgroundColor: const Color(0xFF35CEA9),
-                  leading: IconButton(
-                    icon: const Icon(
-                      Icons.arrow_back_ios_new_rounded,
-                      color: AppColors.white,
-                    ),
-                    tooltip: 'Back Button',
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                  actions: [
-                    PopupMenuButton<String>(
+                    expandedHeight: 284.h,
+                    backgroundColor: const Color(0xFF35CEA9),
+                    leading: IconButton(
                       icon: const Icon(
-                        Icons.more_vert,
+                        Icons.arrow_back_ios_new_rounded,
                         color: AppColors.white,
                       ),
-                      itemBuilder: (context) => [
-                        PopupMenuItem(
-                          value: 'modify',
-                          child: Text(
-                            "Modifier",
-                            style: AppTextStyles.textStyle16,
-                          ),
-                        ),
-                        PopupMenuItem(
-                          value: 'logout',
-                          child: Text(
-                            "se déconnecter",
-                            style: AppTextStyles.textStyle16,
-                          ),
-                        ),
-                      ],
-                      onSelected: (value) async {
-                        if (value == 'modify') {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => UpdateProfileScreen(
-                                userId: userId,
-                                imgUrl: controller.user?.imageUrl,
-                                name: controller.user!.name,
-                                email: controller.user!.email,
-                                mobile: controller.user!.phone,
-                              ),
-                            ),
-                          );
-                        } else if (value == 'logout') {
-                          _performLogout(context);
-                        }
+                      tooltip: 'Back Button',
+                      onPressed: () {
+                        Navigator.pop(context);
                       },
                     ),
-                  ],
-                ),
-                // SliverToBoxAdapter(), // Learn this later on
-                SliverList(
-                  delegate: SliverChildListDelegate(
-                    [
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.only(start: 16.w, top: 16.h),
-                        child: Text(
-                          // '${controller.user?.callCount ?? '0'} Annonces',
-                          '${controller.user?.cars.length ?? '0'} Annonces',
-                          style: AppTextStyles.textStyle16,
-                          // textAlign: TextAlign.start,
+                    actions: [
+                      PopupMenuButton<String>(
+                        icon: const Icon(
+                          Icons.more_vert,
+                          color: AppColors.white,
                         ),
-                      ),
-                      Divider(
-                        thickness: 1,
-                        color: AppColors.grey,
-                        endIndent: 202.w,
-                      ),
-                    ],
-                  ),
-                ),
-                SliverPadding(
-                  padding: EdgeInsetsDirectional.only(
-                    start: 16.w,
-                    end: 16.w,
-                  ),
-                  sliver: SliverGrid(
-                    delegate: SliverChildBuilderDelegate(
-                      (context, index) {
-                        Car car = controller.user!.cars[index];
-                        // print(car.images[index]);
-                        return ModifyCarCard(
-                          id: car.id,
-                          imgUrl: car.images.isNotEmpty
-                              ? car.images.first.imageUrl
-                              : null,
-                          title: car.carName,
-                          subtitle: car.price,
-                          onTap: () {
+                        itemBuilder: (context) => [
+                          PopupMenuItem(
+                            value: 'modify',
+                            child: Text(
+                              "Modifier",
+                              style: AppTextStyles.textStyle16,
+                            ),
+                          ),
+                          PopupMenuItem(
+                            value: 'logout',
+                            child: Text(
+                              "se déconnecter",
+                              style: AppTextStyles.textStyle16,
+                            ),
+                          ),
+                        ],
+                        onSelected: (value) async {
+                          if (value == 'modify') {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => AddOrUpdateCar(
-                                  carId: car.id,
-                                  oldCityId: car.cityId,
-                                  oldDescription: car.description,
-                                  oldName: car.carName,
-                                  oldPrice: car.price,
-                                  wasEssence: car.fueltype == 'Essence',
-                                  wasManuel: car.cartype == 'Manuel',
+                                builder: (context) => UpdateProfileScreen(
+                                  userId: userId,
+                                  imgUrl: controller.user?.imageUrl,
+                                  name: controller.user!.name,
+                                  email: controller.user!.email,
+                                  mobile: controller.user!.phone,
                                 ),
                               ),
-                            ).then((value) => controller.readUser());
-                          },
-                          onDelete: () {
-                            _confirmDelete(
-                              context: context,
-                              controller: controller,
-                              id: car.id,
                             );
-                          },
-                        );
-                      },
-                      childCount: controller.user?.cars.length ?? 0,
-                    ),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 16.h,
-                      crossAxisSpacing: 16.w,
-                      childAspectRatio: 166.w / 188.h,
+                          } else if (value == 'logout') {
+                            _performLogout(context);
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                  // SliverToBoxAdapter(), // Learn this later on
+                  SliverList(
+                    delegate: SliverChildListDelegate(
+                      [
+                        Padding(
+                          padding: EdgeInsetsDirectional.only(
+                              start: 16.w, top: 16.h),
+                          child: Text(
+                            // '${controller.user?.callCount ?? '0'} Annonces',
+                            '${controller.user?.cars.length ?? '0'} Annonces',
+                            style: AppTextStyles.textStyle16,
+                            // textAlign: TextAlign.start,
+                          ),
+                        ),
+                        Divider(
+                          thickness: 1,
+                          color: AppColors.grey,
+                          endIndent: 202.w,
+                        ),
+                      ],
                     ),
                   ),
-                ),
-              ],
+                  SliverPadding(
+                    padding: EdgeInsetsDirectional.only(
+                      start: 16.w,
+                      end: 16.w,
+                    ),
+                    sliver: SliverGrid(
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) {
+                          Car car = controller.user!.cars[index];
+                          // print(car.images[index]);
+                          return ModifyCarCard(
+                            id: car.id,
+                            imgUrl: car.images.isNotEmpty
+                                ? car.images.first.imageUrl
+                                : null,
+                            title: car.carName,
+                            subtitle: car.price,
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => AddOrUpdateCar(
+                                    carId: car.id,
+                                    oldCityId: car.cityId,
+                                    oldDescription: car.description,
+                                    oldName: car.carName,
+                                    oldPrice: car.price,
+                                    wasEssence: car.fueltype == 'Essence',
+                                    wasManuel: car.cartype == 'Manuel',
+                                  ),
+                                ),
+                              ).then((value) => controller.readUser());
+                            },
+                            onDelete: () {
+                              _confirmDelete(
+                                context: context,
+                                controller: controller,
+                                id: car.id,
+                              );
+                            },
+                          );
+                        },
+                        childCount: controller.user?.cars.length ?? 0,
+                      ),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        mainAxisSpacing: 16.h,
+                        crossAxisSpacing: 16.w,
+                        childAspectRatio: 166.w / 188.h,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
             floatingActionButton: const CustomFloatingButton(isHome: false),
           );

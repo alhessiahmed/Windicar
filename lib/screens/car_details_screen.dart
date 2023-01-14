@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:full_screen_image_null_safe/full_screen_image_null_safe.dart';
 import 'package:get/get.dart';
 import 'package:logo/getx/car_details_getx_controller.dart';
 import 'package:logo/model/car.dart';
@@ -44,12 +45,14 @@ class CarDetailsScreen extends StatelessWidget {
             init: CarDetailsGetxController(carId: id),
             builder: (CarDetailsGetxController controller) {
               if (controller.isLoading) {
+                print('fwefwefwf');
                 return const Scaffold(
                   body: Center(
                     child: CircularProgressIndicator(),
                   ),
                 );
               } else {
+                print('gegeqrgqerg;');
                 Car? car = controller.carDetails?.car;
                 return Scaffold(
                   extendBodyBehindAppBar: true,
@@ -195,11 +198,11 @@ class CarDetailsScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
-                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
                                   car?.carName ?? 'Car Name',
-                                  style: AppTextStyles.textStyle17,
+                                  style: AppTextStyles.textStyle17
+                                      .copyWith(fontSize: 18.sp),
                                 ),
                                 const Spacer(),
                                 Text(
@@ -268,15 +271,15 @@ class CarDetailsScreen extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  const Spacer(),
-                                  Image.asset('assets/images/star.png'),
-                                  SizedBox(
-                                    width: 8.w,
-                                  ),
-                                  Text(
-                                    car?.owner?.rate.toString() ?? '0',
-                                    style: AppTextStyles.textStyle16,
-                                  ),
+                                  // const Spacer(),
+                                  // Image.asset('assets/images/star.png'),
+                                  // SizedBox(
+                                  //   width: 8.w,
+                                  // ),
+                                  // Text(
+                                  //   car?.owner?.rate.toString() ?? '0',
+                                  //   style: AppTextStyles.textStyle16,
+                                  // ),
                                 ],
                               ),
                             ),
@@ -290,7 +293,7 @@ class CarDetailsScreen extends StatelessWidget {
                             // ),
                             Text(
                               'Fonctionnalités',
-                              style: AppTextStyles.textStyle16,
+                              style: AppTextStyles.textStyle17,
                             ),
                             SizedBox(
                               height: 16.h,
@@ -319,7 +322,7 @@ class CarDetailsScreen extends StatelessWidget {
                             ),
                             Text(
                               'Description',
-                              style: AppTextStyles.textStyle16,
+                              style: AppTextStyles.textStyle17,
                             ),
                             Padding(
                               padding: EdgeInsetsDirectional.only(
@@ -337,7 +340,7 @@ class CarDetailsScreen extends StatelessWidget {
                             ),
                             Text(
                               'Autres voitures',
-                              style: AppTextStyles.textStyle16,
+                              style: AppTextStyles.textStyle17,
                             ),
                           ],
                         ),
@@ -361,16 +364,20 @@ class CarDetailsScreen extends StatelessWidget {
                                     controller.carDetails!.similarCars[index];
                                 return InkWell(
                                   onTap: () {
-                                    Navigator.pushReplacement(
+                                    print(similarCar.id);
+                                    Navigator.pop(context);
+                                    Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => CarDetailsScreen(
-                                          id: car!.id,
-                                          isFav: car.isFavorite,
+                                        builder: (BuildContext context) =>
+                                            CarDetailsScreen(
+                                          id: similarCar.id,
+                                          isFav: similarCar.isFavorite,
                                         ),
                                       ),
-                                    ).then(
-                                        (value) => controller.readCarDetails());
+                                    );
+                                    // .then(
+                                    //     (value) => controller.readCarDetails());
                                   },
                                   child: CarCard(
                                     id: similarCar.id,
@@ -384,7 +391,8 @@ class CarDetailsScreen extends StatelessWidget {
                                             '0',
                                     isFav: similarCar.isFavorite,
                                     // initialRoute: '/home_screen',
-                                    onTap: () {},
+                                    onTap: () {
+                                    },
                                   ),
                                 );
                               },
@@ -410,9 +418,11 @@ List<Widget> getPictures(List<CarImage> images) {
   List<Widget> items = [];
   for (var i = 0; i < images.length; i++) {
     items.add(
-      Image.network(
-        images[i].imageUrl,
-        fit: BoxFit.cover,
+      FullScreenWidget(
+        child: Image.network(
+          images[i].imageUrl,
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }
